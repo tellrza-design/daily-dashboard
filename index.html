@@ -1837,16 +1837,34 @@
     }
   }
 
+  /* 새 탭 열기 — 복사가 끝난 뒤(비동기)에도 팝업 차단에 걸리지 않도록 링크 클릭으로 연다 */
+  function openTab(url) {
+    if (!url) return;
+    try {
+      var a = document.createElement('a');
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } catch (e) {
+      try { window.open(url, '_blank', 'noopener'); } catch (e2) {}
+    }
+  }
+
   function copyAndOpenReply(r, btn, el) {
     var url = /^https?:\/\//i.test(r.url) ? r.url : '';
-    if (url) {
-      try { window.open(url, '_blank', 'noopener'); } catch (e) {}
-    }
     copyText(r.reply_text, btn, {
       idle: '📋 답글 복사 + 열기',
       ok: '✓ 복사됨',
       msg: url ? '📋 답글 복사 완료 · 원글을 새 탭에 열었어요' : '📋 답글 복사 완료!',
-      after: function () { markReplyDone(r.id, el); }
+      after: function () {
+        // 복사가 끝난 뒤에 연다 — 먼저 탭을 열면 클립보드 쓰기가 막히는 경우가 있다
+        openTab(url);
+        markReplyDone(r.id, el);
+      }
     });
   }
 
