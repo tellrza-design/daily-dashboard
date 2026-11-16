@@ -437,7 +437,7 @@
     </section>
   </main>
 
-  <div class="toast" id="toast">
+  <div class="toast" id="toast" role="status" aria-live="polite">
     <span id="toastText">오늘 미션 4개, 하나씩 체크해 보세요</span>
     <span class="toast-sign">텔르자</span>
   </div>
@@ -749,7 +749,7 @@
     var ss = s % 60;
     $('timerDisplay').textContent = pad(mm) + ':' + pad(ss);
     $('timerDisplay').classList.toggle('ending', timer.running && s <= 10 && s > 0);
-    $('timerState').textContent = timer.running ? '집중 중' : (s === 0 ? '완료' : '대기');
+    $('timerState').textContent = timer.running ? '집중 중' : (s === 0 ? '완료' : (s < timer.preset * 60 ? '일시정지' : '대기'));
   }
 
   function setPreset(min) {
