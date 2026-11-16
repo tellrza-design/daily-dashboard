@@ -495,6 +495,55 @@
   .reply-actions { display: flex; gap: 6px; padding: 0 12px 10px; }
   .reply-actions .mini-btn { flex: 1; justify-content: center; text-align: center; }
 
+  /* 세트 전환(2개씩 보기) */
+  .reply-ctl { display: flex; align-items: center; gap: 6px; flex: 0 0 auto; }
+  .set-badge {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--sub);
+    background: var(--bg);
+    border-radius: 999px;
+    padding: 4px 9px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .next-btn {
+    border: none;
+    background: var(--blue-soft);
+    color: var(--blue);
+    border-radius: 999px;
+    padding: 7px 11px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+    font-family: inherit;
+    min-height: 30px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: transform .1s ease, background-color .2s ease, color .2s ease;
+  }
+  .next-btn:active { transform: scale(0.96); }
+  .next-btn.primary { background: var(--blue); color: #FFFFFF; flex: 1; min-height: 36px; }
+  .next-btn.primary.copied { background: var(--green); }
+  .reply-all { padding: 2px 0 0; text-align: center; }
+  .reply-all-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--sub);
+    letter-spacing: -0.2px;
+    margin: 2px 0 10px;
+    word-break: keep-all;
+  }
+  .reply-all-actions { display: flex; gap: 6px; }
+  .reply-all-actions .mini-btn { flex: 0 0 auto; justify-content: center; min-height: 36px; }
+  .reply-hint {
+    margin-top: 9px;
+    text-align: right;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--sub);
+  }
+
   /* ── 10분 식단 · 레시피 아코디언 ── */
   .dinner-head {
     display: block;
@@ -717,9 +766,20 @@
     <section class="card" id="replyCard">
       <div class="card-head">
         <div class="card-title">🧵 스레드 소통 10초 컷</div>
-        <span class="hint" id="replyHint">답글 복사 → 완료</span>
+        <div class="reply-ctl">
+          <span class="set-badge" id="replySetLabel">1 / 3세트</span>
+          <button class="next-btn" id="replyNext" type="button" aria-label="다음 2개 답글 보기">다음 2개</button>
+        </div>
       </div>
       <div id="replyList"></div>
+      <div class="reply-all" id="replyAllDone" hidden>
+        <div class="reply-all-text" id="replyAllText">준비된 6건을 모두 확인했어요</div>
+        <div class="reply-all-actions">
+          <button class="next-btn primary" id="replyRequest" type="button">새 글 요청 복사</button>
+          <button class="mini-btn" id="replyResetSet" type="button">처음으로</button>
+        </div>
+      </div>
+      <div class="reply-hint" id="replyHint">답글 복사 → 완료</div>
     </section>
 
     <section class="card" id="dinnerCard">
@@ -854,6 +914,30 @@
         topic: '독서 · 문해력과 인생책',
         url: 'https://www.threads.com/@clever.child_/post/DcaqXlPmp-W',
         reply_text: '문해력이라는 게 단순히 글자를 빨리 읽는 힘이 아니라, 결국 한 문장 너머의 맥락과 사람의 마음을 읽어내는 힘이라는 생각이 든다. 인생을 바꿔준 책 한 권이 그 모든 시선의 출발점이 되어주는 것 같다. 📓'
+      },
+      {
+        id: 'tr3',
+        topic: '에세이 · 솔직함 너머의 글쓰기',
+        url: 'https://www.threads.com/@latte_beaver/post/DW4FdWfk9AO',
+        reply_text: '솔직함만으로 글이 완성되지는 않는다는 말에 오래 머물렀다. 내 이야기를 늘어놓는 데서 멈추지 않고, 그 장면이 왜 내게 오래 남았는지까지 데리고 가야 비로소 남의 하루에도 닿는 글이 되더라. 🕯️'
+      },
+      {
+        id: 'tr4',
+        topic: '독서 · 얇지만 무거운 책의 여운',
+        url: 'https://www.threads.com/@abyssnote9/post/DbCoQwnDgd2',
+        reply_text: '얇아서 금방 끝날 줄 알았는데 다 덮고 나면 한참 말이 없어지는 책이라 그 마음 알 것 같다. 슬픔을 미화하지 않고 그대로 보여주는 문장이라 더 오래 남는 것 같고, 그런 날엔 다음 책을 서두르기보다 여운을 며칠 두고 천천히 넘기는 편이 낫더라. 🌫️'
+      },
+      {
+        id: 'tr5',
+        topic: '책 · 위로가 필요할 때 꺼내는 한 권',
+        url: 'https://www.threads.com/@maeilsmile/post/DbRwG4umH_z',
+        reply_text: '위로가 필요할 때 꺼내는 책은 내용보다 그때의 내 상태를 같이 기억하게 해서 더 오래 곁에 두게 되는 것 같다. 같은 문장도 어떤 날엔 그냥 지나가고 어떤 날엔 겨우 숨을 쉬게 해주니까, 그런 책 한 권쯤 있는 사람은 이미 꽤 단단한 사람이라고 생각한다. 🫖'
+      },
+      {
+        id: 'tr6',
+        topic: '인생책 · 소장하고 싶은 책',
+        url: 'https://www.threads.com/@maxi_more__/post/DLjdt6Vzmpd',
+        reply_text: '몇 번을 다시 펴도 처음 읽은 날의 마음으로 돌아가게 하는 책이라면 나는 소로의 『월든』을 꼽고 싶다. 빌려 읽은 책은 내용이 남고 소장한 책은 내가 흔들렸던 자리까지 같이 남아서, 시간이 지나 책장을 넘기면 그때의 내가 먼저 보이더라. 📚'
       }
     ],
     dinner: {
@@ -998,7 +1082,7 @@
   var state = freshState();
 
   function freshState() {
-    return { date: dateKey(), done: {}, checks: {}, replies: {}, timerEnded: 0 };
+    return { date: dateKey(), done: {}, checks: {}, replies: {}, replySet: 0, timerEnded: 0 };
   }
 
   function load() {
@@ -1012,6 +1096,7 @@
           done: saved.done || {},
           checks: saved.checks || {},
           replies: saved.replies || {},
+          replySet: Number(saved.replySet) || 0,
           timerEnded: saved.timerEnded || 0
         };
       } else {
@@ -1307,72 +1392,143 @@
   }
 
   /* ───── 스레드 소통 10초 컷 ───── */
+  var REPLY_PAGE = 2;
+
   function replyItems() {
     return Array.isArray(DATA.threads_replies) ? DATA.threads_replies : [];
   }
 
+  /* 몇 개씩 묶어 보여줄지 → 총 세트 수 (2개씩이면 6건 = 3세트) */
+  function replySetCount() {
+    return Math.max(1, Math.ceil(replyItems().length / REPLY_PAGE));
+  }
+
+  /* 현재 세트 인덱스. 세트 수와 같아지면 "모두 확인" 상태 */
+  function replySetIndex() {
+    var total = replySetCount();
+    var idx = Number(state.replySet) || 0;
+    if (idx < 0) idx = 0;
+    if (idx > total) idx = total;
+    return idx;
+  }
+
   function buildReplies() {
     var card = $('replyCard');
-    var list = $('replyList');
-    list.innerHTML = '';
     var items = replyItems();
     card.style.display = items.length ? '' : 'none';
+    if (!items.length) return;
+    renderReplySet();
+  }
 
-    items.forEach(function (r) {
-      var wrap = document.createElement('div');
-      wrap.className = 'reply';
-      wrap.dataset.id = r.id;
+  function renderReplySet() {
+    var list = $('replyList');
+    var allDone = $('replyAllDone');
+    var items = replyItems();
+    var total = replySetCount();
+    var idx = replySetIndex();
+    var done = idx >= total;
 
-      var head = document.createElement('button');
-      head.type = 'button';
-      head.className = 'reply-head';
-      head.setAttribute('aria-pressed', 'false');
-      head.innerHTML = '<span class="reply-topic"></span><span class="dot-check"></span>';
-      head.querySelector('.reply-topic').textContent = r.topic;
-      head.setAttribute('aria-label', r.topic + ' 답글 완료 체크');
-      head.addEventListener('click', function () { toggleReply(r.id); });
-      wrap.appendChild(head);
+    list.innerHTML = '';
+    list.style.display = done ? 'none' : '';
+    allDone.hidden = !done;
+    $('replyNext').style.display = done ? 'none' : '';
+    $('replySetLabel').textContent = (Math.min(idx, total - 1) + 1) + ' / ' + total + '세트';
 
-      var actions = document.createElement('div');
-      actions.className = 'reply-actions';
+    if (done) {
+      $('replyAllText').textContent = '준비된 ' + items.length + '건을 모두 확인했어요';
+      paintReplies();
+      return;
+    }
 
-      if (/^https?:\/\//i.test(r.url)) {
-        var openLink = document.createElement('a');
-        openLink.className = 'mini-btn open';
-        openLink.href = r.url;
-        openLink.target = '_blank';
-        openLink.rel = 'noopener noreferrer';
-        openLink.textContent = '글 열기 ↗';
-        openLink.setAttribute('aria-label', '원글 새 창에서 열기');
-        actions.appendChild(openLink);
-      }
-
-      var copyBtn = document.createElement('button');
-      copyBtn.type = 'button';
-      copyBtn.className = 'mini-btn copy';
-      copyBtn.textContent = '답글 복사';
-      copyBtn.setAttribute('aria-label', r.topic + ' 답글 복사');
-      copyBtn.addEventListener('click', function () {
-        copyText(r.reply_text, copyBtn, {
-          idle: '답글 복사',
-          ok: '✓ 복사됨',
-          msg: '\uD83D\uDCCB 답글 복사 완료!',
-          after: function () {
-            if (!state.replies[r.id]) {
-              state.replies[r.id] = 1;
-              save();
-              paintReplies();
-            }
-          }
-        });
-      });
-      actions.appendChild(copyBtn);
-
-      wrap.appendChild(actions);
-      list.appendChild(wrap);
+    items.slice(idx * REPLY_PAGE, idx * REPLY_PAGE + REPLY_PAGE).forEach(function (r) {
+      list.appendChild(replyRow(r));
     });
-
     paintReplies();
+  }
+
+  function replyRow(r) {
+    var wrap = document.createElement('div');
+    wrap.className = 'reply';
+    wrap.dataset.id = r.id;
+
+    var head = document.createElement('button');
+    head.type = 'button';
+    head.className = 'reply-head';
+    head.setAttribute('aria-pressed', 'false');
+    head.innerHTML = '<span class="reply-topic"></span><span class="dot-check"></span>';
+    head.querySelector('.reply-topic').textContent = r.topic;
+    head.setAttribute('aria-label', r.topic + ' 답글 완료 체크');
+    head.addEventListener('click', function () { toggleReply(r.id); });
+    wrap.appendChild(head);
+
+    var actions = document.createElement('div');
+    actions.className = 'reply-actions';
+
+    if (/^https?:\/\//i.test(r.url)) {
+      var openLink = document.createElement('a');
+      openLink.className = 'mini-btn open';
+      openLink.href = r.url;
+      openLink.target = '_blank';
+      openLink.rel = 'noopener noreferrer';
+      openLink.textContent = '글 열기 ↗';
+      openLink.setAttribute('aria-label', '원글 새 창에서 열기');
+      actions.appendChild(openLink);
+    }
+
+    var copyBtn = document.createElement('button');
+    copyBtn.type = 'button';
+    copyBtn.className = 'mini-btn copy';
+    copyBtn.textContent = '답글 복사';
+    copyBtn.setAttribute('aria-label', r.topic + ' 답글 복사');
+    copyBtn.addEventListener('click', function () {
+      copyText(r.reply_text, copyBtn, {
+        idle: '답글 복사',
+        ok: '✓ 복사됨',
+        msg: '\uD83D\uDCCB 답글 복사 완료!',
+        after: function () {
+          if (!state.replies[r.id]) {
+            state.replies[r.id] = 1;
+            save();
+            paintReplies();
+          }
+        }
+      });
+    });
+    actions.appendChild(copyBtn);
+
+    wrap.appendChild(actions);
+    return wrap;
+  }
+
+  /* [다음 2개] — 서버 통신 없이 즉시 다음 세트로 */
+  function nextReplySet() {
+    var total = replySetCount();
+    var idx = replySetIndex();
+    if (idx >= total) return;
+    state.replySet = idx + 1;
+    save();
+    renderReplySet();
+    if (state.replySet >= total) {
+      toast('\uD83E\uDDF5 준비된 ' + replyItems().length + '건을 모두 확인했어요', 2600);
+    } else {
+      toast('\uD83E\uDDF5 ' + (state.replySet + 1) + ' / ' + total + '세트로 넘겼습니다', 1700);
+    }
+  }
+
+  function resetReplySet() {
+    state.replySet = 0;
+    save();
+    renderReplySet();
+    toast('\uD83E\uDDF5 처음 세트로 돌아왔습니다', 1700);
+  }
+
+  function copyReplyRequest() {
+    var btn = $('replyRequest');
+    copyText('스레드 소통 새 글 6개 채워서 대시보드에 올려줘', btn, {
+      idle: '새 글 요청 복사',
+      ok: '✓ 복사됨',
+      msg: '\uD83D\uDCCB 새 글 요청 문구를 복사했어요'
+    });
   }
 
   function replyDoneCount() {
@@ -1742,6 +1898,9 @@
     $('weather').addEventListener('click', function () { loadWeather(true); });
     $('syncBtn').addEventListener('click', function () { syncNow(true); });
     $('dinnerToggle').addEventListener('click', toggleDinner);
+    $('replyNext').addEventListener('click', nextReplySet);
+    $('replyResetSet').addEventListener('click', resetReplySet);
+    $('replyRequest').addEventListener('click', copyReplyRequest);
     bindDinnerBox();
 
     // 실행 시 data.json 을 새로 받아 화면을 다시 그린다 (실패하면 내장 데이터 유지)
