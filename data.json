@@ -1,7 +1,7 @@
 {
   "date_label": "11월 16일 월요일",
-  "updated_at": "17:10 기준",
-  "briefing": "18:20 인스타 감성 릴스 · 18:30 1인 식단 브리핑 대기 중",
+  "updated_at": "18:22 기준",
+  "briefing": "18:30 inner pace 릴스 발행 · 곧 1인 식단 브리핑 예정",
   "missions": [
     {
       "id": "m1",
@@ -17,7 +17,7 @@
       "time": "18:30",
       "app_label": "인스타",
       "app_url": "https://www.instagram.com/",
-      "copy_text": ""
+      "copy_text": "Slow down your pace. Tonight, let the noise fade.\n\n오늘 하루 쌓인 소음을 잠시 끄고,\n나만의 속도로 숨 고르는 고요한 밤.\n\n🎧 풀버전 사운드는 프로필 상단 링크나 유튜브 'inner pace'에서 만나보세요.\n\n#innerpace #nightambient #slowliving #마음휴식 #감성릴스"
     },
     {
       "id": "m3",
