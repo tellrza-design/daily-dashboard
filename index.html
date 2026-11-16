@@ -1474,14 +1474,15 @@
 
       var value = document.createElement('span');
       value.className = 'board-value';
-      if (b.tone && b.progress === null) value.className += ' pill pill-' + b.tone;
+      var hasProgress = typeof b.progress === 'number';
+      if (b.tone && !hasProgress) value.className += ' pill pill-' + b.tone;
       value.textContent = b.value;
 
       top.appendChild(label);
       top.appendChild(value);
       row.appendChild(top);
 
-      if (b.progress !== null) {
+      if (hasProgress) {
         var bar = document.createElement('div');
         bar.className = 'board-bar';
         bar.setAttribute('role', 'progressbar');
