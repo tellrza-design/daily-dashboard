@@ -1,37 +1,37 @@
 {
-  "date_label": "11월 16일 월요일",
-  "updated_at": "23:37 기준",
-  "briefing": "오늘 발행 마감 · 빨간불 5건 중 돈·기한 2건부터 확인",
+  "date_label": "11월 17일 화요일",
+  "updated_at": "06:45 기준",
+  "briefing": "슈퍼해피 신규 주문 1건 · 로켓그로스 품절·임박 3건 확인",
   "urgent_inbox": [
     {
       "id": "u1",
-      "title": "모모상점 치이카와 C 품절",
-      "tag": "품절 1건",
+      "title": "슈퍼해피 신규 결제완료 1건 확인",
+      "tag": "미확인 주문",
       "urgency": "red"
     },
     {
       "id": "u2",
-      "title": "코코낫 정산 보류 회신 대기",
-      "tag": "리마인드 대기",
-      "urgency": "amber"
-    },
-    {
-      "id": "u3",
-      "title": "쿠팡 전기매트 2건 주문 확인",
-      "tag": "중복 확인",
+      "title": "로켓그로스 품절 1 · 품절임박 2건",
+      "tag": "모모·오눌루",
       "urgency": "red"
     },
     {
+      "id": "u3",
+      "title": "코코낫 정산 보류 리마인드 발송",
+      "tag": "회신 5일째 없음",
+      "urgency": "amber"
+    },
+    {
       "id": "u4",
-      "title": "수노 블프 할인 감시",
-      "tag": "11/20 예정",
-      "urgency": "blue"
+      "title": "전기매트 2건 중복 결제 확인",
+      "tag": "376,630원",
+      "urgency": "red"
     },
     {
       "id": "u5",
-      "title": "대구신보 창업 자금 상담",
-      "tag": "서류 준비",
-      "urgency": "green"
+      "title": "수노 블프 할인 감시",
+      "tag": "11/20 예정",
+      "urgency": "blue"
     }
   ],
   "timeline": [
@@ -150,8 +150,8 @@
       "progress": 47
     },
     {
-      "label": "🛒 모모상점 재고",
-      "value": "품절 1건 확인",
+      "label": "🛒 로켓그로스 재고",
+      "value": "품절 1 · 임박 2건",
       "tone": "red"
     },
     {
