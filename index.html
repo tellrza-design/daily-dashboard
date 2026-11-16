@@ -1430,7 +1430,7 @@
   function inboxItems() {
     var out = [];
     (DATA.inbox || []).forEach(function (u, i) {
-      out.push({ key: 'u:' + u.id, title: u.title, tag: u.tag, tone: u.urgency, seq: i });
+      out.push({ key: 'u:' + u.id, title: u.title, tag: u.tag, tone: u.urgency, group: 0, seq: i });
     });
     (DATA.checks || []).forEach(function (c, i) {
       out.push({
@@ -1438,7 +1438,8 @@
         title: (c.emoji ? c.emoji + ' ' : '') + c.label,
         tag: c.tag,
         tone: TONES.indexOf(c.tone) < 0 ? 'blue' : c.tone,
-        seq: 100 + i
+        group: 1,
+        seq: i
       });
     });
     return out;
@@ -1464,6 +1465,7 @@
       var da = state.inbox[a.key] ? 1 : 0;
       var db = state.inbox[b.key] ? 1 : 0;
       if (da !== db) return da - db;
+      if (a.group !== b.group) return a.group - b.group;
       var ra = TONE_RANK[a.tone] === undefined ? 9 : TONE_RANK[a.tone];
       var rb = TONE_RANK[b.tone] === undefined ? 9 : TONE_RANK[b.tone];
       if (ra !== rb) return ra - rb;
