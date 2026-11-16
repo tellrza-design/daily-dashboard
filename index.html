@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<title>오늘 관제판</title>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="오늘 관제판" />
+<meta name="application-name" content="오늘 관제판" />
+<meta name="theme-color" content="#F6F7F9" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#101318" media="(prefers-color-scheme: dark)" />
+<link rel="apple-touch-icon" href="icon-180.png" />
+<link rel="icon" href="icon-180.png" type="image/png" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="description" content="오늘의 발행 미션과 핵심 체크, 집중 타이머를 한 화면에서." />
+<style>
+  :root {
+    --bg: #F6F7F9;
+    --page: #E5E8EB;
+    --card: #FFFFFF;
+    --text: #191F28;
+    --sub: #6B7684;
+    --line: #ECEEF2;
+    --blue: #3182F6;
+    --blue-soft: #EBF3FE;
+    --orange: #FF7A30;
+    --orange-soft: #FFF1E8;
+    --green: #16A34A;
+    --green-soft: #DCFCE7;
+    --red: #DC2626;
+    --red-soft: #FEE2E2;
+    --amber: #D97706;
+    --amber-soft: #FEF3C7;
+    --done-bg: #F9FAFB;
+    --shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+    --toast-bg: #191F28;
+    --toast-text: #FFFFFF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101318;
+      --page: #07090C;
+      --card: #191D24;
+      --text: #F2F4F6;
+      --sub: #9AA4B2;
+      --line: #262C35;
+      --blue: #4C8DFF;
+      --blue-soft: #16233A;
+      --orange: #FF8A4C;
+      --orange-soft: #2A1D15;
+      --green: #4ADE80;
+      --green-soft: #132A1C;
+      --red: #F87171;
+      --red-soft: #2C1618;
+      --amber: #FBBF24;
+      --amber-soft: #2B2211;
+      --done-bg: #14181E;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+      --toast-bg: #F2F4F6;
+      --toast-text: #191F28;
+    }
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--page);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overscroll-behavior-y: none;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color .3s ease;
+  }
+  .phone {
+    width: 100%;
+    max-width: 390px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--bg);
+    padding: calc(18px + env(safe-area-inset-top)) 16px calc(26px + env(safe-area-inset-bottom));
+    position: relative;
+  }
+
+  /* ── 헤더 ── */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .date-badge {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--blue);
+    background: var(--blue-soft);
+    padding: 4px 10px;
+    border-radius: 999px;
+    display: inline-block;
+    margin-bottom: 7px;
+  }
+  .title {
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin: 0;
+    line-height: 1.25;
+  }
+  .weather {
+    text-align: right;
+    background: var(--card);
+    padding: 8px 12px;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    flex-shrink: 0;
+    min-width: 78px;
+  }
+  .weather:active { transform: scale(0.97); }
+  .weather-temp { font-size: 15px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .weather-loc { font-size: 11px; color: var(--sub); margin-top: 2px; font-weight: 600; }
+
+  /* ── 카드 ── */
+  .card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+  }
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 8px;
+  }
+  .card-title { font-size: 15px; font-weight: 800; letter-spacing: -0.2px; }
+  .hint { font-size: 12px; color: var(--sub); font-weight: 600; }
+  .progress-pill {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--orange);
+    background: var(--orange-soft);
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .progress-bar {
+    height: 7px;
+    background: var(--line);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--blue), var(--orange));
+    border-radius: 999px;
+    transition: width .35s cubic-bezier(.4, 0, .2, 1);
+  }
+
+  /* ── 미션 ── */
+  .mission-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 11px 12px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background-color .2s ease, border-color .2s ease, transform .12s ease;
+    text-align: left;
+    width: 100%;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    min-height: 56px;
+  }
+  .mission-item:last-child { margin-bottom: 0; }
+  .mission-item:active { transform: scale(0.985); }
+  .mission-item.done { background: var(--done-bg); border-color: var(--blue-soft); }
+  .mission-item.next { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-soft); }
+  .mission-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 7px;
+    border: 2px solid #D1D6DB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+    transition: background-color .2s ease, border-color .2s ease;
+  }
+  .mission-item.done .check-box { background: var(--blue); border-color: var(--blue); }
+  .mission-name { font-size: 14px; font-weight: 700; letter-spacing: -0.2px; }
+  .mission-item.done .mission-name { color: var(--sub); text-decoration: line-through; }
+  .mission-time { font-size: 12px; color: var(--sub); font-weight: 600; margin-top: 2px; }
+  .stamp {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--orange);
+    border: 1.5px solid var(--orange);
+    padding: 2px 7px;
+    border-radius: 6px;
+    transform: rotate(-6deg);
+    display: none;
+    flex-shrink: 0;
+  }
+  .mission-item.done .stamp { display: inline-block; }
+  .next-badge {
+    display: none;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--blue);
+    background: var(--blue-soft);
+    padding: 3px 8px;
+    border-radius: 999px;
+    flex-shrink: 0;
+  }
+  .mission-item.next .next-badge { display: inline-block; }
+  .mission-item.done .next-badge { display: none; }
+
+  /* ── 핵심 체크 ── */
+  .alert-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    cursor: pointer;
+    min-height: 44px;
+  }
+  .alert-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .alert-row:first-of-type { padding-top: 2px; }
+  .alert-row .label { flex: 1; min-width: 0; }
+  .alert-row.checked .label { color: var(--sub); text-decoration: line-through; }
+  .tag {
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .tag-red { background: var(--red-soft); color: var(--red); }
+  .tag-amber { background: var(--amber-soft); color: var(--amber); }
+  .tag-green { background: var(--green-soft); color: var(--green); }
+  .dot-check {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #D1D6DB;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 900;
+    color: #fff;
+    transition: background-color .2s ease, border-color .2s ease;
+  }
+  .alert-row.checked .dot-check { background: var(--green); border-color: var(--green); }
+
+  /* ── 타이머 ── */
+  .timer-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .timer-display {
+    font-size: 34px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .timer-display.ending { color: var(--orange); }
+  .timer-btns { display: flex; gap: 6px; flex-shrink: 0; }
+  .btn {
+    border: none;
+    border-radius: 10px;
+    padding: 9px 13px;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: inherit;
+    min-height: 38px;
+    transition: transform .1s ease, opacity .2s ease;
+  }
+  .btn:active { transform: scale(0.96); }
+  .btn-primary { background: var(--blue); color: #fff; }
+  .btn-ghost { background: var(--bg); color: var(--sub); }
+  .presets { display: flex; gap: 6px; }
+  .chip {
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--sub);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12.5px;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: inherit;
+    font-variant-numeric: tabular-nums;
+    transition: all .15s ease;
+  }
+  .chip.active { border-color: var(--blue); color: var(--blue); background: var(--blue-soft); }
+  .chip:active { transform: scale(0.96); }
+  .timer-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+
+  /* ── 토스트 ── */
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: calc(18px + env(safe-area-inset-bottom));
+    transform: translate(-50%, 130%);
+    width: min(358px, calc(100% - 32px));
+    background: var(--toast-bg);
+    color: var(--toast-text);
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 12px 14px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .3s cubic-bezier(.2, .9, .3, 1.2), opacity .25s ease;
+    box-shadow: 0 8px 26px rgba(0, 0, 0, .22);
+    z-index: 50;
+  }
+  .toast.show { transform: translate(-50%, 0); opacity: 1; }
+  .toast-sign { color: #FF9F68; font-weight: 800; flex-shrink: 0; }
+
+  /* ── 축하 파티클 ── */
+  .confetti {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 40;
+  }
+  .confetti i {
+    position: absolute;
+    top: -12px;
+    width: 7px;
+    height: 11px;
+    border-radius: 2px;
+    animation: fall 1.6s cubic-bezier(.3, .7, .5, 1) forwards;
+  }
+  @keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(105vh) rotate(520deg); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .confetti { display: none; }
+    .toast, .progress-fill, .mission-item, .check-box { transition: none; }
+  }
+</style>
+</head>
+<body>
+  <main class="phone">
+    <div class="header">
+      <div>
+        <span class="date-badge" id="dateBadge">오늘</span>
+        <h1 class="title">오늘 관제판</h1>
+      </div>
+      <button class="weather" id="weather" type="button" aria-label="날씨 새로고침">
+        <div class="weather-temp" id="weatherTemp">대구</div>
+        <div class="weather-loc" id="weatherLoc"></div>
+      </button>
+    </div>
+
+    <section class="card" id="missionCard">
+      <div class="card-head">
+        <div class="card-title">📌 오늘의 발행 미션</div>
+        <div class="progress-pill" id="progText">0 / 4 완료</div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+      <div id="missionList"></div>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <div class="card-title">⚡ 핵심 체크 3건</div>
+        <span class="hint">탭해서 확인</span>
+      </div>
+      <div id="checkList"></div>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <div class="card-title">⏱️ 집중 타이머</div>
+        <span class="hint" id="timerState">대기</span>
+      </div>
+      <div class="timer-box">
+        <div class="timer-display" id="timerDisplay">25:00</div>
+        <div class="timer-btns">
+          <button class="btn btn-primary" id="startBtn" type="button" aria-pressed="false">시작</button>
+          <button class="btn btn-ghost" id="resetBtn" type="button">리셋</button>
+        </div>
+      </div>
+      <div class="timer-foot">
+        <div class="presets" id="presets">
+          <button class="chip active" type="button" data-min="25">25분</button>
+          <button class="chip" type="button" data-min="10">10분</button>
+          <button class="chip" type="button" data-min="5">5분</button>
+        </div>
+        <span class="hint" id="endedCount"></span>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast">
+    <span id="toastText">오늘 미션 4개, 하나씩 체크해 보세요</span>
+    <span class="toast-sign">텔르자</span>
+  </div>
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ───── 설정 ───── */
+  var CONFIG = {
+    city: '대구',
+    lat: 35.8714,
+    lon: 128.6014,
+    missions: [
+      { id: 'm1', emoji: '\uD83E\uDDF5', name: '스레드 점심 공감', time: '12:00' },
+      { id: 'm2', emoji: '\uD83C\uDFAC', name: '인스타 감성 릴스', time: '18:30' },
+      { id: 'm3', emoji: '\uD83D\uDCF8', name: '인스타 캐러셀', time: '20:30' },
+      { id: 'm4', emoji: '\uD83C\uDF19', name: '스레드 심야 사유', time: '21:00' }
+    ],
+    checks: [
+      { id: 'c1', emoji: '\uD83D\uDED2', label: '모모상점 품절 건 확인', tag: '1개 품절', tone: 'red' },
+      { id: 'c2', emoji: '\uD83D\uDCB0', label: '정산 보류 건 회신 확인', tag: '회신 대기', tone: 'amber' },
+      { id: 'c3', emoji: '\u2615', label: '카페 창업 사전 상담 준비', tag: '준비 완료', tone: 'green' }
+    ],
+    timerPresets: [25, 10, 5]
+  };
+
+  var STORE = 'today-board.v1';
+  var WEATHER_STORE = 'today-board.weather.v1';
+  var DAYS = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var pad = function (n) { return String(n).padStart(2, '0'); };
+
+  function dateKey(d) {
+    d = d || new Date();
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  }
+
+  /* ───── 저장 ───── */
+  var state = freshState();
+
+  function freshState() {
+    return { date: dateKey(), done: {}, checks: {}, timerEnded: 0 };
+  }
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORE);
+      var saved = raw ? JSON.parse(raw) : null;
+      // 날짜가 바뀌면 자동 초기화 (다음 날 첫 실행 시)
+      if (saved && saved.date === dateKey()) {
+        state = {
+          date: saved.date,
+          done: saved.done || {},
+          checks: saved.checks || {},
+          timerEnded: saved.timerEnded || 0
+        };
+      } else {
+        state = freshState();
+      }
+    } catch (e) {
+      state = freshState();
+    }
+    save();
+  }
+
+  function save() {
+    try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) {}
+  }
+
+  /* ───── 날짜 표시 ───── */
+  function renderDate() {
+    var d = new Date();
+    $('dateBadge').textContent = (d.getMonth() + 1) + '월 ' + d.getDate() + '일 ' + DAYS[d.getDay()];
+  }
+
+  /* ───── 날씨 (Open-Meteo, 실패하면 조용히 대구 표시 유지) ───── */
+  var WMO = {
+    0: ['☀️', '맑음'], 1: ['🌤', '대체로 맑음'], 2: ['⛅️', '구름 조금'], 3: ['☁️', '흐림'],
+    45: ['🌫', '안개'], 48: ['🌫', '안개'], 51: ['🌦', '약한 이슬비'], 53: ['🌦', '이슬비'], 55: ['🌧', '이슬비'],
+    56: ['🌧', '얼어붙는 비'], 57: ['🌧', '얼어붙는 비'], 61: ['🌦', '약한 비'], 63: ['🌧', '비'], 65: ['🌧', '강한 비'],
+    66: ['🌧', '얼어붙는 비'], 67: ['🌧', '얼어붙는 비'], 71: ['🌨', '약한 눈'], 73: ['🌨', '눈'], 75: ['❄️', '강한 눈'],
+    77: ['🌨', '싸락눈'], 80: ['🌦', '소나기'], 81: ['🌧', '소나기'], 82: ['⛈', '강한 소나기'],
+    85: ['🌨', '눈 소나기'], 86: ['❄️', '강한 눈 소나기'], 95: ['⛈', '뇌우'], 96: ['⛈', '뇌우·우박'], 99: ['⛈', '뇌우·우박']
+  };
+
+  function paintWeather(temp, code, subLabel) {
+    var w = WMO[code] || ['🌡', ''];
+    $('weatherTemp').textContent = w[0] + ' ' + Math.round(temp) + '°';
+    $('weatherLoc').textContent = subLabel || CONFIG.city;
+  }
+
+  function loadWeather(force) {
+    var today = dateKey();
+    if (!force) {
+      try {
+        var cached = JSON.parse(localStorage.getItem(WEATHER_STORE) || 'null');
+        if (cached && cached.date === today) { paintWeather(cached.temp, cached.code, cached.label); return; }
+      } catch (e) {}
+    }
+    var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + CONFIG.lat + '&longitude=' + CONFIG.lon +
+      '&current=temperature_2m,weather_code&timezone=Asia%2FSeoul';
+    fetch(url).then(function (r) { return r.json(); }).then(function (j) {
+      var cur = j && j.current;
+      if (!cur || typeof cur.temperature_2m !== 'number') return;
+      var label = CONFIG.city + ' · ' + ((WMO[cur.weather_code] || ['', ''])[1] || '');
+      paintWeather(cur.temperature_2m, cur.weather_code, label.replace(/ ·\s*$/, ''));
+      try {
+        localStorage.setItem(WEATHER_STORE, JSON.stringify({ date: today, temp: cur.temperature_2m, code: cur.weather_code, label: label }));
+      } catch (e) {}
+    }).catch(function () {
+      // 오프라인이거나 API가 막히면 지역명만 남긴다
+      $('weatherTemp').textContent = CONFIG.city;
+      $('weatherLoc').textContent = '';
+    });
+  }
+
+  /* ───── 미션 ───── */
+  function buildMissions() {
+    var list = $('missionList');
+    list.innerHTML = '';
+    CONFIG.missions.forEach(function (m) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'mission-item';
+      btn.dataset.id = m.id;
+      btn.setAttribute('aria-pressed', 'false');
+      btn.innerHTML =
+        '<span class="mission-left">' +
+          '<span class="check-box"></span>' +
+          '<span>' +
+            '<span class="mission-name"></span>' +
+            '<span class="mission-time"></span>' +
+          '</span>' +
+        '</span>' +
+        '<span class="next-badge">다음</span>' +
+        '<span class="stamp">완료!</span>';
+      btn.querySelector('.mission-name').textContent = m.emoji + ' ' + m.name;
+      btn.querySelector('.mission-time').textContent = m.time + ' 발행';
+      btn.addEventListener('click', function () { toggleMission(m.id); });
+      list.appendChild(btn);
+    });
+  }
+
+  function toggleMission(id) {
+    var before = doneCount();
+    if (state.done[id]) delete state.done[id];
+    else state.done[id] = 1;
+    save();
+    var after = doneCount();
+    renderMissions();
+    if (after === CONFIG.missions.length && before !== after) {
+      celebrate();
+    } else if (after < CONFIG.missions.length) {
+      toast(progressMessage(after), 2600);
+    }
+  }
+
+  function doneCount() {
+    return CONFIG.missions.filter(function (m) { return state.done[m.id]; }).length;
+  }
+
+  function progressMessage(n) {
+    var left = CONFIG.missions.length - n;
+    if (n === 0) return '오늘 미션 ' + CONFIG.missions.length + '개, 하나씩 체크해 보세요';
+    return n + '/' + CONFIG.missions.length + ' 완료 · ' + left + '개 남았습니다';
+  }
+
+  function toMinutes(hhmm) {
+    var p = hhmm.split(':');
+    return parseInt(p[0], 10) * 60 + parseInt(p[1], 10);
+  }
+
+  function renderMissions() {
+    var now = new Date();
+    var nowMin = now.getHours() * 60 + now.getMinutes();
+    var nextId = null;
+    CONFIG.missions.forEach(function (m) {
+      if (!state.done[m.id] && nextId === null && toMinutes(m.time) >= nowMin) nextId = m.id;
+    });
+
+    var nodes = $('missionList').children;
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      var id = el.dataset.id;
+      var done = !!state.done[id];
+      el.classList.toggle('done', done);
+      el.classList.toggle('next', !done && id === nextId);
+      el.setAttribute('aria-pressed', done ? 'true' : 'false');
+      el.querySelector('.check-box').textContent = done ? '✓' : '';
+    }
+
+    var total = CONFIG.missions.length;
+    var n = doneCount();
+    $('progText').textContent = n + ' / ' + total + ' 완료';
+    $('progFill').style.width = Math.round((n / total) * 100) + '%';
+  }
+
+  /* ───── 핵심 체크 ───── */
+  function buildChecks() {
+    var list = $('checkList');
+    list.innerHTML = '';
+    CONFIG.checks.forEach(function (c) {
+      var row = document.createElement('div');
+      row.className = 'alert-row';
+      row.dataset.id = c.id;
+      row.setAttribute('role', 'button');
+      row.setAttribute('tabindex', '0');
+      row.innerHTML =
+        '<span class="label"></span>' +
+        '<span class="tag tag-' + c.tone + '"></span>' +
+        '<span class="dot-check"></span>';
+      row.querySelector('.label').textContent = c.emoji + ' ' + c.label;
+      row.querySelector('.tag').textContent = c.tag;
+      var act = function () { toggleCheck(c.id); };
+      row.addEventListener('click', act);
+      row.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); }
+      });
+      list.appendChild(row);
+    });
+  }
+
+  function toggleCheck(id) {
+    if (state.checks[id]) delete state.checks[id];
+    else state.checks[id] = 1;
+    save();
+    renderChecks();
+  }
+
+  function renderChecks() {
+    var rows = $('checkList').children;
+    for (var i = 0; i < rows.length; i++) {
+      var el = rows[i];
+      var on = !!state.checks[el.dataset.id];
+      el.classList.toggle('checked', on);
+      el.setAttribute('aria-pressed', on ? 'true' : 'false');
+      el.querySelector('.dot-check').textContent = on ? '✓' : '';
+    }
+  }
+
+  /* ───── 축하 ───── */
+  function celebrate() {
+    toast('\uD83D\uDE4C 오늘 미션 올클리어! 수고하셨습니다', 6000);
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var box = $('confetti');
+    var colors = ['#3182F6', '#FF7A30', '#16A34A', '#FBBF24', '#EC4899'];
+    for (var i = 0; i < 18; i++) {
+      var s = document.createElement('i');
+      s.style.left = (Math.random() * 96 + 2).toFixed(1) + '%';
+      s.style.background = colors[i % colors.length];
+      s.style.animationDelay = (Math.random() * 0.35).toFixed(2) + 's';
+      s.style.opacity = '1';
+      box.appendChild(s);
+    }
+    setTimeout(function () { box.innerHTML = ''; }, 2400);
+  }
+
+  /* ───── 토스트 ───── */
+  var toastTimer = null;
+  function toast(msg, ms) {
+    var el = $('toast');
+    $('toastText').textContent = msg;
+    el.classList.add('show');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { el.classList.remove('show'); }, ms || 3000);
+  }
+
+  /* ───── 집중 타이머 ───── */
+  var timer = { preset: 25, remain: 25 * 60, endAt: 0, running: false, iv: null, audioCtx: null };
+
+  function audioContext() {
+    if (timer.audioCtx) {
+      if (timer.audioCtx.state === 'suspended') timer.audioCtx.resume();
+      return timer.audioCtx;
+    }
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    try { timer.audioCtx = new AC(); } catch (e) { return null; }
+    return timer.audioCtx;
+  }
+
+  // 부드러운 3음 차임 (사인파 + 약한 배음, 긴 감쇠)
+  function chime() {
+    var ac = audioContext();
+    if (!ac) return;
+    var t0 = ac.currentTime + 0.02;
+    var notes = [880, 1108.73, 1318.51];
+    notes.forEach(function (freq, i) {
+      var start = t0 + i * 0.19;
+      var osc = ac.createOscillator();
+      var gain = ac.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.exponentialRampToValueAtTime(0.16, start + 0.10);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + 1.7);
+      osc.connect(gain).connect(ac.destination);
+      osc.start(start);
+      osc.stop(start + 1.8);
+    });
+  }
+
+  function renderTimer() {
+    var s = Math.max(0, timer.remain);
+    var mm = Math.floor(s / 60);
+    var ss = s % 60;
+    $('timerDisplay').textContent = pad(mm) + ':' + pad(ss);
+    $('timerDisplay').classList.toggle('ending', timer.running && s <= 10 && s > 0);
+    $('timerState').textContent = timer.running ? '집중 중' : (s === 0 ? '완료' : '대기');
+  }
+
+  function setPreset(min) {
+    stopTicking();
+    timer.preset = min;
+    timer.remain = min * 60;
+    timer.running = false;
+    timer.endAt = 0;
+    $('startBtn').textContent = '시작';
+    $('startBtn').setAttribute('aria-pressed', 'false');
+    var chips = $('presets').children;
+    for (var i = 0; i < chips.length; i++) {
+      chips[i].classList.toggle('active', parseInt(chips[i].dataset.min, 10) === min);
+    }
+    renderTimer();
+  }
+
+  function stopTicking() {
+    if (timer.iv) { clearInterval(timer.iv); timer.iv = null; }
+  }
+
+  function tick() {
+    if (!timer.running) return;
+    var left = Math.round((timer.endAt - Date.now()) / 1000);
+    timer.remain = Math.max(0, left);
+    renderTimer();
+    if (timer.remain <= 0) finishTimer();
+  }
+
+  function startTimer() {
+    audioContext(); // iOS: 사용자 제스처 안에서 오디오를 미리 깨워둔다
+    if (timer.remain <= 0) timer.remain = timer.preset * 60;
+    timer.endAt = Date.now() + timer.remain * 1000;
+    timer.running = true;
+    $('startBtn').textContent = '일시정지';
+    $('startBtn').setAttribute('aria-pressed', 'true');
+    stopTicking();
+    timer.iv = setInterval(tick, 250);
+    renderTimer();
+  }
+
+  function pauseTimer() {
+    timer.remain = Math.max(0, Math.round((timer.endAt - Date.now()) / 1000));
+    timer.running = false;
+    stopTicking();
+    $('startBtn').textContent = '계속';
+    $('startBtn').setAttribute('aria-pressed', 'false');
+    renderTimer();
+  }
+
+  function finishTimer() {
+    timer.running = false;
+    timer.remain = 0;
+    stopTicking();
+    $('startBtn').textContent = '다시 시작';
+    $('startBtn').setAttribute('aria-pressed', 'false');
+    renderTimer();
+    chime();
+    toast('\u23F0 ' + timer.preset + '분 집중 끝났습니다. 잠깐 쉬어가세요', 5000);
+    state.timerEnded = (state.timerEnded || 0) + 1;
+    save();
+    $('endedCount').textContent = '오늘 ' + state.timerEnded + '회 완료';
+  }
+
+  function resetTimer() {
+    setPreset(timer.preset);
+    toast('타이머를 초기화했습니다', 1800);
+  }
+
+  /* ───── 날짜 넘어가면 초기화 ───── */
+  function checkRollover() {
+    if (state.date !== dateKey()) {
+      state = freshState();
+      save();
+      renderDate();
+      renderMissions();
+      renderChecks();
+      loadWeather(true);
+      $('endedCount').textContent = '';
+      toast('날짜가 바뀌었습니다. 오늘 미션 새로 시작합니다', 3200);
+    }
+  }
+
+  /* ───── 초기화 ───── */
+  function init() {
+    load();
+    renderDate();
+    buildMissions();
+    buildChecks();
+    renderMissions();
+    renderChecks();
+    $('endedCount').textContent = state.timerEnded ? '오늘 ' + state.timerEnded + '회 완료' : '';
+    setPreset(25);
+    loadWeather(false);
+
+    $('startBtn').addEventListener('click', function () {
+      if (timer.running) pauseTimer();
+      else startTimer();
+    });
+    $('resetBtn').addEventListener('click', resetTimer);
+    var chips = $('presets').children;
+    for (var i = 0; i < chips.length; i++) {
+      (function (btn) {
+        btn.addEventListener('click', function () { setPreset(parseInt(btn.dataset.min, 10)); });
+      })(chips[i]);
+    }
+    $('weather').addEventListener('click', function () { loadWeather(true); });
+
+    if (doneCount() === CONFIG.missions.length) {
+      $('toastText').textContent = '\uD83D\uDE4C 오늘 미션 올클리어! 수고하셨습니다';
+    } else {
+      $('toastText').textContent = progressMessage(doneCount());
+    }
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'visible') {
+        checkRollover();
+        if (timer.running) tick();
+        renderMissions(); // '다음' 미션 표시 갱신
+        renderDate();
+      }
+    });
+    setInterval(function () {
+      checkRollover();
+      if (!timer.running) renderMissions();
+    }, 60000);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+</body>
+</html>
