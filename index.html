@@ -1003,7 +1003,7 @@
     <section class="card" id="weekCard">
       <div class="card-head">
         <div class="card-title">📅 주간 타임라인</div>
-        <span class="hint">이번 주</span>
+        <span class="hint" id="timelineHint">이번 주</span>
       </div>
       <div class="tl-scroll" id="timelineList"></div>
       <div class="board-divider" id="boardWrap">
@@ -2040,6 +2040,8 @@
     wrap.style.display = items.length ? '' : 'none';
 
     var soonMarked = false;
+    var hintEl = $('timelineHint');
+    if (hintEl) hintEl.textContent = items.length > 2 ? (items.length + '건 · 좌우로 밀기') : '이번 주';
     items.forEach(function (t) {
       var dd = ddayOf(t.date);
       var chip = document.createElement('div');
