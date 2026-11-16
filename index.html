@@ -1435,18 +1435,19 @@
     var hasSteps = ol.children.length > 0;
     $('dinnerCaret').style.display = hasSteps ? '' : 'none';
     $('dinnerToggle').style.cursor = hasSteps ? 'pointer' : 'default';
-    if (!hasSteps) setDinner(false);
-    else setDinner(dinnerOpen);
+    setDinner(hasSteps ? dinnerOpen : false, true);
   }
 
-  function setDinner(open) {
+  // instant: 데이터 다시 그리기일 때는 애니메이션 없이 바로 최종 높이로
+  function setDinner(open, instant) {
     var box = $('dinnerSteps');
     var btn = $('dinnerToggle');
     dinnerOpen = open;
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     $('dinnerCaret').textContent = open ? '레시피 ▴' : '레시피 ▾';
     if (open) {
-      box.style.maxHeight = box.scrollHeight + 'px';
+      if (instant) box.style.maxHeight = 'none';
+      else box.style.maxHeight = box.scrollHeight + 'px';
     } else {
       // 펼친 뒤 maxHeight 가 none 이면, 현재 높이를 고정해야 접히는 애니메이션이 산다
       if (box.style.maxHeight === 'none') {
