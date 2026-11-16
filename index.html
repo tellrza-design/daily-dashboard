@@ -14,7 +14,7 @@
 <link rel="apple-touch-icon" href="icon-180.png" />
 <link rel="icon" href="icon-180.png" type="image/png" />
 <meta name="format-detection" content="telephone=no" />
-<meta name="description" content="오늘의 발행 미션·문안 원터치 복사·작업실 바로가기·집중 타이머를 한 화면에서." />
+<meta name="description" content="오늘의 발행 미션·문안 원터치 복사·스레드 답글·10분 식단·채널 현황·집중 타이머를 한 화면에서." />
 <style>
   :root {
     --bg: #F6F7F9;
@@ -456,6 +456,178 @@
   .chip:active { transform: scale(0.96); }
   .timer-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 
+  /* ── 스레드 소통 10초 컷 ── */
+  .reply {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    transition: background-color .2s ease, border-color .2s ease;
+  }
+  .reply:last-child { margin-bottom: 0; }
+  .reply.done { background: var(--done-bg); border-color: var(--green-soft); }
+  .reply-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 11px 12px 9px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    min-height: 42px;
+  }
+  .reply-head:active { transform: scale(0.99); }
+  .reply-topic {
+    flex: 1;
+    min-width: 0;
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    line-height: 1.4;
+    word-break: keep-all;
+  }
+  .reply.done .reply-topic { color: var(--sub); }
+  .reply .dot-check { width: 18px; height: 18px; }
+  .reply.done .dot-check { background: var(--green); border-color: var(--green); }
+  .reply-actions { display: flex; gap: 6px; padding: 0 12px 10px; }
+  .reply-actions .mini-btn { flex: 1; justify-content: center; text-align: center; }
+
+  /* ── 10분 식단 · 레시피 아코디언 ── */
+  .dinner-head {
+    display: block;
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  .dinner-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 9px;
+  }
+  .dinner-badge {
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--orange-soft);
+    color: var(--orange);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .dinner-row { display: flex; align-items: center; gap: 8px; }
+  .dinner-menu {
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: -0.25px;
+    line-height: 1.4;
+    word-break: keep-all;
+  }
+  .dinner-caret {
+    flex-shrink: 0;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--blue);
+    background: var(--blue-soft);
+    padding: 5px 9px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+  .dinner-steps {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .32s cubic-bezier(.4, 0, .2, 1);
+  }
+  .dinner-steps ol {
+    list-style: none;
+    counter-reset: step;
+    margin: 12px 0 0;
+    padding: 12px 0 0;
+    border-top: 1px solid var(--line);
+  }
+  .dinner-steps li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 27px;
+    margin-bottom: 9px;
+    font-size: 13.5px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.2px;
+    word-break: keep-all;
+  }
+  .dinner-steps li:last-child { margin-bottom: 0; }
+  .dinner-steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    background: var(--blue-soft);
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── 미니 현황판 ── */
+  .board-row { padding: 9px 0; border-bottom: 1px solid var(--line); }
+  .board-row:first-child { padding-top: 1px; }
+  .board-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .board-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .board-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .board-value {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--sub);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .board-value.pill { font-size: 11px; padding: 3px 8px; border-radius: 8px; }
+  .board-value.pill-red { background: var(--red-soft); color: var(--red); }
+  .board-value.pill-amber { background: var(--amber-soft); color: var(--amber); }
+  .board-value.pill-green { background: var(--green-soft); color: var(--green); }
+  .board-value.pill-blue { background: var(--blue-soft); color: var(--blue); }
+  .board-bar {
+    height: 6px;
+    background: var(--line);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .board-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--blue), var(--orange));
+    transition: width .5s cubic-bezier(.4, 0, .2, 1);
+  }
+
   /* ── 토스트 ── */
   .toast {
     position: fixed;
@@ -540,6 +712,38 @@
       </div>
       <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
       <div id="missionList"></div>
+    </section>
+
+    <section class="card" id="replyCard">
+      <div class="card-head">
+        <div class="card-title">🧵 스레드 소통 10초 컷</div>
+        <span class="hint" id="replyHint">답글 복사 → 완료</span>
+      </div>
+      <div id="replyList"></div>
+    </section>
+
+    <section class="card" id="dinnerCard">
+      <button class="dinner-head" id="dinnerToggle" type="button" aria-expanded="false" aria-controls="dinnerSteps">
+        <span class="dinner-top">
+          <span class="card-title">🍳 오늘의 10분 식단</span>
+          <span class="dinner-badge" id="dinnerPrep">10분 컷</span>
+        </span>
+        <span class="dinner-row">
+          <span class="dinner-menu" id="dinnerMenu">불러오는 중…</span>
+          <span class="dinner-caret" id="dinnerCaret">레시피 ▾</span>
+        </span>
+      </button>
+      <div class="dinner-steps" id="dinnerSteps">
+        <ol id="dinnerList"></ol>
+      </div>
+    </section>
+
+    <section class="card" id="boardCard">
+      <div class="card-head">
+        <div class="card-title">📊 4대 채널 · 이커머스</div>
+        <span class="hint">오늘 현황</span>
+      </div>
+      <div id="boardList"></div>
     </section>
 
     <section class="card">
@@ -638,6 +842,31 @@
         copy_text: ''
       }
     ],
+    threads_replies: [
+      {
+        id: 'tr1',
+        topic: '인생책 · 카네기 & 군주론',
+        url: 'https://www.threads.com/@jin___blanc/post/DSLFUuFk6g5',
+        reply_text: '삶의 자리와 고민의 무게가 달라질 때마다 곁에 두게 되는 책도 함께 바뀐다는 말에 깊이 공감한다. 20대엔 사람과 마음을 배우고, 책임을 짊어질수록 구조와 본질을 묻는 고전을 찾게 되는 것 같다. 🗝️'
+      },
+      {
+        id: 'tr2',
+        topic: '독서 · 문해력과 인생책',
+        url: 'https://www.threads.com/@clever.child_/post/DcaqXlPmp-W',
+        reply_text: '문해력이라는 게 단순히 글자를 빨리 읽는 힘이 아니라, 결국 한 문장 너머의 맥락과 사람의 마음을 읽어내는 힘이라는 생각이 든다. 인생을 바꿔준 책 한 권이 그 모든 시선의 출발점이 되어주는 것 같다. 📓'
+      }
+    ],
+    dinner: {
+      menu: '18:30 저녁 메뉴 브리핑 대기',
+      prep_time: '10분 컷',
+      steps: ['18:30 식단 브리핑이 도착하면 여기에 딱 3줄 원팬 레시피가 자동으로 채워집니다.']
+    },
+    status_board: [
+      { label: '🪷 연꽃세상 수익창출', value: '1,887 / 4,000h', progress: 47 },
+      { label: '🛒 모모상점 재고', value: '품절 1건 확인', tone: 'red' },
+      { label: '🎁 쿠팡 체험단', value: '격주 월 10시 / 16시', tone: 'blue' },
+      { label: '🎨 미리캔버스 허브', value: '심사 9건 · 주간 56회', tone: 'amber' }
+    ],
     checks: [
       { id: 'c1', emoji: '🛒', label: '모모상점 품절 건 확인', tag: '1개 품절', tone: 'red' },
       { id: 'c2', emoji: '💰', label: '정산 보류 건 회신 확인', tag: '회신 대기', tone: 'amber' },
@@ -700,11 +929,48 @@
       };
     }).filter(function (s) { return s.label && /^https?:\/\//i.test(s.url); }) : [];
 
+    var replies = Array.isArray(raw.threads_replies) ? raw.threads_replies.map(function (r, i) {
+      return {
+        id: str(r.id) || ('tr' + (i + 1)),
+        topic: str(r.topic),
+        url: str(r.url),
+        reply_text: str(r.reply_text)
+      };
+    }).filter(function (r) { return r.topic && r.reply_text; }) : [];
+
+    var dinner = null;
+    if (raw.dinner && typeof raw.dinner === 'object') {
+      var steps = Array.isArray(raw.dinner.steps) ? raw.dinner.steps.map(str).filter(function (v) { return v; }) : [];
+      if (str(raw.dinner.menu)) {
+        dinner = { menu: str(raw.dinner.menu), prep_time: str(raw.dinner.prep_time), steps: steps };
+      }
+    }
+
+    var board = Array.isArray(raw.status_board) ? raw.status_board.map(function (b, i) {
+      var tone = str(b.tone);
+      if (['red', 'amber', 'green', 'blue'].indexOf(tone) < 0) tone = '';
+      var progress = null;
+      var rawP = b.progress;
+      if (rawP !== null && rawP !== undefined && rawP !== '' && isFinite(Number(rawP))) {
+        progress = Math.max(0, Math.min(100, Math.round(Number(rawP))));
+      }
+      return {
+        id: str(b.id) || ('b' + (i + 1)),
+        label: str(b.label),
+        value: str(b.value),
+        tone: tone,
+        progress: progress
+      };
+    }).filter(function (b) { return b.label && b.value; }) : [];
+
     return {
       date_label: str(raw.date_label),
       updated_at: str(raw.updated_at),
       briefing: str(raw.briefing),
       missions: missions,
+      threads_replies: replies,
+      dinner: dinner,
+      status_board: board,
       checks: checks,
       shortcuts: shortcuts
     };
@@ -732,7 +998,7 @@
   var state = freshState();
 
   function freshState() {
-    return { date: dateKey(), done: {}, checks: {}, timerEnded: 0 };
+    return { date: dateKey(), done: {}, checks: {}, replies: {}, timerEnded: 0 };
   }
 
   function load() {
@@ -745,6 +1011,7 @@
           date: saved.date,
           done: saved.done || {},
           checks: saved.checks || {},
+          replies: saved.replies || {},
           timerEnded: saved.timerEnded || 0
         };
       } else {
@@ -965,17 +1232,22 @@
     }
   }
 
-  function copyText(text, btn) {
+  function copyText(text, btn, opt) {
+    opt = opt || {};
+    var idleLabel = opt.idle || '📋 문안 복사';
+    var okLabel = opt.ok || '✓ 복사됨';
+    var okMsg = opt.msg || '📋 문안 복사 완료!';
     var succeed = function () {
       if (btn) {
         btn.classList.add('copied');
-        btn.textContent = '✓ 복사됨';
+        btn.textContent = okLabel;
         setTimeout(function () {
           btn.classList.remove('copied');
-          btn.textContent = '📋 문안 복사';
+          btn.textContent = idleLabel;
         }, 1800);
       }
-      toast('📋 문안 복사 완료!', 2200);
+      toast(okMsg, 2200);
+      if (opt.after) opt.after();
     };
     var fail = function () {
       if (legacyCopy(text)) { succeed(); return; }
@@ -1032,6 +1304,200 @@
       el.setAttribute('aria-pressed', on ? 'true' : 'false');
       el.querySelector('.dot-check').textContent = on ? '✓' : '';
     }
+  }
+
+  /* ───── 스레드 소통 10초 컷 ───── */
+  function replyItems() {
+    return Array.isArray(DATA.threads_replies) ? DATA.threads_replies : [];
+  }
+
+  function buildReplies() {
+    var card = $('replyCard');
+    var list = $('replyList');
+    list.innerHTML = '';
+    var items = replyItems();
+    card.style.display = items.length ? '' : 'none';
+
+    items.forEach(function (r) {
+      var wrap = document.createElement('div');
+      wrap.className = 'reply';
+      wrap.dataset.id = r.id;
+
+      var head = document.createElement('button');
+      head.type = 'button';
+      head.className = 'reply-head';
+      head.setAttribute('aria-pressed', 'false');
+      head.innerHTML = '<span class="reply-topic"></span><span class="dot-check"></span>';
+      head.querySelector('.reply-topic').textContent = r.topic;
+      head.setAttribute('aria-label', r.topic + ' 답글 완료 체크');
+      head.addEventListener('click', function () { toggleReply(r.id); });
+      wrap.appendChild(head);
+
+      var actions = document.createElement('div');
+      actions.className = 'reply-actions';
+
+      if (/^https?:\/\//i.test(r.url)) {
+        var openLink = document.createElement('a');
+        openLink.className = 'mini-btn open';
+        openLink.href = r.url;
+        openLink.target = '_blank';
+        openLink.rel = 'noopener noreferrer';
+        openLink.textContent = '글 열기 ↗';
+        openLink.setAttribute('aria-label', '원글 새 창에서 열기');
+        actions.appendChild(openLink);
+      }
+
+      var copyBtn = document.createElement('button');
+      copyBtn.type = 'button';
+      copyBtn.className = 'mini-btn copy';
+      copyBtn.textContent = '답글 복사';
+      copyBtn.setAttribute('aria-label', r.topic + ' 답글 복사');
+      copyBtn.addEventListener('click', function () {
+        copyText(r.reply_text, copyBtn, {
+          idle: '답글 복사',
+          ok: '✓ 복사됨',
+          msg: '\uD83D\uDCCB 답글 복사 완료!',
+          after: function () {
+            if (!state.replies[r.id]) {
+              state.replies[r.id] = 1;
+              save();
+              paintReplies();
+            }
+          }
+        });
+      });
+      actions.appendChild(copyBtn);
+
+      wrap.appendChild(actions);
+      list.appendChild(wrap);
+    });
+
+    paintReplies();
+  }
+
+  function replyDoneCount() {
+    return replyItems().filter(function (r) { return state.replies[r.id]; }).length;
+  }
+
+  function paintReplies() {
+    var rows = $('replyList').children;
+    for (var i = 0; i < rows.length; i++) {
+      var el = rows[i];
+      var on = !!state.replies[el.dataset.id];
+      el.classList.toggle('done', on);
+      var head = el.querySelector('.reply-head');
+      if (head) head.setAttribute('aria-pressed', on ? 'true' : 'false');
+      var dot = el.querySelector('.dot-check');
+      if (dot) dot.textContent = on ? '✓' : '';
+    }
+    var total = replyItems().length;
+    $('replyHint').textContent = total
+      ? replyDoneCount() + ' / ' + total + ' 완료'
+      : '';
+  }
+
+  function toggleReply(id) {
+    if (state.replies[id]) delete state.replies[id];
+    else state.replies[id] = 1;
+    save();
+    paintReplies();
+    var left = replyItems().length - replyDoneCount();
+    toast(
+      left > 0
+        ? '🧵 오늘 답글 ' + left + '건 남았습니다'
+        : '🧵 오늘 스레드 소통 완료! 수고하셨습니다',
+      2400
+    );
+  }
+
+  /* ───── 오늘의 10분 식단 · 레시피 ───── */
+  var dinnerOpen = false;
+
+  function renderDinner() {
+    var card = $('dinnerCard');
+    var d = DATA.dinner;
+    if (!d || !d.menu) { card.style.display = 'none'; return; }
+    card.style.display = '';
+
+    $('dinnerMenu').textContent = d.menu;
+    var prep = $('dinnerPrep');
+    prep.textContent = d.prep_time || '';
+    prep.style.display = d.prep_time ? '' : 'none';
+
+    var ol = $('dinnerList');
+    ol.innerHTML = '';
+    (d.steps || []).forEach(function (s) {
+      var li = document.createElement('li');
+      li.textContent = s;
+      ol.appendChild(li);
+    });
+
+    var hasSteps = ol.children.length > 0;
+    $('dinnerCaret').style.display = hasSteps ? '' : 'none';
+    $('dinnerToggle').style.cursor = hasSteps ? 'pointer' : 'default';
+    if (!hasSteps) setDinner(false);
+    else setDinner(dinnerOpen);
+  }
+
+  function setDinner(open) {
+    var box = $('dinnerSteps');
+    var btn = $('dinnerToggle');
+    dinnerOpen = open;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    $('dinnerCaret').textContent = open ? '레시피 ▴' : '레시피 ▾';
+    box.style.maxHeight = open ? box.scrollHeight + 'px' : '0px';
+  }
+
+  function toggleDinner() {
+    if (!$('dinnerList').children.length) return;
+    setDinner(!dinnerOpen);
+  }
+
+  /* ───── 4대 채널 · 이커머스 미니 현황판 ───── */
+  function buildBoard() {
+    var card = $('boardCard');
+    var list = $('boardList');
+    list.innerHTML = '';
+    var items = Array.isArray(DATA.status_board) ? DATA.status_board : [];
+    card.style.display = items.length ? '' : 'none';
+
+    items.forEach(function (b) {
+      var row = document.createElement('div');
+      row.className = 'board-row';
+
+      var top = document.createElement('div');
+      top.className = 'board-top';
+
+      var label = document.createElement('span');
+      label.className = 'board-label';
+      label.textContent = b.label;
+
+      var value = document.createElement('span');
+      value.className = 'board-value';
+      if (b.tone && b.progress === null) value.className += ' pill pill-' + b.tone;
+      value.textContent = b.value;
+
+      top.appendChild(label);
+      top.appendChild(value);
+      row.appendChild(top);
+
+      if (b.progress !== null) {
+        var bar = document.createElement('div');
+        bar.className = 'board-bar';
+        bar.setAttribute('role', 'progressbar');
+        bar.setAttribute('aria-valuemin', '0');
+        bar.setAttribute('aria-valuemax', '100');
+        bar.setAttribute('aria-valuenow', String(b.progress));
+        bar.setAttribute('aria-label', b.label + ' 진행률 ' + b.progress + '%');
+        var fill = document.createElement('div');
+        fill.className = 'board-fill';
+        fill.style.width = b.progress + '%';
+        bar.appendChild(fill);
+        row.appendChild(bar);
+      }
+
+      list.appendChild(row);
+    });
   }
 
   /* ───── 작업실 바로가기 ───── */
@@ -1195,9 +1661,7 @@
     if (state.date !== dateKey()) {
       state = freshState();
       save();
-      renderDate();
-      renderMissions();
-      renderChecks();
+      renderAll();
       loadWeather(true);
       $('endedCount').textContent = '';
       toast('날짜가 바뀌었습니다. 오늘 미션 새로 시작합니다', 3200);
@@ -1209,6 +1673,9 @@
     renderDate();
     renderBriefing();
     buildMissions();
+    buildReplies();
+    renderDinner();
+    buildBoard();
     buildChecks();
     buildShortcuts();
     renderMissions();
@@ -1256,6 +1723,7 @@
     }
     $('weather').addEventListener('click', function () { loadWeather(true); });
     $('syncBtn').addEventListener('click', function () { syncNow(true); });
+    $('dinnerToggle').addEventListener('click', toggleDinner);
 
     // 실행 시 data.json 을 새로 받아 화면을 다시 그린다 (실패하면 내장 데이터 유지)
     syncNow(false).then(function () {

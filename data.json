@@ -36,6 +36,49 @@
       "copy_text": ""
     }
   ],
+  "threads_replies": [
+    {
+      "id": "tr1",
+      "topic": "인생책 · 카네기 & 군주론",
+      "url": "https://www.threads.com/@jin___blanc/post/DSLFUuFk6g5",
+      "reply_text": "삶의 자리와 고민의 무게가 달라질 때마다 곁에 두게 되는 책도 함께 바뀐다는 말에 깊이 공감한다. 20대엔 사람과 마음을 배우고, 책임을 짊어질수록 구조와 본질을 묻는 고전을 찾게 되는 것 같다. 🗝️"
+    },
+    {
+      "id": "tr2",
+      "topic": "독서 · 문해력과 인생책",
+      "url": "https://www.threads.com/@clever.child_/post/DcaqXlPmp-W",
+      "reply_text": "문해력이라는 게 단순히 글자를 빨리 읽는 힘이 아니라, 결국 한 문장 너머의 맥락과 사람의 마음을 읽어내는 힘이라는 생각이 든다. 인생을 바꿔준 책 한 권이 그 모든 시선의 출발점이 되어주는 것 같다. 📓"
+    }
+  ],
+  "dinner": {
+    "menu": "18:30 저녁 메뉴 브리핑 대기",
+    "prep_time": "10분 컷",
+    "steps": [
+      "18:30 식단 브리핑이 도착하면 여기에 딱 3줄 원팬 레시피가 자동으로 채워집니다."
+    ]
+  },
+  "status_board": [
+    {
+      "label": "🪷 연꽃세상 수익창출",
+      "value": "1,887 / 4,000h",
+      "progress": 47
+    },
+    {
+      "label": "🛒 모모상점 재고",
+      "value": "품절 1건 확인",
+      "tone": "red"
+    },
+    {
+      "label": "🎁 쿠팡 체험단",
+      "value": "격주 월 10시 / 16시",
+      "tone": "blue"
+    },
+    {
+      "label": "🎨 미리캔버스 허브",
+      "value": "심사 9건 · 주간 56회",
+      "tone": "amber"
+    }
+  ],
   "checks": [
     {
       "id": "c1",
