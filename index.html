@@ -1959,6 +1959,7 @@
       row.setAttribute('role', 'button');
       row.setAttribute('tabindex', '0');
       row.setAttribute('aria-pressed', done ? 'true' : 'false');
+      row.setAttribute('aria-label', it.title + (it.tag ? ' · ' + it.tag : '') + (done ? ' · 확인 완료' : ''));
       row.innerHTML =
         '<span class="inbox-line">' +
           '<span class="inbox-title"></span>' +
