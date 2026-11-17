@@ -25,10 +25,11 @@
    - 6건 모두 확인 시 `준비된 6건을 모두 확인했어요` + **[새 글 요청 복사]** + **[처음으로]**
 6. **🍳 오늘의 10분 식단 + 🛒 퇴근길 장보기** — 장보기 한 줄 배너를 크게, 그 아래 메뉴명·`prep_time` 배지, 탭하면 3줄 원팬 레시피 아코디언
 7. **📅 주간 타임라인 & 현황판** — `timeline` 을 가로 스크롤 칩으로(오늘/내일/D-N 배지, 가장 가까운 일정 강조), 아래에 `status_board`(진행률 바·색 배지)
-8. **📊 채널 · 스레드 실시간 지표** — `channel_metrics`
+8. **📊 채널 · SNS 실시간 지표** — `channel_metrics`
    - 유튜브 4채널(마음정원·마음의바다·연꽃세상·inner pace) 2열 타일: 구독자·영상 수·총 조회(만 단위)·최신 영상 제목/날짜/조회
    - 스레드 `@mind_gardenss`: 팔로워·프로필 조회·좋아요·댓글·리포스트 2×2 요약 + 최근 5건(본문 30자·날짜·조회·좋아요·댓글)
-   - 카드 우상단에 마지막 동기화 시각(`synced_at`), 값이 없으면 카드 자동 숨김
+   - 인스타그램 `@mind_gardenss`: 팔로워·게시물 수 + 최근 28일 조회·도달·프로필 방문/게시물 2×2 요약 + 팔로잉·참여 계정 한 줄 + 최근 5건(본문 30자·날짜·유형(릴스/캐러셀/피드)·조회·좋아요·저장)
+   - 카드 우상단에 마지막 동기화 시각(`synced_at`), 값이 없으면 카드(또는 해당 그룹) 자동 숨김
 9. **🧮 10초 계산기** — 기본은 접힌 아코디언, 탭 2개
    - **[로켓그로스 마진]**: 매입원가(¥/₩ 토글·환율 수정, 기본 195원)·예상 판매가·쿠팡 수수료율(10.8%)·입출고배송비(3,500원)·광고비 비중(10%)·부가세 10% 차감 스위치 → 예상 순이익·마진율·손익분기 최소 판매가·손익분기 ROAS 즉시 계산(적자 빨강·마진 20%↑ 초록)
    - **[홈쇼핑 g당 단가]**: A안·B안 가격+총용량(단위 g/ml/정/개) → 단위당 가격, 더 싼 쪽 배지·몇 % 더 싼지·100g(정/개는 1단위) 기준 차액·총용량 차이
@@ -82,6 +83,13 @@
       "summary": { "username": "mind_gardenss", "followers": 29, "views": 1068, "views_date": "2026-11-17",
                    "likes": 48, "replies": 14, "reposts": 1 },
       "recent_posts": [ { "date": "2026-11-17", "snippet": "본문 30자", "views": 8, "likes": 3, "replies": 1 } ]
+    },
+    "instagram": {
+      "summary": { "username": "mind_gardenss", "name": "마음정원 | 철학·심리학",
+                   "followers": 2, "follows": 33, "media_count": 66, "window_days": 28,
+                   "views": 2318, "reach": 2017, "profile_views": 18, "accounts_engaged": 8 },
+      "recent_posts": [ { "date": "2026-11-17", "type": "REELS|CAROUSEL|FEED|VIDEO|STORY",
+                          "snippet": "본문 30자", "likes": 3, "views": 122, "reach": 115, "saved": 1 } ]
     }
   }
 }
@@ -95,8 +103,11 @@
   - 6선의 `url` 구성이 바뀌면 앱이 이를 감지해 그날의 답글 완료 체크를 새 세트로 넘기지 않고 자동 초기화합니다(이전 글에 단 체크가 새 글에 붙는 것을 막음).
 - **`dinner.shopping_item`** — 장보기 배너의 큰 한 줄(예: `팽이버섯 1봉`). 없으면 `shopping_tip` 을 그대로 배너에 씁니다. **`shopping_tip`** 은 배너 아래 작은 안내문. 둘 다 없으면 배너가 숨겨집니다.
 - **`status_board`** — `progress`(0~100)가 있는 행만 진행률 바, 없는 행은 `tone` 색 배지.
-- **`channel_metrics`** — `scripts/sync_channel_metrics.py` 가 `.secrets/` 의 키를 읽어 채워 넣는 실시간 지표입니다. 유튜브는 채널 4개(`name` 순서 고정), 스레드는 계정 요약 + 최근 5건. `synced_at` 은 `YYYY-MM-DD HH:MM`(KST). 이 키가 없거나 비어 있으면 카드만 숨고 나머지 화면은 그대로 뜹니다.
-  - 동기화: `python3 scripts/sync_channel_metrics.py` — API 키·토큰은 저장소 밖 `.secrets/` 에만 있고 `data.json` 에는 절대 쓰지 않습니다(스크립트가 산출물에 비밀값이 섞였는지 마지막에 검사).
+- **`channel_metrics`** — `scripts/sync_channel_metrics.py` 가 `.secrets/` 의 키를 읽어 채워 넣는 실시간 지표입니다. 유튜브는 채널 4개(`name` 순서 고정), 스레드는 계정 요약 + 최근 5건, 인스타그램은 계정 요약 + 최근 5건. `synced_at` 은 `YYYY-MM-DD HH:MM`(KST). 이 키가 없거나 비어 있으면 카드만 숨고 나머지 화면은 그대로 뜹니다. 그룹별로도 독립적이라 인스타만 실패해도 유튜브·스레드 타일은 그대로 그립니다.
+  - 인스타그램 `summary` 의 `views`·`reach`·`profile_views`·`accounts_engaged` 는 **최근 `window_days`(28)일 합계**입니다(Instagram Graph API `period=day` + `metric_type=total_value` + 28일 구간). `followers`·`follows`·`media_count` 는 현재값.
+  - 인스타 `recent_posts[].type` 은 `REELS`(릴스) / `CAROUSEL`(캐러셀) / `FEED`(단일 이미지·영상 피드) / `VIDEO` / `STORY` 이고, `date` 는 API의 UTC 타임스탬프를 KST 날짜로 바꾼 값입니다. `views`·`reach`·`saved` 는 게시물별 누적(lifetime).
+  - 동기화: `python3 scripts/sync_channel_metrics.py` — API 키·토큰은 저장소 밖 `.secrets/` 에만 있고 `data.json` 에는 절대 쓰지 않습니다(스크립트가 산출물에 비밀값이 섞였는지 마지막에 검사). 필요한 파일: `.secrets/youtube_api_key`, `.secrets/threads_token`, `.secrets/instagram_token`, `.secrets/instagram_account_id`.
+  - 한 소스가 실패(토큰 만료·API 오류)해도 나머지는 그대로 동기화되고, 실패한 소스는 직전 값을 유지합니다.
   - 정기 루틴이 `data.json` 을 고쳐 푸시할 때 이 스크립트를 먼저 돌리면 지표도 함께 최신이 됩니다(기존 키는 그대로 보존, `updated_at` 만 동기화 시각으로 바뀜).
 - **`date_label`** 은 오늘 날짜와 일치할 때만 배지에 쓰이고, 아니면 실제 오늘 날짜를 계산해 표시합니다.
 

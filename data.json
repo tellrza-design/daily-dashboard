@@ -1,6 +1,6 @@
 {
   "date_label": "11월 18일 수요일",
-  "updated_at": "11/18 06:45 기준",
+  "updated_at": "11/18 07:38 기준",
   "briefing": "오늘 최고 12°C·최저 5°C, 밤 21시 이슬비 20%에 미세먼지 좋음 — 내일부터 급하강, 금요일 첫 영하 -3°C 눈발 · 07:30 연꽃세상 쇼츠 #1 시작으로 SNS 6종 발행 · 모모상점 쿠팡애즈 일예산 100% 소진(1만→권장 3만), 오눌루 헬로키티 파우치 레드 품절임박(입고권장 10개)",
   "urgent_inbox": [
     {
@@ -243,7 +243,7 @@
     }
   ],
   "channel_metrics": {
-    "synced_at": "2026-11-18 06:42",
+    "synced_at": "2026-11-18 07:38",
     "youtube": [
       {
         "name": "마음정원",
@@ -253,7 +253,7 @@
         "video_count": 96,
         "latest_title": "파스칼의 5수 마차, 열매를 보지 못한 마지막 해 #Shorts",
         "latest_date": "2026-11-17",
-        "latest_views": 407,
+        "latest_views": 386,
         "latest_likes": 2,
         "latest_comments": 1
       },
@@ -298,7 +298,7 @@
       "summary": {
         "username": "mind_gardenss",
         "followers": 29,
-        "views": 2108,
+        "views": 2181,
         "views_date": "2026-11-17",
         "likes": 55,
         "replies": 19,
@@ -339,6 +339,67 @@
           "views": 23,
           "likes": 4,
           "replies": 1
+        }
+      ]
+    },
+    "instagram": {
+      "summary": {
+        "username": "mind_gardenss",
+        "name": "마음정원 | 철학·심리학",
+        "followers": 2,
+        "follows": 33,
+        "media_count": 66,
+        "window_days": 28,
+        "views": 2318,
+        "reach": 2017,
+        "profile_views": 18,
+        "accounts_engaged": 8
+      },
+      "recent_posts": [
+        {
+          "date": "2026-11-17",
+          "type": "CAROUSEL",
+          "snippet": "모두에게 좋은 사람일 필요는 없어요. 내 마음을 깎아가…",
+          "likes": 1,
+          "views": 1,
+          "reach": 0,
+          "saved": 0
+        },
+        {
+          "date": "2026-11-17",
+          "type": "REELS",
+          "snippet": "남의 속도에 맞추느라 정작 내 마음을 지나치진 않았나요…",
+          "likes": 3,
+          "views": 122,
+          "reach": 115,
+          "saved": 1
+        },
+        {
+          "date": "2026-11-16",
+          "type": "CAROUSEL",
+          "snippet": "살다 보면 사소한 대화에서도 은근한 승부를 겨루고 있을…",
+          "likes": 2,
+          "views": 8,
+          "reach": 2,
+          "saved": 0
+        },
+        {
+          "date": "2026-11-16",
+          "type": "REELS",
+          "snippet": "굳이 모든 사람에게 이해받으려 애쓰지 마세요. 물처럼 …",
+          "likes": 2,
+          "views": 141,
+          "reach": 124,
+          "saved": 1
+        },
+        {
+          "date": "2026-11-15",
+          "type": "REELS",
+          "snippet": "남의 말 한마디에 하루가 무너지는 밤이라면, 오늘만큼은…",
+          "likes": 2,
+          "views": 113,
+          "reach": 103,
+          "saved": 0
         }
       ]
     }

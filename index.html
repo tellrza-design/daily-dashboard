@@ -933,6 +933,15 @@
     letter-spacing: -0.4px;
     font-variant-numeric: tabular-nums;
   }
+  .mt-foot {
+    display: block;
+    margin-top: 6px;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--sub);
+    letter-spacing: -0.1px;
+    font-variant-numeric: tabular-nums;
+  }
   .mt-posts { list-style: none; margin: 9px 0 0; padding: 0; }
   .mt-post { padding: 7px 0; border-top: 1px solid var(--line); }
   .mt-post:first-child { border-top: none; padding-top: 1px; }
@@ -1484,9 +1493,9 @@
       </div>
     </section>
 
-    <section class="card" id="metricsCard" aria-label="채널·스레드 실시간 지표">
+    <section class="card" id="metricsCard" aria-label="채널·SNS 실시간 지표">
       <div class="card-head">
-        <div class="card-title">📊 채널 · 스레드 실시간 지표</div>
+        <div class="card-title">📊 채널 · SNS 실시간 지표</div>
         <span class="hint" id="metricsSynced">—</span>
       </div>
       <div class="mt-group" id="metricsYtGroup" hidden>
@@ -1503,6 +1512,15 @@
         </div>
         <div class="mt-stats" id="metricsThStats"></div>
         <ul class="mt-posts" id="metricsThPosts"></ul>
+      </div>
+      <div class="mt-group" id="metricsIgGroup" hidden>
+        <div class="mt-sub">
+          <span class="mt-sub-name" id="metricsIgName">📸 인스타그램</span>
+          <span class="mt-pill" id="metricsIgPill"></span>
+        </div>
+        <div class="mt-stats" id="metricsIgStats"></div>
+        <span class="mt-foot" id="metricsIgFoot"></span>
+        <ul class="mt-posts" id="metricsIgPosts"></ul>
       </div>
     </section>
 
@@ -1961,8 +1979,38 @@
           }).filter(function (p) { return p && (p.snippet || p.date); }) : []
         };
       }
-      if (ytRows.length || (th && (th.username || th.posts.length))) {
-        metrics = { synced_at: str(raw.channel_metrics.synced_at), youtube: ytRows, threads: th };
+      var igRaw = raw.channel_metrics.instagram && typeof raw.channel_metrics.instagram === 'object'
+        ? raw.channel_metrics.instagram : null;
+      var ig = null;
+      if (igRaw) {
+        var isum = igRaw.summary && typeof igRaw.summary === 'object' ? igRaw.summary : {};
+        ig = {
+          username: str(isum.username),
+          name: str(isum.name),
+          followers: numRaw(isum.followers),
+          follows: numRaw(isum.follows),
+          media_count: numRaw(isum.media_count),
+          window_days: numRaw(isum.window_days),
+          views: numRaw(isum.views),
+          reach: numRaw(isum.reach),
+          profile_views: numRaw(isum.profile_views),
+          accounts_engaged: numRaw(isum.accounts_engaged),
+          posts: Array.isArray(igRaw.recent_posts) ? igRaw.recent_posts.map(function (p) {
+            if (!p || typeof p !== 'object') return null;
+            return {
+              date: str(p.date),
+              type: str(p.type),
+              snippet: str(p.snippet),
+              likes: numRaw(p.likes),
+              views: numRaw(p.views),
+              reach: numRaw(p.reach),
+              saved: numRaw(p.saved)
+            };
+          }).filter(function (p) { return p && (p.snippet || p.date); }) : []
+        };
+      }
+      if (ytRows.length || (th && (th.username || th.posts.length)) || (ig && (ig.username || ig.posts.length))) {
+        metrics = { synced_at: str(raw.channel_metrics.synced_at), youtube: ytRows, threads: th, instagram: ig };
       }
     }
 
@@ -3071,9 +3119,11 @@
     var yts = cm && Array.isArray(cm.youtube) ? cm.youtube : [];
     var th = cm ? cm.threads : null;
     var hasTh = !!(th && (th.username || (th.posts && th.posts.length)));
+    var ig = cm ? cm.instagram : null;
+    var hasIg = !!(ig && (ig.username || (ig.posts && ig.posts.length)));
 
-    card.style.display = (yts.length || hasTh) ? '' : 'none';
-    if (!yts.length && !hasTh) return;
+    card.style.display = (yts.length || hasTh || hasIg) ? '' : 'none';
+    if (!yts.length && !hasTh && !hasIg) return;
 
     var synced = str(cm.synced_at);
     $('metricsSynced').textContent = synced.length >= 16 ? synced.slice(11, 16) + ' 동기화' : '지표';
@@ -3110,43 +3160,92 @@
     /* 스레드 — 2×2 요약 + 최근 글 */
     var thGroup = $('metricsThGroup');
     thGroup.hidden = !hasTh;
-    if (!hasTh) return;
+    if (hasTh) {
+      $('metricsThName').textContent = '🧵 스레드' + (th.username ? ' @' + th.username : '');
+      var pill = $('metricsThPill');
+      pill.textContent = th.followers ? '팔로워 ' + nf(th.followers) : '';
+      pill.hidden = !th.followers;
 
-    $('metricsThName').textContent = '🧵 스레드' + (th.username ? ' @' + th.username : '');
-    var pill = $('metricsThPill');
-    pill.textContent = th.followers ? '팔로워 ' + nf(th.followers) : '';
-    pill.hidden = !th.followers;
+      var stats = $('metricsThStats');
+      stats.innerHTML = '';
+      var cells = [
+        ['프로필 조회' + (mdLabel(th.views_date) ? ' (' + mdLabel(th.views_date) + ')' : ''), compactNum(th.views)],
+        ['좋아요', nf(th.likes)],
+        ['댓글', nf(th.replies)],
+        ['리포스트', nf(th.reposts)]
+      ];
+      cells.forEach(function (c) {
+        var cell = el('div', 'mt-cell');
+        cell.appendChild(el('span', 'mt-cell-label', c[0]));
+        cell.appendChild(el('span', 'mt-cell-value', c[1]));
+        stats.appendChild(cell);
+      });
 
-    var stats = $('metricsThStats');
-    stats.innerHTML = '';
-    var cells = [
-      ['프로필 조회' + (mdLabel(th.views_date) ? ' (' + mdLabel(th.views_date) + ')' : ''), compactNum(th.views)],
-      ['좋아요', nf(th.likes)],
-      ['댓글', nf(th.replies)],
-      ['리포스트', nf(th.reposts)]
-    ];
-    cells.forEach(function (c) {
+      var ul = $('metricsThPosts');
+      ul.innerHTML = '';
+      th.posts.forEach(function (p) {
+        var li = el('li', 'mt-post');
+        li.appendChild(el('span', 'mt-post-snip', p.snippet || '(텍스트 없음)'));
+        var bits = [];
+        var when = mdLabel(p.date);
+        if (when) bits.push(when);
+        bits.push('조회 ' + nf(p.views));
+        bits.push('좋아요 ' + nf(p.likes));
+        bits.push('댓글 ' + nf(p.replies));
+        li.appendChild(el('span', 'mt-post-meta', bits.join(' · ')));
+        ul.appendChild(li);
+      });
+      ul.style.display = th.posts.length ? '' : 'none';
+    }
+
+    /* 인스타그램 — 2×2 요약 + 최근 글 */
+    var igGroup = $('metricsIgGroup');
+    igGroup.hidden = !hasIg;
+    if (!hasIg) return;
+
+    $('metricsIgName').textContent = '📸 인스타그램' + (ig.username ? ' @' + ig.username : '');
+    var igPill = $('metricsIgPill');
+    igPill.textContent = ig.followers ? '팔로워 ' + nf(ig.followers) : '';
+    igPill.hidden = !ig.followers;
+
+    var igWin = ig.window_days ? '최근 ' + nf(ig.window_days) + '일 ' : '';
+    var igStats = $('metricsIgStats');
+    igStats.innerHTML = '';
+    [
+      [igWin + '조회', compactNum(ig.views)],
+      [igWin + '도달', compactNum(ig.reach)],
+      ['프로필 방문', nf(ig.profile_views)],
+      ['게시물', nf(ig.media_count)]
+    ].forEach(function (c) {
       var cell = el('div', 'mt-cell');
       cell.appendChild(el('span', 'mt-cell-label', c[0]));
       cell.appendChild(el('span', 'mt-cell-value', c[1]));
-      stats.appendChild(cell);
+      igStats.appendChild(cell);
     });
 
-    var ul = $('metricsThPosts');
-    ul.innerHTML = '';
-    th.posts.forEach(function (p) {
+    var igFootBits = [];
+    if (ig.follows) igFootBits.push('팔로잉 ' + nf(ig.follows));
+    if (ig.accounts_engaged) igFootBits.push('참여 계정 ' + nf(ig.accounts_engaged));
+    $('metricsIgFoot').textContent = igFootBits.join(' · ');
+    $('metricsIgFoot').hidden = !igFootBits.length;
+
+    var igTypeLabel = { REELS: '릴스', CAROUSEL: '캐러셀', FEED: '피드', VIDEO: '동영상', STORY: '스토리' };
+    var igUl = $('metricsIgPosts');
+    igUl.innerHTML = '';
+    ig.posts.forEach(function (p) {
       var li = el('li', 'mt-post');
-      li.appendChild(el('span', 'mt-post-snip', p.snippet || '(텍스트 없음)'));
+      li.appendChild(el('span', 'mt-post-snip', p.snippet || '(캡션 없음)'));
       var bits = [];
       var when = mdLabel(p.date);
       if (when) bits.push(when);
+      if (p.type) bits.push(igTypeLabel[p.type] || p.type);
       bits.push('조회 ' + nf(p.views));
       bits.push('좋아요 ' + nf(p.likes));
-      bits.push('댓글 ' + nf(p.replies));
+      bits.push('저장 ' + nf(p.saved));
       li.appendChild(el('span', 'mt-post-meta', bits.join(' · ')));
-      ul.appendChild(li);
+      igUl.appendChild(li);
     });
-    ul.style.display = th.posts.length ? '' : 'none';
+    igUl.style.display = ig.posts.length ? '' : 'none';
   }
 
   /* ───── 작업실 바로가기 ───── */
