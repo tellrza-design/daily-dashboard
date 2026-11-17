@@ -1,61 +1,117 @@
 {
-  "date_label": "11월 17일 화요일",
-  "updated_at": "22:13 기준",
-  "briefing": "슈퍼해피 신규 주문 1건 · 로켓그로스 품절·임박 3건 확인",
+  "date_label": "11월 18일 수요일",
+  "updated_at": "11/18 06:45 기준",
+  "briefing": "오늘 최고 12°C·최저 5°C, 밤 21시 이슬비 20%에 미세먼지 좋음 — 내일부터 급하강, 금요일 첫 영하 -3°C 눈발 · 07:30 연꽃세상 쇼츠 #1 시작으로 SNS 6종 발행 · 모모상점 쿠팡애즈 일예산 100% 소진(1만→권장 3만), 오눌루 헬로키티 파우치 레드 품절임박(입고권장 10개)",
   "urgent_inbox": [
     {
       "id": "u1",
-      "title": "슈퍼해피 신규 결제완료 1건 확인",
-      "tag": "미확인 주문",
+      "title": "모모상점·슈퍼해피 쿠팡애즈 일예산 100% 소진",
+      "tag": "1만→3만 증액 결정",
       "urgency": "red",
-      "prompt_text": "슈퍼해피 신규 결제완료 1건 주문 내역 확인하고 출고 처리 안내해 줘"
+      "prompt_text": "모모상점·슈퍼해피 쿠팡애즈 일예산이 1만 원에서 100% 소진됐어. 쿠팡 권장 3만 원으로 올릴지 판단할 수 있게 계정별 최근 7일 광고매출·ROAS·소진 추이 먼저 정리해 줘."
     },
     {
       "id": "u2",
-      "title": "로켓그로스 품절 1 · 품절임박 2건",
-      "tag": "모모·오눌루",
+      "title": "로켓그로스 입고 3건 (헬로키티 파우치 레드 권장 10개)",
+      "tag": "오눌루·모모상점",
       "urgency": "red",
-      "prompt_text": "로켓그로스 품절 1건(모모상점 에코백)이랑 품절임박 2건 상세 옵션·입고 권장 수량 정리해서 알려줘"
+      "prompt_text": "로켓그로스 입고 3건 옵션별 재고·판매속도랑 입고 권장 수량 정리해서 알려줘. 오눌루 헬로키티 화장품 파우치 레드부터 처리할게."
     },
     {
       "id": "u3",
-      "title": "코코낫 정산 보류 리마인드 발송",
-      "tag": "회신 5일째 없음",
+      "title": "코코낫 정산 보류 6일째 미회신",
+      "tag": "11월 내 계좌 변경",
       "urgency": "amber",
-      "prompt_text": "코코낫 정산 보류 건 담당자께 리마인드 메일 보내줘"
+      "prompt_text": "코코낫 로켓그로스 정산 보류 건, 정산 담당자에게 리마인드 메일 보내줘. 11월 안에 계좌를 바꿔야 12/07에 재지급되니 필요서류(사업자등록증·대표자 명의 통장사본) 안내도 함께 넣어줘."
+    },
+    {
+      "id": "u4",
+      "title": "구글 'vooy' 앱 접근 권한 확인",
+      "tag": "11/16 부여",
+      "urgency": "blue",
+      "prompt_text": "구글 계정에 11/16에 'vooy' 앱 접근 권한이 허용됐어. 내가 쓴 적 있는 앱인지 확인하고, 모르는 앱이면 권한 철회하는 절차 알려줘."
     },
     {
       "id": "u5",
-      "title": "수노 블프 할인 감시",
-      "tag": "11/20 예정",
+      "title": "업비트 SOPH·ZIL 출금 (12/16 마감)",
+      "tag": "거래지원 종료",
+      "urgency": "amber",
+      "prompt_text": "업비트 SOPH·ZIL 거래지원이 끝났으니 12/16 출금 마감 전에 처리해야 해. 보유 수량이랑 출금 가능한 네트워크·수수료 정리해서 알려줘."
+    },
+    {
+      "id": "u6",
+      "title": "토스쇼핑 11/27 운영정책 개편 대비",
+      "tag": "상품준비중 자동취소",
       "urgency": "blue",
-      "prompt_text": "수노 블랙프라이데이 할인 지금 떴는지 먼저 체크해 줘"
+      "prompt_text": "토스쇼핑 11/27 개편 대비해서 상품준비중 자동취소·배송지 변경 대응 순서랑, 12/7 페널티 4개 지표(셀러취소율·배송실패율·품질결함율·응대지연율) 관리 포인트 정리해 줘."
     }
   ],
   "timeline": [
     {
       "id": "t1",
       "date": "11/18 (수)",
-      "time": "07:00",
-      "title": "🪷 마음의바다 수능 2차 연등"
+      "time": "07:30",
+      "title": "🪷 연꽃세상 쇼츠 #1"
     },
     {
       "id": "t2",
       "date": "11/19 (목)",
-      "time": "20:00",
-      "title": "🌿 마음정원 명상록 편 공개"
+      "time": "18:00",
+      "title": "🎵 inner pace 롱폼 B-side"
     },
     {
       "id": "t3",
+      "date": "11/19 (목)",
+      "time": "20:00",
+      "title": "🎬 마음정원 롱폼 본편"
+    },
+    {
+      "id": "t4",
       "date": "11/20 (금)",
       "time": "10:30",
       "title": "🎵 수노 블프 할인 감시"
     },
     {
-      "id": "t4",
-      "date": "11/21 (토)",
+      "id": "t5",
+      "date": "11/20 (금)",
+      "time": "12:00",
+      "title": "🪷 연꽃세상 쇼츠 #2 · 🧵 스레드 동시"
+    },
+    {
+      "id": "t6",
+      "date": "11/20 (금)",
       "time": "18:00",
-      "title": "🪷 연꽃세상 법문 공개"
+      "title": "🪷 연꽃세상 롱폼 본편"
+    },
+    {
+      "id": "t7",
+      "date": "11/21 (토)",
+      "time": "11:00",
+      "title": "🎬 마음정원 쇼츠 #2"
+    },
+    {
+      "id": "t8",
+      "date": "11/21 (토)",
+      "time": "13:30",
+      "title": "🎵 inner pace 쇼츠 에이스 #2"
+    },
+    {
+      "id": "t9",
+      "date": "11/23 (월)",
+      "time": "08:00",
+      "title": "🎵 inner pace 롱폼 본편"
+    },
+    {
+      "id": "t10",
+      "date": "11/23 (월)",
+      "time": "마감",
+      "title": "📚 도서정가제 반품도서 조치"
+    },
+    {
+      "id": "t11",
+      "date": "11/24 (화)",
+      "time": "18:00",
+      "title": "🎬 마음정원 쇼츠 #1"
     }
   ],
   "missions": [
@@ -149,7 +205,7 @@
     },
     {
       "label": "🛒 로켓그로스 재고",
-      "value": "품절 1 · 임박 2건",
+      "value": "입고 권장 3건",
       "tone": "red"
     },
     {
@@ -187,17 +243,17 @@
     }
   ],
   "channel_metrics": {
-    "synced_at": "2026-11-17 22:13",
+    "synced_at": "2026-11-18 06:42",
     "youtube": [
       {
         "name": "마음정원",
         "channel_id": "UCCwHcYVUxelD1MCoTF7vCNg",
         "subs": 4030,
-        "total_views": 451357,
+        "total_views": 451641,
         "video_count": 96,
         "latest_title": "파스칼의 5수 마차, 열매를 보지 못한 마지막 해 #Shorts",
         "latest_date": "2026-11-17",
-        "latest_views": 233,
+        "latest_views": 407,
         "latest_likes": 2,
         "latest_comments": 1
       },
@@ -205,11 +261,11 @@
         "name": "마음의바다",
         "channel_id": "UCKGK5-SECrJUxDklVF_c_3g",
         "subs": 11200,
-        "total_views": 289963,
+        "total_views": 290222,
         "video_count": 47,
         "latest_title": "나가세나는 왕에게 \"같은 사람도, 다른 사람도 아니다\"라고 답했다",
         "latest_date": "2026-11-14",
-        "latest_views": 86,
+        "latest_views": 91,
         "latest_likes": 1,
         "latest_comments": 1
       },
@@ -217,11 +273,11 @@
         "name": "연꽃세상",
         "channel_id": "UCOHlvKb40Ko3CH5cHWMMWuw",
         "subs": 1450,
-        "total_views": 43656,
+        "total_views": 43747,
         "video_count": 21,
         "latest_title": "\"성철 스님은 한국 불교의 보물이야!\" 청담 스님의 호통 #Shorts",
         "latest_date": "2026-11-15",
-        "latest_views": 1440,
+        "latest_views": 1442,
         "latest_likes": 15,
         "latest_comments": 1
       },
@@ -233,7 +289,7 @@
         "video_count": 35,
         "latest_title": "[playlist] 눈 내린 마을에서, 부치지 못한 편지. | 러브레터 Love Letter",
         "latest_date": "2026-11-15",
-        "latest_views": 33,
+        "latest_views": 38,
         "latest_likes": 1,
         "latest_comments": 1
       }
@@ -242,32 +298,32 @@
       "summary": {
         "username": "mind_gardenss",
         "followers": 29,
-        "views": 1123,
+        "views": 2108,
         "views_date": "2026-11-17",
-        "likes": 48,
-        "replies": 14,
+        "likes": 55,
+        "replies": 19,
         "reposts": 1
       },
       "recent_posts": [
         {
           "date": "2026-11-17",
           "snippet": "살다 보면 나를 흔드는 일 앞에서 괜히 더 단단해지려고…",
-          "views": 8,
-          "likes": 3,
+          "views": 9,
+          "likes": 4,
           "replies": 1
         },
         {
           "date": "2026-11-17",
           "snippet": "오전 내내 바쁘게 움직이다 보면 정작 내가 지금 어디로…",
-          "views": 10,
-          "likes": 3,
+          "views": 11,
+          "likes": 4,
           "replies": 1
         },
         {
           "date": "2026-11-16",
           "snippet": "하루를 끝내고 불을 끄면 낮 동안 아무렇지 않게 넘겼던…",
-          "views": 17,
-          "likes": 4,
+          "views": 19,
+          "likes": 5,
           "replies": 1
         },
         {
