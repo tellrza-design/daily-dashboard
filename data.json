@@ -1,6 +1,6 @@
 {
   "date_label": "11월 17일 화요일",
-  "updated_at": "20:50 기준",
+  "updated_at": "22:06 기준",
   "briefing": "슈퍼해피 신규 주문 1건 · 로켓그로스 품절·임박 3건 확인",
   "urgent_inbox": [
     {
@@ -185,5 +185,106 @@
       "label": "▶️ 유튜브 스튜디오",
       "url": "https://studio.youtube.com/"
     }
-  ]
+  ],
+  "channel_metrics": {
+    "synced_at": "2026-11-17 22:06",
+    "youtube": [
+      {
+        "name": "마음정원",
+        "channel_id": "UCCwHcYVUxelD1MCoTF7vCNg",
+        "subs": 4030,
+        "total_views": 451357,
+        "video_count": 96,
+        "latest_title": "파스칼의 5수 마차, 열매를 보지 못한 마지막 해 #Shorts",
+        "latest_date": "2026-11-17",
+        "latest_views": 231,
+        "latest_likes": 2,
+        "latest_comments": 1
+      },
+      {
+        "name": "마음의바다",
+        "channel_id": "UCKGK5-SECrJUxDklVF_c_3g",
+        "subs": 11200,
+        "total_views": 289963,
+        "video_count": 47,
+        "latest_title": "나가세나는 왕에게 \"같은 사람도, 다른 사람도 아니다\"라고 답했다",
+        "latest_date": "2026-11-14",
+        "latest_views": 86,
+        "latest_likes": 1,
+        "latest_comments": 1
+      },
+      {
+        "name": "연꽃세상",
+        "channel_id": "UCOHlvKb40Ko3CH5cHWMMWuw",
+        "subs": 1450,
+        "total_views": 43656,
+        "video_count": 21,
+        "latest_title": "\"성철 스님은 한국 불교의 보물이야!\" 청담 스님의 호통 #Shorts",
+        "latest_date": "2026-11-15",
+        "latest_views": 1440,
+        "latest_likes": 15,
+        "latest_comments": 1
+      },
+      {
+        "name": "inner pace",
+        "channel_id": "UC3I8loHAzuptjmp00FHbcbw",
+        "subs": 207,
+        "total_views": 3212,
+        "video_count": 35,
+        "latest_title": "[playlist] 눈 내린 마을에서, 부치지 못한 편지. | 러브레터 Love Letter",
+        "latest_date": "2026-11-15",
+        "latest_views": 33,
+        "latest_likes": 1,
+        "latest_comments": 1
+      }
+    ],
+    "threads": {
+      "summary": {
+        "username": "mind_gardenss",
+        "followers": 29,
+        "views": 1068,
+        "views_date": "2026-11-17",
+        "likes": 48,
+        "replies": 14,
+        "reposts": 1
+      },
+      "recent_posts": [
+        {
+          "date": "2026-11-17",
+          "snippet": "살다 보면 나를 흔드는 일 앞에서 괜히 더 단단해지려고…",
+          "views": 8,
+          "likes": 3,
+          "replies": 1
+        },
+        {
+          "date": "2026-11-17",
+          "snippet": "오전 내내 바쁘게 움직이다 보면 정작 내가 지금 어디로…",
+          "views": 10,
+          "likes": 3,
+          "replies": 1
+        },
+        {
+          "date": "2026-11-16",
+          "snippet": "하루를 끝내고 불을 끄면 낮 동안 아무렇지 않게 넘겼던…",
+          "views": 17,
+          "likes": 4,
+          "replies": 1
+        },
+        {
+          "date": "2026-11-16",
+          "snippet": "월요일 오전은 유독 마음이 급해진다. 주말 사이에 밀린…",
+          "views": 17,
+          "likes": 3,
+          "replies": 1
+        },
+        {
+          "date": "2026-11-15",
+          "snippet": "일요일 밤이 유독 무겁게 느껴지는 이유는 아직 오지 않…",
+          "views": 23,
+          "likes": 4,
+          "replies": 1
+        }
+      ]
+    }
+  }
 }

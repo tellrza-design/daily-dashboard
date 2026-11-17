@@ -817,6 +817,144 @@
     transition: width .5s cubic-bezier(.4, 0, .2, 1);
   }
 
+  /* ── 📊 채널 · 스레드 실시간 지표 ── */
+  .mt-group { margin-bottom: 13px; }
+  .mt-group:last-child { margin-bottom: 0; }
+  .mt-sub {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--sub);
+    letter-spacing: -0.2px;
+    margin-bottom: 7px;
+  }
+  .mt-sub-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .mt-pill {
+    flex-shrink: 0;
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--blue);
+    background: var(--blue-soft);
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .mt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .mt-tile {
+    min-width: 0;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 9px 11px 10px;
+  }
+  .mt-name {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 800;
+    color: var(--sub);
+    letter-spacing: -0.2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mt-hero { display: flex; align-items: baseline; gap: 3px; margin-top: 2px; }
+  .mt-hero-num {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.6px;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+  }
+  .mt-hero-unit { font-size: 10.5px; font-weight: 700; color: var(--sub); white-space: nowrap; }
+  .mt-mini {
+    display: block;
+    margin-top: 3px;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--sub);
+    letter-spacing: -0.1px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mt-latest { display: block; margin-top: 7px; padding-top: 7px; border-top: 1px dashed var(--line); }
+  .mt-latest-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    line-height: 1.38;
+    word-break: keep-all;
+  }
+  .mt-latest-meta {
+    display: block;
+    margin-top: 3px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--sub);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mt-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .mt-cell { min-width: 0; padding: 9px 11px 10px; }
+  .mt-cell:nth-child(odd) { border-right: 1px solid var(--line); }
+  .mt-cell:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .mt-cell-label {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--sub);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mt-cell-value {
+    display: block;
+    margin-top: 1px;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .mt-posts { list-style: none; margin: 9px 0 0; padding: 0; }
+  .mt-post { padding: 7px 0; border-top: 1px solid var(--line); }
+  .mt-post:first-child { border-top: none; padding-top: 1px; }
+  .mt-post-snip {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mt-post-meta {
+    display: block;
+    margin-top: 2px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--sub);
+    font-variant-numeric: tabular-nums;
+  }
+
   /* ── 작업실 바로가기 ── */
   .shortcut-grid {
     display: grid;
@@ -1346,6 +1484,28 @@
       </div>
     </section>
 
+    <section class="card" id="metricsCard" aria-label="채널·스레드 실시간 지표">
+      <div class="card-head">
+        <div class="card-title">📊 채널 · 스레드 실시간 지표</div>
+        <span class="hint" id="metricsSynced">—</span>
+      </div>
+      <div class="mt-group" id="metricsYtGroup" hidden>
+        <div class="mt-sub">
+          <span class="mt-sub-name">▶️ 유튜브 4채널</span>
+          <span class="mt-pill" id="metricsYtSum"></span>
+        </div>
+        <div class="mt-grid" id="metricsYt"></div>
+      </div>
+      <div class="mt-group" id="metricsThGroup" hidden>
+        <div class="mt-sub">
+          <span class="mt-sub-name" id="metricsThName">🧵 스레드</span>
+          <span class="mt-pill" id="metricsThPill"></span>
+        </div>
+        <div class="mt-stats" id="metricsThStats"></div>
+        <ul class="mt-posts" id="metricsThPosts"></ul>
+      </div>
+    </section>
+
     <section class="card calc-card" id="calcCard" aria-label="10초 계산기">
       <button class="calc-head" id="calcToggle" type="button" aria-expanded="false" aria-controls="calcBody">
         <span class="calc-head-main">
@@ -1656,6 +1816,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var pad = function (n) { return String(n).padStart(2, '0'); };
   var str = function (v) { return typeof v === 'string' ? v : ''; };
+  var numRaw = function (v) { var n = Number(v); return isFinite(n) ? n : 0; };
 
   function dateKey(d) {
     d = d || new Date();
@@ -1741,8 +1902,7 @@
       }
     }
 
-    var board = Array.isArray(raw.status_board) ? raw.status_board.map(function (b, i) {
-      var tone = str(b.tone);
+    var board = Array.isArray(raw.status_board) ? raw.status_board.map(function (b, i) {      var tone = str(b.tone);
       if (TONES.indexOf(tone) < 0) tone = '';
       var progress = null;
       var rawP = b.progress;
@@ -1758,6 +1918,54 @@
       };
     }).filter(function (b) { return b.label && b.value; }) : [];
 
+    /* 이른바 실시간 지표 — 없어도 나머지 화면은 그대로 뜬다 */
+    var metrics = null;
+    if (raw.channel_metrics && typeof raw.channel_metrics === 'object') {
+      var ytRows = Array.isArray(raw.channel_metrics.youtube) ? raw.channel_metrics.youtube.map(function (y) {
+        if (!y || typeof y !== 'object') return null;
+        return {
+          name: str(y.name),
+          subs: numRaw(y.subs),
+          total_views: numRaw(y.total_views),
+          video_count: numRaw(y.video_count),
+          latest_title: str(y.latest_title),
+          latest_date: str(y.latest_date),
+          latest_views: numRaw(y.latest_views),
+          latest_likes: numRaw(y.latest_likes),
+          latest_comments: numRaw(y.latest_comments)
+        };
+      }).filter(function (y) { return y && y.name; }) : [];
+
+      var thRaw = raw.channel_metrics.threads && typeof raw.channel_metrics.threads === 'object'
+        ? raw.channel_metrics.threads : null;
+      var th = null;
+      if (thRaw) {
+        var s = thRaw.summary && typeof thRaw.summary === 'object' ? thRaw.summary : {};
+        th = {
+          username: str(s.username),
+          followers: numRaw(s.followers),
+          views: numRaw(s.views),
+          views_date: str(s.views_date),
+          likes: numRaw(s.likes),
+          replies: numRaw(s.replies),
+          reposts: numRaw(s.reposts),
+          posts: Array.isArray(thRaw.recent_posts) ? thRaw.recent_posts.map(function (p) {
+            if (!p || typeof p !== 'object') return null;
+            return {
+              date: str(p.date),
+              snippet: str(p.snippet),
+              views: numRaw(p.views),
+              likes: numRaw(p.likes),
+              replies: numRaw(p.replies)
+            };
+          }).filter(function (p) { return p && (p.snippet || p.date); }) : []
+        };
+      }
+      if (ytRows.length || (th && (th.username || th.posts.length))) {
+        metrics = { synced_at: str(raw.channel_metrics.synced_at), youtube: ytRows, threads: th };
+      }
+    }
+
     return {
       date_label: str(raw.date_label),
       updated_at: str(raw.updated_at),
@@ -1768,6 +1976,7 @@
       threads_replies: replies,
       dinner: dinner,
       status_board: board,
+      channel_metrics: metrics,
       checks: checks,
       shortcuts: shortcuts
     };
@@ -2835,6 +3044,111 @@
     });
   }
 
+  /* ───── 📊 채널 · 스레드 실시간 지표 ───── */
+  function compactNum(n) {
+    n = numRaw(n);
+    if (n >= 10000) {
+      var v = n / 10000;
+      return (v >= 10 ? String(Math.round(v)) : String(Math.round(v * 10) / 10)) + '만';
+    }
+    return nf(n);
+  }
+  function mdLabel(iso) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || '');
+    return m ? (parseInt(m[2], 10) + '/' + parseInt(m[3], 10)) : '';
+  }
+  function el(tag, cls, text) {
+    var node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text !== undefined && text !== null) node.textContent = text;
+    return node;
+  }
+
+  function buildMetrics() {
+    var card = $('metricsCard');
+    if (!card) return;
+    var cm = DATA.channel_metrics;
+    var yts = cm && Array.isArray(cm.youtube) ? cm.youtube : [];
+    var th = cm ? cm.threads : null;
+    var hasTh = !!(th && (th.username || (th.posts && th.posts.length)));
+
+    card.style.display = (yts.length || hasTh) ? '' : 'none';
+    if (!yts.length && !hasTh) return;
+
+    var synced = str(cm.synced_at);
+    $('metricsSynced').textContent = synced.length >= 16 ? synced.slice(11, 16) + ' 동기화' : '지표';
+
+    /* 유튜브 4채널 — 2열 타일 */
+    var ytGroup = $('metricsYtGroup');
+    var grid = $('metricsYt');
+    grid.innerHTML = '';
+    ytGroup.hidden = !yts.length;
+    var sumSubs = 0;
+    yts.forEach(function (y) {
+      sumSubs += numRaw(y.subs);
+      var tile = el('div', 'mt-tile');
+      tile.appendChild(el('span', 'mt-name', y.name));
+      var hero = el('span', 'mt-hero');
+      hero.appendChild(el('span', 'mt-hero-num', nf(y.subs)));
+      hero.appendChild(el('span', 'mt-hero-unit', '구독'));
+      tile.appendChild(hero);
+      tile.appendChild(el('span', 'mt-mini', '영상 ' + nf(y.video_count) + ' · 조회 ' + compactNum(y.total_views)));
+      if (y.latest_title) {
+        var box = el('span', 'mt-latest');
+        box.appendChild(el('span', 'mt-latest-title', y.latest_title));
+        var when = mdLabel(y.latest_date);
+        box.appendChild(el('span', 'mt-latest-meta',
+          '최신' + (when ? ' ' + when : '') + ' · ' + nf(y.latest_views) + '회'));
+        tile.appendChild(box);
+      }
+      grid.appendChild(tile);
+    });
+    var sumEl = $('metricsYtSum');
+    sumEl.textContent = yts.length ? '구독 합 ' + nf(sumSubs) : '';
+    sumEl.hidden = !yts.length;
+
+    /* 스레드 — 2×2 요약 + 최근 글 */
+    var thGroup = $('metricsThGroup');
+    thGroup.hidden = !hasTh;
+    if (!hasTh) return;
+
+    $('metricsThName').textContent = '🧵 스레드' + (th.username ? ' @' + th.username : '');
+    var pill = $('metricsThPill');
+    pill.textContent = th.followers ? '팔로워 ' + nf(th.followers) : '';
+    pill.hidden = !th.followers;
+
+    var stats = $('metricsThStats');
+    stats.innerHTML = '';
+    var cells = [
+      ['프로필 조회' + (mdLabel(th.views_date) ? ' (' + mdLabel(th.views_date) + ')' : ''), compactNum(th.views)],
+      ['좋아요', nf(th.likes)],
+      ['댓글', nf(th.replies)],
+      ['리포스트', nf(th.reposts)]
+    ];
+    cells.forEach(function (c) {
+      var cell = el('div', 'mt-cell');
+      cell.appendChild(el('span', 'mt-cell-label', c[0]));
+      cell.appendChild(el('span', 'mt-cell-value', c[1]));
+      stats.appendChild(cell);
+    });
+
+    var ul = $('metricsThPosts');
+    ul.innerHTML = '';
+    th.posts.forEach(function (p) {
+      var li = el('li', 'mt-post');
+      li.appendChild(el('span', 'mt-post-snip', p.snippet || '(텍스트 없음)'));
+      var bits = [];
+      var when = mdLabel(p.date);
+      if (when) bits.push(when);
+      bits.push('조회 ' + nf(p.views));
+      bits.push('좋아요 ' + nf(p.likes));
+      bits.push('댓글 ' + nf(p.replies));
+      li.appendChild(el('span', 'mt-post-meta', bits.join(' · ')));
+      ul.appendChild(li);
+    });
+    ul.style.display = th.posts.length ? '' : 'none';
+  }
+
   /* ───── 작업실 바로가기 ───── */
   function buildShortcuts() {
     var grid = $('shortcutGrid');
@@ -3013,6 +3327,7 @@
     renderDinner();
     buildTimeline();
     buildBoard();
+    buildMetrics();
     buildShortcuts();
     renderMissions();
   }
