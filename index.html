@@ -259,9 +259,6 @@
   }
   .inbox-pill.zero { background: var(--green); }
   .inbox-row {
-    display: flex;
-    align-items: center;
-    gap: 9px;
     min-height: 48px;
     padding: 11px 10px;
     background: var(--bg);
@@ -279,6 +276,40 @@
   .inbox-row.amber { border-left-color: var(--amber); }
   .inbox-row.blue { border-left-color: var(--blue); }
   .inbox-row.green { border-left-color: var(--green); }
+  .inbox-line {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .inbox-act {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+  .inbox-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    border: 1px solid var(--blue-soft);
+    background: var(--blue-soft);
+    color: var(--blue);
+    border-radius: 8px;
+    padding: 4px 9px;
+    min-height: 26px;
+    font-family: inherit;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: transform .1s ease, background-color .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .inbox-copy:active { transform: scale(0.96); }
+  .inbox-copy.copied {
+    background: var(--green-soft);
+    border-color: var(--green-soft);
+    color: var(--green);
+  }
   .inbox-title {
     flex: 1;
     min-width: 0;
@@ -861,6 +892,309 @@
   .chip:active { transform: scale(0.96); }
   .timer-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 
+  /* ── 🧮 10초 계산기 ── */
+  .calc-card { padding: 0; }
+  .calc-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 16px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  .calc-head-main { flex: 1; min-width: 0; }
+  .calc-head-main .card-title { display: block; }
+  .calc-sub {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--sub);
+    letter-spacing: -0.2px;
+    margin-top: 3px;
+    word-break: keep-all;
+  }
+  .calc-caret {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--bg);
+    color: var(--sub);
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .25s ease;
+  }
+  .calc-card.open .calc-caret { transform: rotate(180deg); }
+  .calc-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .32s cubic-bezier(.4, 0, .2, 1);
+  }
+  .calc-inner { padding: 0 16px 16px; }
+  .calc-tabs {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    background: var(--bg);
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+  .calc-tab {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    color: var(--sub);
+    border-radius: 9px;
+    padding: 8px 4px;
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color .2s ease, color .2s ease;
+  }
+  .calc-tab.active {
+    background: var(--card);
+    color: var(--blue);
+    box-shadow: var(--shadow);
+  }
+  .calc-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 9px;
+  }
+  .calc-label {
+    flex: 1;
+    min-width: 0;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.25px;
+    line-height: 1.3;
+    word-break: keep-all;
+  }
+  .calc-note {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--sub);
+    margin: -4px 0 10px;
+    letter-spacing: -0.2px;
+    font-variant-numeric: tabular-nums;
+  }
+  .calc-input {
+    width: 100px;
+    flex-shrink: 0;
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 800;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.3px;
+    min-height: 38px;
+  }
+  .calc-input:focus { outline: none; border-color: var(--blue); }
+  .calc-input::placeholder { color: var(--sub); font-weight: 700; }
+  .cur-toggle {
+    display: inline-flex;
+    gap: 2px;
+    padding: 3px;
+    background: var(--bg);
+    border-radius: 9px;
+    flex-shrink: 0;
+  }
+  .cur-btn {
+    border: none;
+    background: transparent;
+    color: var(--sub);
+    border-radius: 7px;
+    padding: 5px 7px;
+    font-family: inherit;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color .2s ease, color .2s ease;
+  }
+  .cur-btn.active { background: var(--card); color: var(--blue); }
+  .switch { display: inline-flex; flex-shrink: 0; }
+  .switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .switch-track {
+    width: 42px;
+    height: 24px;
+    border-radius: 999px;
+    background: var(--line);
+    display: block;
+    transition: background-color .2s ease;
+  }
+  .switch-thumb {
+    display: block;
+    width: 18px;
+    height: 18px;
+    margin: 3px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+    transition: transform .2s ease;
+  }
+  .switch input:checked + .switch-track { background: var(--blue); }
+  .switch input:checked + .switch-track .switch-thumb { transform: translateX(18px); }
+  .switch input:focus-visible + .switch-track { box-shadow: 0 0 0 3px var(--blue-soft); }
+  .calc-result {
+    margin-top: 11px;
+    padding: 12px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+  }
+  .calc-hero {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .calc-hero-side { text-align: right; flex-shrink: 0; }
+  .calc-cell-label {
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--sub);
+    letter-spacing: -0.2px;
+  }
+  .calc-hero-value {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: -0.7px;
+    margin-top: 3px;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  .calc-hero-value.good { color: var(--green); }
+  .calc-hero-value.bad { color: var(--red); }
+  .calc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .calc-cell {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 10px;
+    min-width: 0;
+  }
+  .calc-cell-value {
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: -0.4px;
+    margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .calc-foot {
+    margin-top: 9px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--sub);
+    letter-spacing: -0.2px;
+    line-height: 1.4;
+    word-break: keep-all;
+    font-variant-numeric: tabular-nums;
+  }
+  .calc-select {
+    flex-shrink: 0;
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+    min-height: 38px;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .hs-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .hs-col {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px;
+    min-width: 0;
+  }
+  .hs-col.win { border-color: var(--green); box-shadow: 0 0 0 2px var(--green-soft); }
+  .hs-head { display: flex; align-items: center; gap: 5px; margin-bottom: 8px; }
+  .hs-name { font-size: 12.5px; font-weight: 900; letter-spacing: -0.3px; }
+  .hs-badge {
+    font-size: 9.5px;
+    font-weight: 900;
+    color: var(--green);
+    background: var(--green-soft);
+    padding: 2px 6px;
+    border-radius: 6px;
+    letter-spacing: -0.2px;
+    white-space: nowrap;
+  }
+  .hs-field { display: block; margin-bottom: 6px; }
+  .hs-field span {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--sub);
+    margin-bottom: 3px;
+    letter-spacing: -0.2px;
+  }
+  .hs-field .calc-input { width: 100%; }
+  .hs-unit {
+    margin-top: 7px;
+    padding-top: 7px;
+    border-top: 1px dashed var(--line);
+    font-size: 12.5px;
+    font-weight: 900;
+    letter-spacing: -0.3px;
+    font-variant-numeric: tabular-nums;
+  }
+  .hs-unit-sub {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--sub);
+    margin-top: 2px;
+    letter-spacing: -0.2px;
+  }
+  .hs-verdict {
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: -0.3px;
+    line-height: 1.4;
+    word-break: keep-all;
+  }
+  .hs-verdict.good { color: var(--green); }
+
   /* ── 토스트 ── */
   .toast {
     position: fixed;
@@ -1012,6 +1346,145 @@
       </div>
     </section>
 
+    <section class="card calc-card" id="calcCard" aria-label="10초 계산기">
+      <button class="calc-head" id="calcToggle" type="button" aria-expanded="false" aria-controls="calcBody">
+        <span class="calc-head-main">
+          <span class="card-title">🧮 10초 계산기</span>
+          <span class="calc-sub">로켓그로스 마진 · 홈쇼핑 g당 단가</span>
+        </span>
+        <span class="calc-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="calc-body" id="calcBody">
+        <div class="calc-inner">
+          <div class="calc-tabs" role="tablist" aria-label="계산기 종류">
+            <button class="calc-tab active" id="tabRg" type="button" role="tab" aria-selected="true" aria-controls="paneRg" data-tab="rg">로켓그로스 마진</button>
+            <button class="calc-tab" id="tabHs" type="button" role="tab" aria-selected="false" aria-controls="paneHs" data-tab="hs">홈쇼핑 g당 단가</button>
+          </div>
+
+          <div class="calc-pane" id="paneRg" role="tabpanel" aria-labelledby="tabRg">
+            <div class="calc-row">
+              <span class="calc-label">매입원가</span>
+              <div class="cur-toggle" id="curToggle" role="group" aria-label="매입원가 통화">
+                <button class="cur-btn active" type="button" data-cur="cny" aria-pressed="true">¥ 위안</button>
+                <button class="cur-btn" type="button" data-cur="krw" aria-pressed="false">₩ 원</button>
+              </div>
+              <input class="calc-input" id="cCost" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-label="매입원가" />
+            </div>
+            <div class="calc-row" id="rateRow">
+              <span class="calc-label">적용 환율</span>
+              <input class="calc-input" id="cRate" type="text" inputmode="decimal" autocomplete="off" value="195" aria-label="위안 환율" />
+            </div>
+            <p class="calc-note" id="cCostHint">원가를 넣으면 원화로 환산합니다</p>
+            <div class="calc-row">
+              <span class="calc-label">예상 판매가</span>
+              <input class="calc-input" id="cPrice" type="text" inputmode="numeric" autocomplete="off" placeholder="0" aria-label="예상 판매가" />
+            </div>
+            <div class="calc-row">
+              <span class="calc-label">쿠팡 수수료율 (%)</span>
+              <input class="calc-input" id="cFee" type="text" inputmode="decimal" autocomplete="off" value="10.8" aria-label="쿠팡 수수료율" />
+            </div>
+            <div class="calc-row">
+              <span class="calc-label">입출고·배송비 (원)</span>
+              <input class="calc-input" id="cShip" type="text" inputmode="numeric" autocomplete="off" value="3500" aria-label="입출고 배송비" />
+            </div>
+            <div class="calc-row">
+              <span class="calc-label">광고비 비중 (%)</span>
+              <input class="calc-input" id="cAd" type="text" inputmode="decimal" autocomplete="off" value="10" aria-label="광고비 비중" />
+            </div>
+            <div class="calc-row">
+              <span class="calc-label">부가세 10% 차감 <span style="color:var(--sub);font-weight:700;font-size:11px">(일반과세)</span></span>
+              <label class="switch">
+                <input type="checkbox" id="cVat" />
+                <span class="switch-track"><span class="switch-thumb"></span></span>
+                <span class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">부가세 10% 차감</span>
+              </label>
+            </div>
+            <div class="calc-result">
+              <div class="calc-hero">
+                <div>
+                  <div class="calc-cell-label">예상 순이익 (건당)</div>
+                  <div class="calc-hero-value" id="rgProfit">—</div>
+                </div>
+                <div class="calc-hero-side">
+                  <div class="calc-cell-label">마진율</div>
+                  <div class="calc-hero-value" id="rgMargin">—</div>
+                </div>
+              </div>
+              <div class="calc-grid">
+                <div class="calc-cell">
+                  <div class="calc-cell-label">손익분기 최소 판매가</div>
+                  <div class="calc-cell-value" id="rgBe">—</div>
+                </div>
+                <div class="calc-cell">
+                  <div class="calc-cell-label">손익분기 ROAS</div>
+                  <div class="calc-cell-value" id="rgRoas">—</div>
+                </div>
+              </div>
+              <div class="calc-foot" id="rgFoot">매입원가와 판매가를 넣으면 바로 계산됩니다</div>
+            </div>
+          </div>
+
+          <div class="calc-pane" id="paneHs" role="tabpanel" aria-labelledby="tabHs" hidden>
+            <div class="calc-row">
+              <span class="calc-label">용량 단위 (A·B 동일)</span>
+              <select class="calc-select" id="hsUnit" aria-label="용량 단위">
+                <option value="g">g 그램</option>
+                <option value="ml">ml 밀리리터</option>
+                <option value="정">정 (알약)</option>
+                <option value="개">개</option>
+              </select>
+            </div>
+            <div class="hs-cols">
+              <div class="hs-col" id="hsColA">
+                <div class="hs-head">
+                  <span class="hs-name">A안</span>
+                  <span class="hs-badge" id="hsBadgeA" hidden>더 저렴</span>
+                </div>
+                <label class="hs-field">
+                  <span>가격 (원)</span>
+                  <input class="calc-input" id="hsA1" type="text" inputmode="numeric" autocomplete="off" placeholder="0" />
+                </label>
+                <label class="hs-field">
+                  <span>총 용량·수량</span>
+                  <input class="calc-input" id="hsA2" type="text" inputmode="decimal" autocomplete="off" placeholder="0" />
+                </label>
+                <div class="hs-unit"><span id="hsUnitAText">—</span><span class="hs-unit-sub" id="hsSubA"></span></div>
+              </div>
+              <div class="hs-col" id="hsColB">
+                <div class="hs-head">
+                  <span class="hs-name">B안</span>
+                  <span class="hs-badge" id="hsBadgeB" hidden>더 저렴</span>
+                </div>
+                <label class="hs-field">
+                  <span>가격 (원)</span>
+                  <input class="calc-input" id="hsB1" type="text" inputmode="numeric" autocomplete="off" placeholder="0" />
+                </label>
+                <label class="hs-field">
+                  <span>총 용량·수량</span>
+                  <input class="calc-input" id="hsB2" type="text" inputmode="decimal" autocomplete="off" placeholder="0" />
+                </label>
+                <div class="hs-unit"><span id="hsUnitBText">—</span><span class="hs-unit-sub" id="hsSubB"></span></div>
+              </div>
+            </div>
+            <div class="calc-result">
+              <div class="hs-verdict" id="hsVerdict">A안·B안 가격과 용량을 넣으면 바로 비교합니다</div>
+              <div class="calc-grid">
+                <div class="calc-cell">
+                  <div class="calc-cell-label" id="hsDiffLabel">100g 기준 차액</div>
+                  <div class="calc-cell-value" id="hsDiff">—</div>
+                </div>
+                <div class="calc-cell">
+                  <div class="calc-cell-label">총 용량 차이</div>
+                  <div class="calc-cell-value" id="hsSame">—</div>
+                </div>
+              </div>
+              <div class="calc-foot" id="hsFoot">홈쇼핑·상세페이지 단가 비교용</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="card">
       <div class="card-head">
         <div class="card-title">⏱️ 집중 타이머</div>
@@ -1067,11 +1540,11 @@
     updated_at: '23:20 기준',
     briefing: '오늘 발행 마감 · 빨간불 5건 중 돈·기한 2건부터 확인',
     urgent_inbox: [
-      { id: 'u1', title: '모모상점 치이카와 C 품절', tag: '품절 1건', urgency: 'red' },
-      { id: 'u2', title: '코코낫 정산 보류 회신 대기', tag: '리마인드 대기', urgency: 'amber' },
-      { id: 'u3', title: '쿠팡 전기매트 2건 주문 확인', tag: '중복 확인', urgency: 'red' },
-      { id: 'u4', title: '수노 블프 할인 감시', tag: '11/20 예정', urgency: 'blue' },
-      { id: 'u5', title: '대구신보 창업 자금 상담', tag: '서류 준비', urgency: 'green' }
+      { id: 'u1', title: '모모상점 치이카와 C 품절', tag: '품절 1건', urgency: 'red', prompt_text: '모모상점 치이카와 C 품절 옵션·입고 권장 수량 정리해서 알려줘' },
+      { id: 'u2', title: '코코낫 정산 보류 회신 대기', tag: '리마인드 대기', urgency: 'amber', prompt_text: '코코낫 정산 보류 건 담당자께 리마인드 메일 보내줘' },
+      { id: 'u3', title: '쿠팡 전기매트 2건 주문 확인', tag: '중복 확인', urgency: 'red', prompt_text: '쿠팡 전기매트 2건 중복 결제 내역 확인하고 취소 필요한지 봐줘' },
+      { id: 'u4', title: '수노 블프 할인 감시', tag: '11/20 예정', urgency: 'blue', prompt_text: '수노 블랙프라이데이 할인 지금 떴는지 먼저 체크해 줘' },
+      { id: 'u5', title: '대구신보 창업 자금 상담', tag: '서류 준비', urgency: 'green', prompt_text: '대구신보 창업 자금 상담 서류 준비 상황 정리해 줘' }
     ],
     timeline: [
       { id: 't1', date: '11/18 (수)', time: '07:00', title: '🪷 마음의바다 수능 2차 연등' },
@@ -1223,7 +1696,8 @@
         id: str(u.id) || ('u' + (i + 1)),
         title: str(u.title),
         tag: str(u.tag),
-        urgency: urgency
+        urgency: urgency,
+        prompt_text: str(u.prompt_text)
       };
     }).filter(function (u) { return u.title; }) : [];
 
@@ -1430,7 +1904,7 @@
   function inboxItems() {
     var out = [];
     (DATA.inbox || []).forEach(function (u, i) {
-      out.push({ key: 'u:' + u.id, title: u.title, tag: u.tag, tone: u.urgency, group: 0, seq: i });
+      out.push({ key: 'u:' + u.id, title: u.title, tag: u.tag, tone: u.urgency, prompt_text: u.prompt_text, group: 0, seq: i });
     });
     (DATA.checks || []).forEach(function (c, i) {
       out.push({
@@ -1438,6 +1912,7 @@
         title: (c.emoji ? c.emoji + ' ' : '') + c.label,
         tag: c.tag,
         tone: TONES.indexOf(c.tone) < 0 ? 'blue' : c.tone,
+        prompt_text: '',
         group: 1,
         seq: i
       });
@@ -1485,14 +1960,34 @@
       row.setAttribute('tabindex', '0');
       row.setAttribute('aria-pressed', done ? 'true' : 'false');
       row.innerHTML =
-        '<span class="inbox-title"></span>' +
-        '<span class="tag tag-' + it.tone + '"></span>' +
-        '<span class="dot-check"></span>';
+        '<span class="inbox-line">' +
+          '<span class="inbox-title"></span>' +
+          '<span class="tag tag-' + it.tone + '"></span>' +
+          '<span class="dot-check"></span>' +
+        '</span>' +
+        '<span class="inbox-act">' +
+          '<button class="inbox-copy" type="button">⚡ 지시 복사</button>' +
+        '</span>';
       row.querySelector('.inbox-title').textContent = it.title;
       var tagEl = row.querySelector('.tag');
       tagEl.textContent = it.tag;
       tagEl.style.display = it.tag ? '' : 'none';
       row.querySelector('.dot-check').textContent = done ? '✓' : '';
+
+      // ⚡ 피클 지시문 원터치 복사 (행 완료 토글과 충돌하지 않게 전파 차단)
+      var copyBtn = row.querySelector('.inbox-copy');
+      var promptText = it.prompt_text || (it.title + ' 건 진행해 줘');
+      copyBtn.setAttribute('aria-label', '「' + it.title + '」 지시문 복사');
+      copyBtn.addEventListener('click', function (ev) {
+        ev.stopPropagation();
+        copyText(promptText, copyBtn, {
+          idle: '⚡ 지시 복사',
+          ok: '✓ 복사됨',
+          msg: '지시문 복사됨 · 피클 톡에 붙여넣으세요'
+        });
+      });
+      copyBtn.addEventListener('keydown', function (ev) { ev.stopPropagation(); });
+
       var act = function () { toggleInbox(it.key); };
       row.addEventListener('click', act);
       row.addEventListener('keydown', function (e) {
@@ -1524,6 +2019,229 @@
     } else {
       toast('↩️ 다시 확인 대기로 돌렸습니다 · ' + left + '건', 2200);
     }
+  }
+
+  /* ───── 🧮 10초 계산기 (로켓그로스 마진 · 홈쇼핑 단가) ───── */
+  var CALC_STORE = 'today-board.calc.v1';
+  var CALC_FIELDS = [
+    ['cRate', 'rate'], ['cCost', 'cost'], ['cPrice', 'price'],
+    ['cFee', 'fee'], ['cShip', 'ship'], ['cAd', 'ad'],
+    ['hsA1', 'a1'], ['hsA2', 'a2'], ['hsB1', 'b1'], ['hsB2', 'b2']
+  ];
+
+  function nf(n) { return Math.round(n).toLocaleString('ko-KR'); }
+  function won(n) { return nf(n) + '원'; }
+  function perUnit(n) { return (n >= 100 ? nf(n) : String(Math.round(n * 10) / 10)) + '원'; }
+  function numOf(id) {
+    var el = $(id);
+    if (!el) return 0;
+    var v = parseFloat(String(el.value).replace(/[^0-9.\-]/g, ''));
+    return isFinite(v) ? v : 0;
+  }
+  function curSel() {
+    var btn = document.querySelector('#curToggle .cur-btn.active');
+    return btn ? btn.dataset.cur : 'cny';
+  }
+
+  function saveCalc() {
+    try {
+      var o = { cur: curSel(), vat: $('cVat').checked, unit: $('hsUnit').value };
+      CALC_FIELDS.forEach(function (f) { o[f[1]] = $(f[0]).value; });
+      localStorage.setItem(CALC_STORE, JSON.stringify(o));
+    } catch (e) {}
+  }
+
+  function restoreCalc() {
+    var saved = null;
+    try { saved = JSON.parse(localStorage.getItem(CALC_STORE) || 'null'); } catch (e) { saved = null; }
+    if (!saved) return;
+    CALC_FIELDS.forEach(function (f) {
+      if (typeof saved[f[1]] === 'string') $(f[0]).value = saved[f[1]];
+    });
+    if (saved.unit) $('hsUnit').value = saved.unit;
+    $('cVat').checked = !!saved.vat;
+    if (saved.cur === 'krw') setCurrency('krw');
+  }
+
+  function setCurrency(cur) {
+    var all = document.querySelectorAll('.cur-btn');
+    for (var i = 0; i < all.length; i++) {
+      var on = all[i].dataset.cur === cur;
+      all[i].classList.toggle('active', on);
+      all[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+    $('rateRow').style.display = cur === 'cny' ? '' : 'none';
+  }
+
+  function calcRg() {
+    var cur = curSel();
+    var rate = numOf('cRate');
+    var costRaw = numOf('cCost');
+    var cost = cur === 'cny' ? costRaw * rate : costRaw;
+    var price = numOf('cPrice');
+    var fee = numOf('cFee');
+    var ship = numOf('cShip');
+    var ad = numOf('cAd');
+    var vat = $('cVat').checked;
+
+    var hint = $('cCostHint');
+    if (costRaw > 0 && cur === 'cny') {
+      hint.textContent = costRaw + '¥ × ' + rate + ' = ' + won(cost) + ' (원가 환산)';
+    } else if (costRaw > 0) {
+      hint.textContent = '매입 원가 ' + won(costRaw);
+    } else {
+      hint.textContent = cur === 'cny' ? '위안 원가를 넣으면 원화로 환산합니다' : '원화 원가를 그대로 넣으세요';
+    }
+
+    var profitEl = $('rgProfit'), marginEl = $('rgMargin'), beEl = $('rgBe'), roasEl = $('rgRoas'), foot = $('rgFoot');
+
+    if (!price) {
+      profitEl.className = 'calc-hero-value';
+      marginEl.className = 'calc-hero-value';
+      profitEl.textContent = '—';
+      marginEl.textContent = '—';
+      beEl.textContent = '—';
+      roasEl.textContent = '—';
+      foot.textContent = '매입원가와 판매가를 넣으면 바로 계산됩니다';
+      return;
+    }
+
+    var revenue = price / (vat ? 1.1 : 1);
+    var ratio = 1 - (fee + ad) / 100;
+    var feeAmt = revenue * fee / 100;
+    var adAmt = revenue * ad / 100;
+    var profit = revenue - cost - feeAmt - adAmt - ship;
+    var margin = revenue ? profit / revenue * 100 : 0;
+    var bePrice = ratio > 0 ? (cost + ship) / ratio * (vat ? 1.1 : 1) : null;
+    var contrib = revenue - cost - feeAmt - ship;
+    var beRoas = contrib > 0 ? revenue / contrib * 100 : null;
+
+    profitEl.className = 'calc-hero-value' + (profit < 0 ? ' bad' : (margin >= 20 ? ' good' : ''));
+    profitEl.textContent = won(profit);
+    marginEl.className = 'calc-hero-value' + (profit < 0 ? ' bad' : (margin >= 20 ? ' good' : ''));
+    marginEl.textContent = margin.toFixed(1) + '%';
+    beEl.textContent = bePrice ? won(bePrice) : '계산 불가';
+    roasEl.textContent = beRoas ? nf(beRoas) + '%' : '광고 불가';
+
+    var parts = [];
+    if (vat) parts.push('부가세 차감 실매출 ' + won(revenue));
+    else parts.push('실매출 ' + won(revenue));
+    parts.push('수수료 ' + won(feeAmt));
+    parts.push('광고 ' + won(adAmt));
+    parts.push('배송 ' + won(ship));
+    parts.push('원가 ' + won(cost));
+    foot.textContent = parts.join(' · ');
+  }
+
+  function calcHs() {
+    var unit = $('hsUnit').value || 'g';
+    var ap = numOf('hsA1'), aq = numOf('hsA2'), bp = numOf('hsB1'), bq = numOf('hsB2');
+    var base = (unit === 'g' || unit === 'ml') ? 100 : 1;
+    var baseLabel = base === 100 ? '100' + unit : '1' + unit;
+    var okA = ap > 0 && aq > 0;
+    var okB = bp > 0 && bq > 0;
+    var ua = okA ? ap / aq : 0;
+    var ub = okB ? bp / bq : 0;
+
+    $('hsDiffLabel').textContent = baseLabel + ' 기준 차액';
+    $('hsUnitAText').textContent = okA ? perUnit(ua) + ' / 1' + unit : '—';
+    $('hsUnitBText').textContent = okB ? perUnit(ub) + ' / 1' + unit : '—';
+    $('hsSubA').textContent = okA ? won(ap) + ' · 총 ' + aq + unit : '';
+    $('hsSubB').textContent = okB ? won(bp) + ' · 총 ' + bq + unit : '';
+
+    var colA = $('hsColA'), colB = $('hsColB');
+    var badgeA = $('hsBadgeA'), badgeB = $('hsBadgeB');
+    var verdict = $('hsVerdict'), diffEl = $('hsDiff'), sameEl = $('hsSame'), foot = $('hsFoot');
+    colA.classList.remove('win');
+    colB.classList.remove('win');
+    badgeA.hidden = true;
+    badgeB.hidden = true;
+    verdict.className = 'hs-verdict';
+
+    if (!okA || !okB) {
+      verdict.textContent = 'A안·B안 가격과 용량을 넣으면 바로 비교합니다';
+      diffEl.textContent = '—';
+      sameEl.textContent = '—';
+      foot.textContent = '홈쇼핑·상세페이지 단가 비교용';
+      return;
+    }
+
+    var gap = Math.abs(ua - ub);
+    if (gap < 0.000001) {
+      verdict.textContent = '두 안의 단가가 같아요';
+      diffEl.textContent = '0원';
+    } else {
+      var aWins = ua < ub;
+      var pct = gap / Math.max(ua, ub) * 100;
+      if (pct < 0.05) {
+        verdict.textContent = '거의 같은 단가예요';
+      } else {
+        verdict.textContent = (aWins ? 'A안' : 'B안') + '이 ' + pct.toFixed(1) + '% 더 싸요';
+      }
+      verdict.className = 'hs-verdict good';
+      if (aWins) { colA.classList.add('win'); badgeA.hidden = false; }
+      else { colB.classList.add('win'); badgeB.hidden = false; }
+    }
+    diffEl.textContent = gap < 0.000001 ? '0원' : (baseLabel + '당 ' + won(gap * base) + ' 차이');
+    sameEl.textContent = Math.abs(aq - bq) < 0.000001 ? '같음' : ((bq > aq ? 'B안' : 'A안') + ' ' + Math.abs(bq - aq) + unit + ' 많음');
+    foot.textContent = 'A ' + won(ap) + ' / ' + aq + unit + ' · B ' + won(bp) + ' / ' + bq + unit;
+  }
+
+  function calcAll() {
+    calcRg();
+    calcHs();
+    syncCalcHeight();
+  }
+
+  function setCalcOpen(open) {
+    var card = $('calcCard'), body = $('calcBody');
+    card.classList.toggle('open', open);
+    $('calcToggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+    body.style.maxHeight = open ? (body.scrollHeight + 24) + 'px' : '0px';
+  }
+
+  function syncCalcHeight() {
+    var card = $('calcCard'), body = $('calcBody');
+    if (card.classList.contains('open')) body.style.maxHeight = (body.scrollHeight + 24) + 'px';
+  }
+
+  function setCalcTab(tab) {
+    var isRg = tab !== 'hs';
+    $('paneRg').hidden = !isRg;
+    $('paneHs').hidden = isRg;
+    $('tabRg').classList.toggle('active', isRg);
+    $('tabHs').classList.toggle('active', !isRg);
+    $('tabRg').setAttribute('aria-selected', isRg ? 'true' : 'false');
+    $('tabHs').setAttribute('aria-selected', !isRg ? 'true' : 'false');
+    syncCalcHeight();
+  }
+
+  function bindCalc() {
+    $('calcToggle').addEventListener('click', function () {
+      setCalcOpen(!$('calcCard').classList.contains('open'));
+    });
+    var tabs = document.querySelectorAll('.calc-tab');
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].addEventListener('click', function () { setCalcTab(this.dataset.tab); });
+    }
+    var curs = document.querySelectorAll('.cur-btn');
+    for (var j = 0; j < curs.length; j++) {
+      curs[j].addEventListener('click', function () {
+        setCurrency(this.dataset.cur);
+        saveCalc();
+        calcAll();
+      });
+    }
+    var ids = CALC_FIELDS.map(function (f) { return f[0]; }).concat(['hsUnit', 'cVat']);
+    ids.forEach(function (id) {
+      var el = $(id);
+      var onChange = function () { saveCalc(); calcAll(); };
+      el.addEventListener('input', onChange);
+      el.addEventListener('change', onChange);
+    });
+    restoreCalc();
+    calcAll();
+    window.addEventListener('resize', syncCalcHeight);
   }
 
   /* ───── 미션 ───── */
@@ -2349,6 +3067,7 @@
     $('weather').addEventListener('click', function () { loadWeather(true); });
     $('syncBtn').addEventListener('click', function () { syncNow(true); });
     $('dinnerToggle').addEventListener('click', toggleDinner);
+    bindCalc();
     $('inboxMore').addEventListener('click', function () {
       state.inboxOpen = !state.inboxOpen;
       buildInbox();

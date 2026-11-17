@@ -7,31 +7,36 @@
       "id": "u1",
       "title": "슈퍼해피 신규 결제완료 1건 확인",
       "tag": "미확인 주문",
-      "urgency": "red"
+      "urgency": "red",
+      "prompt_text": "슈퍼해피 신규 결제완료 1건 주문 내역 확인하고 출고 처리 안내해 줘"
     },
     {
       "id": "u2",
       "title": "로켓그로스 품절 1 · 품절임박 2건",
       "tag": "모모·오눌루",
-      "urgency": "red"
+      "urgency": "red",
+      "prompt_text": "로켓그로스 품절 1건(모모상점 에코백)이랑 품절임박 2건 상세 옵션·입고 권장 수량 정리해서 알려줘"
     },
     {
       "id": "u3",
       "title": "코코낫 정산 보류 리마인드 발송",
       "tag": "회신 5일째 없음",
-      "urgency": "amber"
+      "urgency": "amber",
+      "prompt_text": "코코낫 정산 보류 건 담당자께 리마인드 메일 보내줘"
     },
     {
       "id": "u4",
       "title": "전기매트 2건 중복 결제 확인",
       "tag": "376,630원",
-      "urgency": "red"
+      "urgency": "red",
+      "prompt_text": "11월 14일 쿠팡 전기매트 2건(376,630원) 중복 결제 내역 확인하고 취소 필요한지 봐줘"
     },
     {
       "id": "u5",
       "title": "수노 블프 할인 감시",
       "tag": "11/20 예정",
-      "urgency": "blue"
+      "urgency": "blue",
+      "prompt_text": "수노 블랙프라이데이 할인 지금 떴는지 먼저 체크해 줘"
     }
   ],
   "timeline": [
