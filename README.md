@@ -97,6 +97,7 @@
 - **`status_board`** — `progress`(0~100)가 있는 행만 진행률 바, 없는 행은 `tone` 색 배지.
 - **`channel_metrics`** — `scripts/sync_channel_metrics.py` 가 `.secrets/` 의 키를 읽어 채워 넣는 실시간 지표입니다. 유튜브는 채널 4개(`name` 순서 고정), 스레드는 계정 요약 + 최근 5건. `synced_at` 은 `YYYY-MM-DD HH:MM`(KST). 이 키가 없거나 비어 있으면 카드만 숨고 나머지 화면은 그대로 뜹니다.
   - 동기화: `python3 scripts/sync_channel_metrics.py` — API 키·토큰은 저장소 밖 `.secrets/` 에만 있고 `data.json` 에는 절대 쓰지 않습니다(스크립트가 산출물에 비밀값이 섞였는지 마지막에 검사).
+  - 정기 루틴이 `data.json` 을 고쳐 푸시할 때 이 스크립트를 먼저 돌리면 지표도 함께 최신이 됩니다(기존 키는 그대로 보존, `updated_at` 만 동기화 시각으로 바뀜).
 - **`date_label`** 은 오늘 날짜와 일치할 때만 배지에 쓰이고, 아니면 실제 오늘 날짜를 계산해 표시합니다.
 
 ## 저장 키 (브라우저 localStorage)
