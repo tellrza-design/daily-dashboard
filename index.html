@@ -14,7 +14,7 @@
 <link rel="apple-touch-icon" href="icon-180.png" />
 <link rel="icon" href="icon-180.png" type="image/png" />
 <meta name="format-detection" content="telephone=no" />
-<meta name="description" content="오늘의 발행 미션·빨간불 미결함·스레드 소통·주간 타임라인·10분 식단·집중 타이머를 한 화면에서." />
+<meta name="description" content="오늘의 발행 미션·텔르자 원터치 호출·빨간불 미결함·스레드 소통·주간 타임라인·10분 식단을 한 화면에서." />
 <style>
   :root {
     --bg: #F6F7F9;
@@ -1393,6 +1393,33 @@
     .toast, .progress-fill, .mission, .mission-main, .check-box, .sync-btn, .reply, .inbox-row { transition: none; }
     .sync-btn.spin { animation: none; }
   }
+  /* ── 텔르자 원터치 호출 ── */
+  .qp-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .qp-btn {
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--text);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 9px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: transform .12s ease, background-color .15s ease, border-color .15s ease;
+  }
+  .qp-btn:active {
+    transform: scale(0.96);
+    background: var(--blue-soft);
+    border-color: var(--blue);
+    color: var(--blue);
+  }
 </style>
 </head>
 <body>
@@ -1426,6 +1453,14 @@
       </div>
       <div id="inboxList"></div>
       <button class="inbox-more" id="inboxMore" type="button" hidden>나머지 더 보기 ▾</button>
+    </section>
+
+    <section class="card" id="qpCard" aria-label="텔르자 원터치 호출">
+      <div class="card-head">
+        <div class="card-title">⚡ 텔르자 원터치 호출</div>
+        <span class="hint">탭하면 복사</span>
+      </div>
+      <div class="qp-wrap" id="qpWrap"></div>
     </section>
 
     <section class="card" id="missionCard">
@@ -1663,28 +1698,6 @@
       </div>
     </section>
 
-    <section class="card">
-      <div class="card-head">
-        <div class="card-title">⏱️ 집중 타이머</div>
-        <span class="hint" id="timerState">대기</span>
-      </div>
-      <div class="timer-box">
-        <div class="timer-display" id="timerDisplay">25:00</div>
-        <div class="timer-btns">
-          <button class="btn btn-primary" id="startBtn" type="button" aria-pressed="false">시작</button>
-          <button class="btn btn-ghost" id="resetBtn" type="button">리셋</button>
-        </div>
-      </div>
-      <div class="timer-foot">
-        <div class="presets" id="presets">
-          <button class="chip active" type="button" data-min="25">25분</button>
-          <button class="chip" type="button" data-min="10">10분</button>
-          <button class="chip" type="button" data-min="5">5분</button>
-        </div>
-        <span class="hint" id="endedCount"></span>
-      </div>
-    </section>
-
     <section class="card" id="shortcutCard">
       <div class="card-head">
         <div class="card-title">🛠️ 작업실 바로가기</div>
@@ -1708,8 +1721,7 @@
   var CONFIG = {
     city: '대구',
     lat: 35.8714,
-    lon: 128.6014,
-    timerPresets: [25, 10, 5]
+    lon: 128.6014
   };
 
   /* 네트워크 실패 시 화면에 그릴 내장 fallback (data.json 과 같은 구조) */
@@ -1816,6 +1828,13 @@
       { label: '🎨 미리캔버스 허브', value: '대기 85 · 심사 9', tone: 'amber' }
     ],
     checks: [],
+    quick_prompts: [
+      { id: 'qp1', label: '🧵 스레드 6선 리필', prompt: '스레드 소통 새 글 6개 채워서 대시보드에 올려줘' },
+      { id: 'qp2', label: '📺 4채널 댓글 점검', prompt: '유튜브 4대 채널 미답변 댓글 있는지 확인해서 보고해 줘' },
+      { id: 'qp3', label: '🎵 이너페이스 댓글', prompt: '이너페이스 릴스 첫 댓글 문안 만들어줘' },
+      { id: 'qp4', label: '🛒 최저가 비교', prompt: '아래 상품 최저가 비교해서 찾아줘: ' },
+      { id: 'qp5', label: '📅 남은 일정·미결', prompt: '오늘 남은 일정이랑 미결 안건 정리해서 알려줘' }
+    ],
     shortcuts: [
       { id: 's1', label: '💬 슬랙', url: 'https://autotell.slack.com/archives/C0APZQ4UWRF' },
       { id: 's2', label: '🎨 미리캔버스', url: 'https://www.miricanvas.com/' },
@@ -1896,6 +1915,14 @@
         url: str(s.url)
       };
     }).filter(function (s) { return s.label && /^https?:\/\//i.test(s.url); }) : [];
+
+    var quickPrompts = Array.isArray(raw.quick_prompts) ? raw.quick_prompts.map(function (q, i) {
+      return {
+        id: str(q.id) || ('qp' + (i + 1)),
+        label: str(q.label),
+        prompt: str(q.prompt)
+      };
+    }).filter(function (q) { return q.label && q.prompt; }) : [];
 
     var replies = Array.isArray(raw.threads_replies) ? raw.threads_replies.map(function (r, i) {
       return {
@@ -2026,6 +2053,7 @@
       status_board: board,
       channel_metrics: metrics,
       checks: checks,
+      quick_prompts: quickPrompts,
       shortcuts: shortcuts
     };
   }
@@ -3248,6 +3276,26 @@
     igUl.style.display = ig.posts.length ? '' : 'none';
   }
 
+  /* ───── 텔르자 원터치 호출 ───── */
+  function buildQuickPrompts() {
+    var wrap = $('qpWrap');
+    var list = (DATA.quick_prompts && DATA.quick_prompts.length) ? DATA.quick_prompts : FALLBACK.quick_prompts;
+    wrap.innerHTML = '';
+    list.forEach(function (q) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'qp-btn';
+      btn.textContent = q.label;
+      btn.addEventListener('click', function () {
+        copyText(q.prompt).then(function () {
+          toast('⚡ 복사됐어요! 텔르자 톡에 붙여넣으세요', 2600);
+        });
+      });
+      wrap.appendChild(btn);
+    });
+    $('qpCard').style.display = list.length ? '' : 'none';
+  }
+
   /* ───── 작업실 바로가기 ───── */
   function buildShortcuts() {
     var grid = $('shortcutGrid');
@@ -3293,117 +3341,6 @@
     toastTimer = setTimeout(function () { el.classList.remove('show'); }, ms || 3000);
   }
 
-  /* ───── 집중 타이머 ───── */
-  var timer = { preset: 25, remain: 25 * 60, endAt: 0, running: false, iv: null, audioCtx: null };
-
-  function audioContext() {
-    if (timer.audioCtx) {
-      if (timer.audioCtx.state === 'suspended') timer.audioCtx.resume();
-      return timer.audioCtx;
-    }
-    var AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return null;
-    try { timer.audioCtx = new AC(); } catch (e) { return null; }
-    return timer.audioCtx;
-  }
-
-  // 부드러운 3음 차임 (사인파 + 약한 배음, 긴 감쇠)
-  function chime() {
-    var ac = audioContext();
-    if (!ac) return;
-    var t0 = ac.currentTime + 0.02;
-    var notes = [880, 1108.73, 1318.51];
-    notes.forEach(function (freq, i) {
-      var start = t0 + i * 0.19;
-      var osc = ac.createOscillator();
-      var gain = ac.createGain();
-      osc.type = 'sine';
-      osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0.0001, start);
-      gain.gain.exponentialRampToValueAtTime(0.16, start + 0.10);
-      gain.gain.exponentialRampToValueAtTime(0.0001, start + 1.7);
-      osc.connect(gain).connect(ac.destination);
-      osc.start(start);
-      osc.stop(start + 1.8);
-    });
-  }
-
-  function renderTimer() {
-    var s = Math.max(0, timer.remain);
-    var mm = Math.floor(s / 60);
-    var ss = s % 60;
-    $('timerDisplay').textContent = pad(mm) + ':' + pad(ss);
-    $('timerDisplay').classList.toggle('ending', timer.running && s <= 10 && s > 0);
-    $('timerState').textContent = timer.running ? '집중 중' : (s === 0 ? '완료' : (s < timer.preset * 60 ? '일시정지' : '대기'));
-  }
-
-  function setPreset(min) {
-    stopTicking();
-    timer.preset = min;
-    timer.remain = min * 60;
-    timer.running = false;
-    timer.endAt = 0;
-    $('startBtn').textContent = '시작';
-    $('startBtn').setAttribute('aria-pressed', 'false');
-    var chips = $('presets').children;
-    for (var i = 0; i < chips.length; i++) {
-      chips[i].classList.toggle('active', parseInt(chips[i].dataset.min, 10) === min);
-    }
-    renderTimer();
-  }
-
-  function stopTicking() {
-    if (timer.iv) { clearInterval(timer.iv); timer.iv = null; }
-  }
-
-  function tick() {
-    if (!timer.running) return;
-    var left = Math.round((timer.endAt - Date.now()) / 1000);
-    timer.remain = Math.max(0, left);
-    renderTimer();
-    if (timer.remain <= 0) finishTimer();
-  }
-
-  function startTimer() {
-    audioContext(); // iOS: 사용자 제스처 안에서 오디오를 미리 깨워둔다
-    if (timer.remain <= 0) timer.remain = timer.preset * 60;
-    timer.endAt = Date.now() + timer.remain * 1000;
-    timer.running = true;
-    $('startBtn').textContent = '일시정지';
-    $('startBtn').setAttribute('aria-pressed', 'true');
-    stopTicking();
-    timer.iv = setInterval(tick, 250);
-    renderTimer();
-  }
-
-  function pauseTimer() {
-    timer.remain = Math.max(0, Math.round((timer.endAt - Date.now()) / 1000));
-    timer.running = false;
-    stopTicking();
-    $('startBtn').textContent = '계속';
-    $('startBtn').setAttribute('aria-pressed', 'false');
-    renderTimer();
-  }
-
-  function finishTimer() {
-    timer.running = false;
-    timer.remain = 0;
-    stopTicking();
-    $('startBtn').textContent = '다시 시작';
-    $('startBtn').setAttribute('aria-pressed', 'false');
-    renderTimer();
-    chime();
-    toast('⏰ ' + timer.preset + '분 집중 끝났습니다. 잠깐 쉬어가세요', 5000);
-    state.timerEnded = (state.timerEnded || 0) + 1;
-    save();
-    $('endedCount').textContent = '오늘 ' + state.timerEnded + '회 완료';
-  }
-
-  function resetTimer() {
-    setPreset(timer.preset);
-    toast('타이머를 초기화했습니다', 1800);
-  }
-
   /* ───── 날짜 넘어가면 초기화 ───── */
   function checkRollover() {
     if (state.date !== dateKey()) {
@@ -3411,7 +3348,6 @@
       save();
       renderAll();
       loadWeather(true);
-      $('endedCount').textContent = '';
       toast('날짜가 바뀌었습니다. 오늘 미션 새로 시작합니다', 3200);
     }
   }
@@ -3421,6 +3357,7 @@
     renderDate();
     renderBriefing();
     buildInbox();
+    buildQuickPrompts();
     buildMissions();
     renderReplySet();
     renderDinner();
@@ -3464,21 +3401,8 @@
   function init() {
     load();
     renderAll();
-    $('endedCount').textContent = state.timerEnded ? '오늘 ' + state.timerEnded + '회 완료' : '';
-    setPreset(25);
     loadWeather(false);
 
-    $('startBtn').addEventListener('click', function () {
-      if (timer.running) pauseTimer();
-      else startTimer();
-    });
-    $('resetBtn').addEventListener('click', resetTimer);
-    var chips = $('presets').children;
-    for (var i = 0; i < chips.length; i++) {
-      (function (btn) {
-        btn.addEventListener('click', function () { setPreset(parseInt(btn.dataset.min, 10)); });
-      })(chips[i]);
-    }
     $('weather').addEventListener('click', function () { loadWeather(true); });
     $('syncBtn').addEventListener('click', function () { syncNow(true); });
     $('dinnerToggle').addEventListener('click', toggleDinner);
@@ -3508,7 +3432,6 @@
     document.addEventListener('visibilitychange', function () {
       if (document.visibilityState === 'visible') {
         checkRollover();
-        if (timer.running) tick();
         renderMissions(); // '다음' 미션 표시 갱신
         renderDate();
         syncNow(false); // 다시 앱으로 돌아오면 최신 data.json 반영
@@ -3516,7 +3439,7 @@
     });
     setInterval(function () {
       checkRollover();
-      if (!timer.running) renderMissions();
+      renderMissions();
     }, 60000);
   }
 

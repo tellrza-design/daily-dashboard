@@ -1,6 +1,6 @@
 {
   "date_label": "11월 19일 목요일",
-  "updated_at": "11/19 23:12 기준",
+  "updated_at": "11/19 23:15 기준",
   "briefing": "오늘 최고 6°C·최저 0°C(체감 -4°C), 밤 23시 눈발·미세먼지 좋음 · 07:30 마음의바다 목요 롱폼·18:00 이너페이스 B-side·20:00 마음정원 명상록 본편 · 코코낫 정산 보류 7일째(11월 내 계좌 변경 필수) · 쿠팡 3상점 재고·뱃지·애즈 정리 대기",
   "urgent_inbox": [
     {
@@ -232,6 +232,33 @@
     }
   ],
   "checks": [],
+  "quick_prompts": [
+    {
+      "id": "qp1",
+      "label": "🧵 스레드 6선 리필",
+      "prompt": "스레드 소통 새 글 6개 채워서 대시보드에 올려줘"
+    },
+    {
+      "id": "qp2",
+      "label": "📺 4채널 댓글 점검",
+      "prompt": "유튜브 4대 채널 미답변 댓글 있는지 확인해서 보고해 줘"
+    },
+    {
+      "id": "qp3",
+      "label": "🎵 이너페이스 댓글",
+      "prompt": "이너페이스 릴스 첫 댓글 문안 만들어줘"
+    },
+    {
+      "id": "qp4",
+      "label": "🛒 최저가 비교",
+      "prompt": "아래 상품 최저가 비교해서 찾아줘: "
+    },
+    {
+      "id": "qp5",
+      "label": "📅 남은 일정·미결",
+      "prompt": "오늘 남은 일정이랑 미결 안건 정리해서 알려줘"
+    }
+  ],
   "shortcuts": [
     {
       "id": "s1",
@@ -255,17 +282,17 @@
     }
   ],
   "channel_metrics": {
-    "synced_at": "2026-11-18 07:38",
+    "synced_at": "2026-11-19 23:15",
     "youtube": [
       {
         "name": "마음정원",
         "channel_id": "UCCwHcYVUxelD1MCoTF7vCNg",
         "subs": 4030,
-        "total_views": 451641,
-        "video_count": 96,
-        "latest_title": "파스칼의 5수 마차, 열매를 보지 못한 마지막 해 #Shorts",
-        "latest_date": "2026-11-17",
-        "latest_views": 386,
+        "total_views": 452785,
+        "video_count": 97,
+        "latest_title": "마르쿠스 아우렐리우스 명상록, 황제가 매일 아침 자신에게 한 말",
+        "latest_date": "2026-11-19",
+        "latest_views": 10,
         "latest_likes": 2,
         "latest_comments": 1
       },
@@ -273,36 +300,36 @@
         "name": "마음의바다",
         "channel_id": "UCKGK5-SECrJUxDklVF_c_3g",
         "subs": 11200,
-        "total_views": 290222,
-        "video_count": 47,
-        "latest_title": "나가세나는 왕에게 \"같은 사람도, 다른 사람도 아니다\"라고 답했다",
-        "latest_date": "2026-11-14",
-        "latest_views": 91,
-        "latest_likes": 1,
+        "total_views": 291065,
+        "video_count": 48,
+        "latest_title": "부처님의 마지막 여행, \"나는 이제 낡은 수레와 같다\"",
+        "latest_date": "2026-11-18",
+        "latest_views": 24,
+        "latest_likes": 0,
         "latest_comments": 1
       },
       {
         "name": "연꽃세상",
         "channel_id": "UCOHlvKb40Ko3CH5cHWMMWuw",
         "subs": 1450,
-        "total_views": 43747,
-        "video_count": 21,
-        "latest_title": "\"성철 스님은 한국 불교의 보물이야!\" 청담 스님의 호통 #Shorts",
-        "latest_date": "2026-11-15",
-        "latest_views": 1442,
-        "latest_likes": 15,
+        "total_views": 45316,
+        "video_count": 22,
+        "latest_title": "사리가 부스러진 청담 스님 다비, 성철 스님의 한마디 #Shorts",
+        "latest_date": "2026-11-18",
+        "latest_views": 1370,
+        "latest_likes": 17,
         "latest_comments": 1
       },
       {
         "name": "inner pace",
         "channel_id": "UC3I8loHAzuptjmp00FHbcbw",
         "subs": 207,
-        "total_views": 3212,
-        "video_count": 35,
-        "latest_title": "[playlist] 눈 내린 마을에서, 부치지 못한 편지. | 러브레터 Love Letter",
-        "latest_date": "2026-11-15",
-        "latest_views": 38,
-        "latest_likes": 1,
+        "total_views": 3230,
+        "video_count": 37,
+        "latest_title": "[playlist] 눈이 내리기 전에, 그 언덕길에서 듣는 음악. | 러브레터 Love Letter B-side",
+        "latest_date": "2026-11-19",
+        "latest_views": 2,
+        "latest_likes": 2,
         "latest_comments": 1
       }
     ],
