@@ -1,6 +1,6 @@
 {
   "date_label": "11월 20일 금요일",
-  "updated_at": "11/20 08:37 기준",
+  "updated_at": "11/20 10:04 기준",
   "briefing": "오늘 최고 3°C·최저 -2°C(체감 -4°C), 눈발 47%·미세먼지 좋음 · 10:30 수노 블프 감시·12:00 연꽃세상 쇼츠/스레드·18:00 연꽃세상 롱폼 본편 · 코코낫 정산 보류 8일째(11월 내 계좌 변경 필수) · 쿠팡 품절·애즈·Buffer 토큰 만료 확인 필요",
   "urgent_inbox": [
     {
@@ -282,7 +282,7 @@
     }
   ],
   "channel_metrics": {
-    "synced_at": "2026-11-20 06:43",
+    "synced_at": "2026-11-20 10:04",
     "youtube": [
       {
         "name": "마음정원",
@@ -292,7 +292,7 @@
         "video_count": 97,
         "latest_title": "마르쿠스 아우렐리우스 명상록, 황제가 매일 아침 자신에게 한 말",
         "latest_date": "2026-11-19",
-        "latest_views": 29,
+        "latest_views": 45,
         "latest_likes": 2,
         "latest_comments": 1
       },
@@ -304,7 +304,7 @@
         "video_count": 48,
         "latest_title": "부처님의 마지막 여행, \"나는 이제 낡은 수레와 같다\"",
         "latest_date": "2026-11-18",
-        "latest_views": 38,
+        "latest_views": 39,
         "latest_likes": 0,
         "latest_comments": 1
       },
@@ -328,121 +328,121 @@
         "video_count": 37,
         "latest_title": "[playlist] 눈이 내리기 전에, 그 언덕길에서 듣는 음악. | 러브레터 Love Letter B-side",
         "latest_date": "2026-11-19",
-        "latest_views": 7,
+        "latest_views": 9,
         "latest_likes": 2,
         "latest_comments": 1
       }
     ],
     "threads": {
-      "synced_at": "2026-11-17",
       "summary": {
         "username": "mind_gardenss",
-        "followers": 29,
-        "views": 2181,
-        "views_date": "2026-11-17",
-        "likes": 55,
-        "replies": 19,
-        "reposts": 1
+        "followers": 42,
+        "views": 2798,
+        "views_date": "2026-11-19",
+        "likes": 70,
+        "replies": 13,
+        "reposts": 2
       },
       "recent_posts": [
         {
-          "date": "2026-11-17",
-          "snippet": "살다 보면 나를 흔드는 일 앞에서 괜히 더 단단해지려고…",
-          "views": 9,
-          "likes": 4,
+          "date": "2026-11-19",
+          "snippet": "하루를 끝내고 혼자 앉아 있으면 낮에 내가 했던 말과 …",
+          "views": 7,
+          "likes": 2,
           "replies": 1
         },
         {
-          "date": "2026-11-17",
-          "snippet": "오전 내내 바쁘게 움직이다 보면 정작 내가 지금 어디로…",
-          "views": 11,
-          "likes": 4,
-          "replies": 1
+          "date": "2026-11-19",
+          "snippet": "",
+          "views": 0,
+          "likes": 0,
+          "replies": 0
         },
         {
-          "date": "2026-11-16",
-          "snippet": "하루를 끝내고 불을 끄면 낮 동안 아무렇지 않게 넘겼던…",
-          "views": 19,
-          "likes": 5,
-          "replies": 1
-        },
-        {
-          "date": "2026-11-16",
-          "snippet": "월요일 오전은 유독 마음이 급해진다. 주말 사이에 밀린…",
-          "views": 17,
+          "date": "2026-11-19",
+          "snippet": "목요일 점심쯤 되면 이번 주에 내가 잘 해낸 것보다 못…",
+          "views": 12,
           "likes": 3,
           "replies": 1
         },
         {
-          "date": "2026-11-15",
-          "snippet": "일요일 밤이 유독 무겁게 느껴지는 이유는 아직 오지 않…",
-          "views": 23,
-          "likes": 4,
+          "date": "2026-11-18",
+          "snippet": "살다 보면 아직 결론이 안 난 일 때문에 자꾸 마음이 …",
+          "views": 12,
+          "likes": 1,
+          "replies": 1
+        },
+        {
+          "date": "2026-11-18",
+          "snippet": "예전엔 누가 날 오해하면 기를 쓰고 풀려고 했어. 그걸…",
+          "views": 14,
+          "likes": 3,
           "replies": 1
         }
-      ]
+      ],
+      "synced_at": "2026-11-20 10:04"
     },
     "instagram": {
-      "synced_at": "2026-11-17",
       "summary": {
         "username": "mind_gardenss",
         "name": "마음정원 | 철학·심리학",
-        "followers": 2,
-        "follows": 33,
-        "media_count": 66,
+        "followers": 5,
+        "follows": 34,
+        "media_count": 70,
         "window_days": 28,
-        "views": 2318,
-        "reach": 2017,
-        "profile_views": 18,
-        "accounts_engaged": 8
+        "views": 2204,
+        "reach": 1938,
+        "profile_views": 21,
+        "accounts_engaged": 11
       },
       "recent_posts": [
         {
-          "date": "2026-11-17",
+          "date": "2026-11-19",
           "type": "CAROUSEL",
-          "snippet": "모두에게 좋은 사람일 필요는 없어요. 내 마음을 깎아가…",
+          "snippet": "결국 끝까지 남는 건 나를 설명하지 않아도 되는 사람뿐…",
           "likes": 1,
-          "views": 1,
+          "views": 0,
           "reach": 0,
           "saved": 0
         },
         {
-          "date": "2026-11-17",
+          "date": "2026-11-19",
           "type": "REELS",
-          "snippet": "남의 속도에 맞추느라 정작 내 마음을 지나치진 않았나요…",
-          "likes": 3,
-          "views": 122,
-          "reach": 115,
+          "snippet": "혼자 있는 시간이 자꾸 외롭게 느껴지시나요? 고독은 고…",
+          "likes": 1,
+          "views": 109,
+          "reach": 99,
           "saved": 1
         },
         {
-          "date": "2026-11-16",
+          "date": "2026-11-18",
           "type": "CAROUSEL",
-          "snippet": "살다 보면 사소한 대화에서도 은근한 승부를 겨루고 있을…",
+          "snippet": "어제의 강물에 오늘 다시 들어가려 하지 마세요. 강물도…",
           "likes": 2,
-          "views": 8,
-          "reach": 2,
+          "views": 5,
+          "reach": 1,
           "saved": 0
         },
         {
-          "date": "2026-11-16",
+          "date": "2026-11-18",
           "type": "REELS",
-          "snippet": "굳이 모든 사람에게 이해받으려 애쓰지 마세요. 물처럼 …",
-          "likes": 2,
-          "views": 141,
-          "reach": 124,
-          "saved": 1
+          "snippet": "어쩔 수 없는 일까지 혼자 껴안고 애쓰던 밤, 내 힘 …",
+          "likes": 4,
+          "views": 159,
+          "reach": 131,
+          "saved": 0
         },
         {
-          "date": "2026-11-15",
-          "type": "REELS",
-          "snippet": "남의 말 한마디에 하루가 무너지는 밤이라면, 오늘만큼은…",
+          "date": "2026-11-17",
+          "type": "CAROUSEL",
+          "snippet": "모두에게 좋은 사람일 필요는 없어요. 내 마음을 깎아가…",
           "likes": 2,
-          "views": 113,
-          "reach": 103,
+          "views": 4,
+          "reach": 1,
           "saved": 0
         }
-      ]
+      ],
+      "synced_at": "2026-11-20 10:04"
     }
   }
 }
