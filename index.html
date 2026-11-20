@@ -2067,7 +2067,7 @@
       if (thRaw) {
         var s = thRaw.summary && typeof thRaw.summary === 'object' ? thRaw.summary : {};
         th = {
-          synced_at: str(thRaw.get("synced_at")),
+          synced_at: str(thRaw.synced_at),
           username: str(s.username),
           followers: numRaw(s.followers),
           views: numRaw(s.views),
@@ -2093,7 +2093,7 @@
       if (igRaw) {
         var isum = igRaw.summary && typeof igRaw.summary === 'object' ? igRaw.summary : {};
         ig = {
-          synced_at: str(igRaw.get("synced_at")),
+          synced_at: str(igRaw.synced_at),
           username: str(isum.username),
           name: str(isum.name),
           followers: numRaw(isum.followers),
