@@ -831,6 +831,7 @@
     margin-bottom: 7px;
   }
   .mt-sub-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .mt-pills { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
   .mt-pill {
     flex-shrink: 0;
     font-size: 10.5px;
@@ -841,6 +842,10 @@
     border-radius: 999px;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
+  }
+  .mt-pill.stale {
+    color: #b45309;
+    background: #fef3c7;
   }
   .mt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .mt-tile {
@@ -1565,7 +1570,10 @@
       <div class="mt-group" id="metricsThGroup" hidden>
         <div class="mt-sub">
           <span class="mt-sub-name" id="metricsThName">🧵 스레드</span>
-          <span class="mt-pill" id="metricsThPill"></span>
+          <span class="mt-pills">
+            <span class="mt-pill" id="metricsThDate" hidden></span>
+            <span class="mt-pill" id="metricsThPill"></span>
+          </span>
         </div>
         <div class="mt-stats" id="metricsThStats"></div>
         <ul class="mt-posts" id="metricsThPosts"></ul>
@@ -1573,7 +1581,10 @@
       <div class="mt-group" id="metricsIgGroup" hidden>
         <div class="mt-sub">
           <span class="mt-sub-name" id="metricsIgName">📸 인스타그램</span>
-          <span class="mt-pill" id="metricsIgPill"></span>
+          <span class="mt-pills">
+            <span class="mt-pill" id="metricsIgDate" hidden></span>
+            <span class="mt-pill" id="metricsIgPill"></span>
+          </span>
         </div>
         <div class="mt-stats" id="metricsIgStats"></div>
         <span class="mt-foot" id="metricsIgFoot"></span>
@@ -2009,6 +2020,7 @@
       if (thRaw) {
         var s = thRaw.summary && typeof thRaw.summary === 'object' ? thRaw.summary : {};
         th = {
+          synced_at: str(thRaw.get("synced_at")),
           username: str(s.username),
           followers: numRaw(s.followers),
           views: numRaw(s.views),
@@ -2034,6 +2046,7 @@
       if (igRaw) {
         var isum = igRaw.summary && typeof igRaw.summary === 'object' ? igRaw.summary : {};
         ig = {
+          synced_at: str(igRaw.get("synced_at")),
           username: str(isum.username),
           name: str(isum.name),
           followers: numRaw(isum.followers),
@@ -3208,10 +3221,17 @@
     sumEl.hidden = !yts.length;
 
     /* 스레드 — 2×2 요약 + 최근 글 */
+    var topDate = synced.length >= 10 ? synced.slice(0, 10) : '';
     var thGroup = $('metricsThGroup');
     thGroup.hidden = !hasTh;
     if (hasTh) {
       $('metricsThName').textContent = '🧵 스레드' + (th.username ? ' @' + th.username : '');
+      var thDateRaw = str(th.synced_at || th.views_date || (th.posts[0] && th.posts[0].date)).slice(0, 10);
+      var thDateEl = $('metricsThDate');
+      var thDateLbl = mdLabel(thDateRaw);
+      thDateEl.textContent = thDateLbl ? thDateLbl + ' 기준' : '';
+      thDateEl.hidden = !thDateLbl;
+      thDateEl.className = 'mt-pill' + (topDate && thDateRaw && thDateRaw !== topDate ? ' stale' : '');
       var pill = $('metricsThPill');
       pill.textContent = th.followers ? '팔로워 ' + nf(th.followers) : '';
       pill.hidden = !th.followers;
@@ -3254,6 +3274,12 @@
     if (!hasIg) return;
 
     $('metricsIgName').textContent = '📸 인스타그램' + (ig.username ? ' @' + ig.username : '');
+    var igDateRaw = str(ig.synced_at || (ig.posts[0] && ig.posts[0].date)).slice(0, 10);
+    var igDateEl = $('metricsIgDate');
+    var igDateLbl = mdLabel(igDateRaw);
+    igDateEl.textContent = igDateLbl ? igDateLbl + ' 기준' : '';
+    igDateEl.hidden = !igDateLbl;
+    igDateEl.className = 'mt-pill' + (topDate && igDateRaw && igDateRaw !== topDate ? ' stale' : '');
     var igPill = $('metricsIgPill');
     igPill.textContent = ig.followers ? '팔로워 ' + nf(ig.followers) : '';
     igPill.hidden = !ig.followers;
