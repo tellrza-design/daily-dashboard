@@ -844,8 +844,8 @@
     white-space: nowrap;
   }
   .mt-pill.stale {
-    color: #b45309;
-    background: #fef3c7;
+    color: #b91c1c;
+    background: #fee2e2;
   }
   .mt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .mt-tile {
@@ -854,6 +854,48 @@
     border: 1px solid var(--line);
     border-radius: 14px;
     padding: 9px 11px 10px;
+  }
+  .mt-tile.hero {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(14, 165, 233, 0.03));
+    border-color: rgba(59, 130, 246, 0.3);
+    padding: 12px 13px;
+  }
+  .mt-tile.hero .mt-hero-num { font-size: 24px; }
+  .mt-tile.art {
+    grid-column: 1 / -1;
+    opacity: 0.9;
+    padding: 9px 11px;
+  }
+  .mt-dday {
+    display: inline-flex;
+    align-items: center;
+    font-size: 10.5px;
+    font-weight: 800;
+    color: #1d4ed8;
+    background: rgba(59, 130, 246, 0.14);
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .mt-art-tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--sub);
+    background: var(--line);
+    padding: 1px 7px;
+    border-radius: 999px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .mt-diff {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #059669;
+    margin-left: 4px;
   }
   .mt-name {
     display: block;
@@ -1563,7 +1605,10 @@
       <div class="mt-group" id="metricsYtGroup" hidden>
         <div class="mt-sub">
           <span class="mt-sub-name">▶️ 유튜브 4채널</span>
-          <span class="mt-pill" id="metricsYtSum"></span>
+          <span class="mt-pills">
+            <span class="mt-pill" id="metricsYtDate" hidden></span>
+            <span class="mt-pill" id="metricsYtSum"></span>
+          </span>
         </div>
         <div class="mt-grid" id="metricsYt"></div>
       </div>
@@ -2010,7 +2055,9 @@
           latest_date: str(y.latest_date),
           latest_views: numRaw(y.latest_views),
           latest_likes: numRaw(y.latest_likes),
-          latest_comments: numRaw(y.latest_comments)
+          latest_comments: numRaw(y.latest_comments),
+          subs_diff_7d: typeof y.subs_diff_7d === 'number' ? y.subs_diff_7d : null,
+          views_diff_7d: typeof y.views_diff_7d === 'number' ? y.views_diff_7d : null
         };
       }).filter(function (y) { return y && y.name; }) : [];
 
@@ -3191,21 +3238,75 @@
     var synced = str(cm.synced_at);
     $('metricsSynced').textContent = synced.length >= 16 ? synced.slice(11, 16) + ' 동기화' : '지표';
 
-    /* 유튜브 4채널 — 2열 타일 */
+    function isStale24h(dateStr) {
+      if (!dateStr) return false;
+      var iso = dateStr.length >= 16 ? dateStr.slice(0, 10) + 'T' + dateStr.slice(11, 16) + ':00+09:00'
+        : dateStr.slice(0, 10) + 'T23:59:59+09:00';
+      var t = Date.parse(iso);
+      if (isNaN(t)) return false;
+      return (Date.now() - t) > 86400000;
+    }
+
+    function ddayLabel(targetYmd) {
+      var target = Date.parse(targetYmd + 'T00:00:00+09:00');
+      var now = new Date();
+      var todayYmd = new Date(now.getTime() + 9 * 3600000).toISOString().slice(0, 10);
+      var today = Date.parse(todayYmd + 'T00:00:00+09:00');
+      var diff = Math.round((target - today) / 86400000);
+      if (diff > 0) return 'D-' + diff;
+      if (diff === 0) return 'D-Day';
+      return 'D+' + Math.abs(diff);
+    }
+
+    /* 유튜브 4채널 — 마음의바다 대형 카드 최상단 · 마음정원/연꽃 2열 · inner pace 아트 프로젝트 하단 */
     var ytGroup = $('metricsYtGroup');
     var grid = $('metricsYt');
     grid.innerHTML = '';
     ytGroup.hidden = !yts.length;
+    var ytDateEl = $('metricsYtDate');
+    var ytDateLbl = mdLabel(synced.slice(0, 10));
+    ytDateEl.textContent = ytDateLbl ? ytDateLbl + ' 기준' : '';
+    ytDateEl.hidden = !ytDateLbl;
+    ytDateEl.className = 'mt-pill' + (isStale24h(synced) ? ' stale' : '');
+
+    var orderMap = { '마음의바다': 0, '마음정원': 1, '연꽃세상': 2, 'inner pace': 3 };
+    var sortedYts = yts.slice().sort(function (a, b) {
+      var oa = orderMap.hasOwnProperty(a.name) ? orderMap[a.name] : 9;
+      var ob = orderMap.hasOwnProperty(b.name) ? orderMap[b.name] : 9;
+      return oa - ob;
+    });
+
     var sumSubs = 0;
-    yts.forEach(function (y) {
+    sortedYts.forEach(function (y) {
       sumSubs += numRaw(y.subs);
-      var tile = el('div', 'mt-tile');
-      tile.appendChild(el('span', 'mt-name', y.name));
+      var isSea = y.name === '마음의바다';
+      var isArt = y.name === 'inner pace';
+      var tile = el('div', 'mt-tile' + (isSea ? ' hero' : '') + (isArt ? ' art' : ''));
+      var nameEl = el('span', 'mt-name');
+      nameEl.appendChild(document.createTextNode(y.name));
+      if (isSea) {
+        nameEl.appendChild(el('span', 'mt-dday', '수익화 재신청 ' + ddayLabel('2027-01-13') + ' (1/13)'));
+      } else if (isArt) {
+        nameEl.appendChild(el('span', 'mt-art-tag', '아트 프로젝트'));
+      }
+      tile.appendChild(nameEl);
+
       var hero = el('span', 'mt-hero');
       hero.appendChild(el('span', 'mt-hero-num', nf(y.subs)));
       hero.appendChild(el('span', 'mt-hero-unit', '구독'));
+      if (typeof y.subs_diff_7d === 'number' && y.subs_diff_7d !== 0) {
+        var sd = y.subs_diff_7d;
+        hero.appendChild(el('span', 'mt-diff', (sd > 0 ? '+' : '') + nf(sd) + ' (7일)'));
+      }
       tile.appendChild(hero);
-      tile.appendChild(el('span', 'mt-mini', '영상 ' + nf(y.video_count) + ' · 조회 ' + compactNum(y.total_views)));
+
+      var miniText = '영상 ' + nf(y.video_count) + ' · 조회 ' + compactNum(y.total_views);
+      if (typeof y.views_diff_7d === 'number' && y.views_diff_7d !== 0) {
+        var vd = y.views_diff_7d;
+        miniText += ' (' + (vd > 0 ? '+' : '') + compactNum(vd) + ')';
+      }
+      tile.appendChild(el('span', 'mt-mini', miniText));
+
       if (y.latest_title) {
         var box = el('span', 'mt-latest');
         box.appendChild(el('span', 'mt-latest-title', y.latest_title));
@@ -3221,17 +3322,16 @@
     sumEl.hidden = !yts.length;
 
     /* 스레드 — 2×2 요약 + 최근 글 */
-    var topDate = synced.length >= 10 ? synced.slice(0, 10) : '';
     var thGroup = $('metricsThGroup');
     thGroup.hidden = !hasTh;
     if (hasTh) {
       $('metricsThName').textContent = '🧵 스레드' + (th.username ? ' @' + th.username : '');
-      var thDateRaw = str(th.synced_at || th.views_date || (th.posts[0] && th.posts[0].date)).slice(0, 10);
+      var thDateRaw = str(th.synced_at || th.views_date || (th.posts[0] && th.posts[0].date));
       var thDateEl = $('metricsThDate');
-      var thDateLbl = mdLabel(thDateRaw);
+      var thDateLbl = mdLabel(thDateRaw.slice(0, 10));
       thDateEl.textContent = thDateLbl ? thDateLbl + ' 기준' : '';
       thDateEl.hidden = !thDateLbl;
-      thDateEl.className = 'mt-pill' + (topDate && thDateRaw && thDateRaw !== topDate ? ' stale' : '');
+      thDateEl.className = 'mt-pill' + (isStale24h(thDateRaw) ? ' stale' : '');
       var pill = $('metricsThPill');
       pill.textContent = th.followers ? '팔로워 ' + nf(th.followers) : '';
       pill.hidden = !th.followers;
@@ -3274,12 +3374,12 @@
     if (!hasIg) return;
 
     $('metricsIgName').textContent = '📸 인스타그램' + (ig.username ? ' @' + ig.username : '');
-    var igDateRaw = str(ig.synced_at || (ig.posts[0] && ig.posts[0].date)).slice(0, 10);
+    var igDateRaw = str(ig.synced_at || (ig.posts[0] && ig.posts[0].date));
     var igDateEl = $('metricsIgDate');
-    var igDateLbl = mdLabel(igDateRaw);
+    var igDateLbl = mdLabel(igDateRaw.slice(0, 10));
     igDateEl.textContent = igDateLbl ? igDateLbl + ' 기준' : '';
     igDateEl.hidden = !igDateLbl;
-    igDateEl.className = 'mt-pill' + (topDate && igDateRaw && igDateRaw !== topDate ? ' stale' : '');
+    igDateEl.className = 'mt-pill' + (isStale24h(igDateRaw) ? ' stale' : '');
     var igPill = $('metricsIgPill');
     igPill.textContent = ig.followers ? '팔로워 ' + nf(ig.followers) : '';
     igPill.hidden = !ig.followers;
