@@ -2240,31 +2240,55 @@
     $('weatherLoc').textContent = subLabel || CONFIG.city;
   }
 
+  function fetchWeatherAt(lat, lon, cityName, today) {
+    var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon +
+      '&current=temperature_2m,weather_code&timezone=Asia%2FSeoul';
+    fetch(url).then(function (r) { return r.json(); }).then(function (j) {
+      var cur = j && j.current;
+      if (!cur || typeof cur.temperature_2m !== 'number') return;
+      var label = cityName + ' · ' + ((WMO[cur.weather_code] || ['', ''])[1] || '');
+      label = label.replace(/ ·\s*$/, '');
+      paintWeather(cur.temperature_2m, cur.weather_code, label);
+      try {
+        localStorage.setItem(WEATHER_STORE, JSON.stringify({
+          date: today, ts: Date.now(), temp: cur.temperature_2m, code: cur.weather_code, label: label
+        }));
+      } catch (e) {}
+    }).catch(function () {
+      $('weatherTemp').textContent = cityName;
+      $('weatherLoc').textContent = '';
+    });
+  }
+
   function loadWeather(force) {
     var today = dateKey();
     if (!force) {
       try {
         var cached = JSON.parse(localStorage.getItem(WEATHER_STORE) || 'null');
-        if (cached && cached.date === today && typeof cached.temp === 'number') {
+        if (cached && cached.date === today && typeof cached.temp === 'number' && cached.ts && (Date.now() - cached.ts < 900000)) {
           paintWeather(cached.temp, cached.code, cached.label);
           return;
         }
       } catch (e) {}
     }
-    var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + CONFIG.lat + '&longitude=' + CONFIG.lon +
-      '&current=temperature_2m,weather_code&timezone=Asia%2FSeoul';
-    fetch(url).then(function (r) { return r.json(); }).then(function (j) {
-      var cur = j && j.current;
-      if (!cur || typeof cur.temperature_2m !== 'number') return;
-      var label = CONFIG.city + ' · ' + ((WMO[cur.weather_code] || ['', ''])[1] || '');
-      paintWeather(cur.temperature_2m, cur.weather_code, label.replace(/ ·\s*$/, ''));
-      try {
-        localStorage.setItem(WEATHER_STORE, JSON.stringify({ date: today, temp: cur.temperature_2m, code: cur.weather_code, label: label }));
-      } catch (e) {}
-    }).catch(function () {
-      $('weatherTemp').textContent = CONFIG.city;
-      $('weatherLoc').textContent = '';
-    });
+    if (navigator.geolocation && typeof navigator.geolocation.getCurrentPosition === 'function') {
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        var lat = pos.coords.latitude.toFixed(4);
+        var lon = pos.coords.longitude.toFixed(4);
+        var geoUrl = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' + lat + '&longitude=' + lon + '&localityLanguage=ko';
+        fetch(geoUrl).then(function (r) { return r.json(); }).then(function (g) {
+          var cityName = (g && (g.locality || g.city || g.principalSubdivision)) || CONFIG.city;
+          cityName = String(cityName).replace(/(특별시|광역시|특별자치시|특별자치도)$/, '');
+          fetchWeatherAt(lat, lon, cityName, today);
+        }).catch(function () {
+          fetchWeatherAt(lat, lon, CONFIG.city, today);
+        });
+      }, function () {
+        fetchWeatherAt(CONFIG.lat, CONFIG.lon, CONFIG.city, today);
+      }, { enableHighAccuracy: false, timeout: 5000, maximumAge: 300000 });
+    } else {
+      fetchWeatherAt(CONFIG.lat, CONFIG.lon, CONFIG.city, today);
+    }
   }
 
   /* ───── 🔴 빨간불 미결 안건함 ───── */
