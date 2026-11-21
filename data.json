@@ -1,85 +1,85 @@
 {
-  "date_label": "11월 21일 토요일",
-  "updated_at": "11/21 20:51 기준",
-  "briefing": "단양 오늘 최고 2°C·최저 -5°C(맑음·미세먼지 좋음) · Facebook 보안 코드 본인 요청 여부 확인 · 슈퍼해피 헤어핀 품절 임박(1개) 추가 및 코코낫 정산 보류 리마인드 대기 · NOL 후기 이전 11/23 08:00 마감 · 세네카 편 Vrew 목소리 저장 대기",
+  "date_label": "11월 22일 일요일",
+  "updated_at": "11/22 06:50 기준",
+  "briefing": "단양 오늘 최고 3°C·최저 -7°C(맑음·미세먼지 좋음) · 쿠팡 3상점(모모·오눌루 추가) 내일 월요일 WING 일괄 점검 대기 · NOL 후기 이전 내일(11/23) 08:00 마감 · 네이버페이 KYC 30일 내 재이행 필요 · 테무 2건 48시간 내 리뷰 크레딧",
   "urgent_inbox": [
     {
       "id": "u1",
-      "title": "코코낫 정산 보류 리마인드 (11월 내 계좌 변경 필수)",
-      "tag": "12/7 재지급 마감",
+      "title": "NOL(구 NOL티켓) 이용후기 이전 마감",
+      "tag": "내일(11/23) 08:00",
       "urgency": "red",
-      "prompt_text": "코코낫 로켓그로스 정산 보류 건, 정산 담당자분께 오늘 리마인드 메일 보내줘. 11월 안에 대표계좌를 바꿔야 12/7 재지급되니 사업자등록증·대표자 명의 통장사본 안내도 같이 넣어줘."
+      "prompt_text": "구 NOL티켓 공연 후기 NOL 이전 안내 메일 왔는데, 내일(11/23) 오전 8시 전에 통합회원 전환할지 여부 정리해 줘."
     },
     {
       "id": "u2",
-      "title": "쿠팡 3상점 WING 점검 (슈퍼해피 헤어핀 1개 임박 추가)",
-      "tag": "슈퍼해피·코코낫·모모",
+      "title": "코코낫 정산 보류 리마인드 (11월 내 계좌 변경 필수)",
+      "tag": "12/7 재지급 마감",
       "urgency": "red",
-      "prompt_text": "어제(11/20) 슈퍼해피 플라워 비즈 헤어핀 6p 세트 1개 품절 임박(입고권장 6개) 알림이 왔는데, 기존 코코낫·모모상점 품절/배지/애즈 건과 함께 쿠팡 WING 들어가서 일괄 정리해 줘."
+      "prompt_text": "코코낫 로켓그로스 정산 보류 건, 정산 담당자분께 리마인드 메일 보내줘. 11월 안에 대표계좌를 바꿔야 12/7 재지급되니 사업자등록증·대표자 명의 통장사본 안내도 같이 넣어줘."
     },
     {
       "id": "u3",
-      "title": "Facebook 새 이메일 확인 보안 메일 본인 요청 여부 확인",
-      "tag": "11/20 10:01 수신",
-      "urgency": "amber",
-      "prompt_text": "어제 오전 10:01에 온 Facebook 보안 코드 메일, 내가 Meta 개발자 계정 인증하면서 요청한 건지 아닌지 확인하고 보안 점검 도와줘."
+      "title": "쿠팡 3상점 WING 일괄 점검 (모모상점·오눌루 임박 추가)",
+      "tag": "월요일 WING 점검",
+      "urgency": "red",
+      "prompt_text": "어제(11/21) 모모상점 치이카와 자석 키링(24개)·오눌루 스누피 네임택(7개) 품절 임박 알림이 추가됐어. 기존 슈퍼해피 헤어핀(1개)·코코낫 건과 함께 쿠팡 WING 일괄 점검해 줘."
     },
     {
       "id": "u4",
-      "title": "NOL(구 NOL티켓) 이용후기 이전 마감",
-      "tag": "11/23(월) 08:00",
+      "title": "네이버페이 고객확인제도(KYC) 재이행",
+      "tag": "30일 내 미이행 시 제한",
       "urgency": "amber",
-      "prompt_text": "구 NOL티켓 공연 후기 NOL 이전 안내 메일 왔는데, 11/23 오전 8시 전에 통합회원 전환할지 여부 정리해 줘."
+      "prompt_text": "네이버페이 고객확인제도(KYC) 재이행 안내가 왔는데, 앱에서 어디로 들어가서 무엇을 입력하면 되는지 다시 알려줘."
     },
     {
       "id": "u5",
-      "title": "Buffer 토큰 만료(11/19) & 보안 인가(Instinct·Handlus·vooy)",
-      "tag": "계정 점검",
-      "urgency": "blue",
-      "prompt_text": "Buffer 토큰 만료된 거 정리하고, Instinct·Handlus·vooy 연동 권한 중 안 쓰는 것 끊는 방법 정리해 줘."
+      "title": "테무 주문 2건 리뷰 크레딧 (48시간 내 각 5,300원)",
+      "tag": "11/21 이후 배송분",
+      "urgency": "amber",
+      "prompt_text": "테무 주문 2건 리뷰 쓰면 5,300원 크레딧 준다고 메일 왔는데, 크레딧 받기 대상인지 같이 확인하고 리뷰 문안 잡아줘."
     },
     {
       "id": "u6",
-      "title": "KT알파 기프티쇼 종료 (알파포인트 11/26 중단)",
-      "tag": "12/20 사용 마감",
+      "title": "아킬레스건 병원 선택 & Facebook 보안 메일 확인",
+      "tag": "월요일 복귀 후",
       "urgency": "blue",
-      "prompt_text": "KT알파쇼핑 알파포인트 잔여가 있는지 확인하고, 11/26 충전·전환 중단과 12/20 최종 사용 마감 전에 어떻게 처리할지 정리해 줘."
+      "prompt_text": "대구 복귀 후 아킬레스건 진료 보러 갈 정형외과/재활의학과 3곳 중에 어디가 좋을지 다시 비교해 주고, 11/20 Facebook 보안 코드 메일도 같이 확인해 줘."
     }
   ],
   "timeline": [
     {
       "id": "t1",
-      "date": "11/21 (토)",
-      "time": "11:00",
-      "title": "🎬 마음정원 쇼츠 #2"
+      "date": "11/22 (일)",
+      "time": "08:30",
+      "title": "🎵 인스타 · inner pace 릴스 #1"
     },
     {
       "id": "t2",
-      "date": "11/21 (토)",
+      "date": "11/22 (일)",
       "time": "12:00",
       "title": "🧵 스레드 점심 공감 숏폼"
     },
     {
       "id": "t3",
-      "date": "11/21 (토)",
-      "time": "13:30",
-      "title": "🎵 inner pace 쇼츠 에이스 #2"
-    },
-    {
-      "id": "t4",
-      "date": "11/21 (토)",
+      "date": "11/22 (일)",
       "time": "18:30",
       "title": "🎬 인스타 매일 감성 릴스"
     },
     {
+      "id": "t4",
+      "date": "11/22 (일)",
+      "time": "18:40",
+      "title": "🎵 인스타 · inner pace 릴스 #2"
+    },
+    {
       "id": "t5",
-      "date": "11/21 (토)",
+      "date": "11/22 (일)",
       "time": "20:30",
       "title": "📸 인스타 데일리 캐러셀"
     },
     {
       "id": "t6",
-      "date": "11/21 (토)",
+      "date": "11/22 (일)",
       "time": "21:00",
       "title": "🧵 스레드 밤 심야 사유"
     },
@@ -288,17 +288,17 @@
     }
   ],
   "channel_metrics": {
-    "synced_at": "2026-11-21 06:42",
+    "synced_at": "2026-11-22 06:48",
     "youtube": [
       {
         "name": "마음정원",
         "channel_id": "UCCwHcYVUxelD1MCoTF7vCNg",
         "subs": 4030,
-        "total_views": 453383,
+        "total_views": 454284,
         "video_count": 97,
         "latest_title": "마르쿠스 아우렐리우스 명상록, 황제가 매일 아침 자신에게 한 말",
         "latest_date": "2026-11-19",
-        "latest_views": 71,
+        "latest_views": 103,
         "latest_likes": 2,
         "latest_comments": 1
       },
@@ -306,11 +306,11 @@
         "name": "마음의바다",
         "channel_id": "UCKGK5-SECrJUxDklVF_c_3g",
         "subs": 11200,
-        "total_views": 291686,
+        "total_views": 292359,
         "video_count": 48,
         "latest_title": "부처님의 마지막 여행, \"나는 이제 낡은 수레와 같다\"",
         "latest_date": "2026-11-18",
-        "latest_views": 61,
+        "latest_views": 78,
         "latest_likes": 0,
         "latest_comments": 1
       },
@@ -318,90 +318,108 @@
         "name": "연꽃세상",
         "channel_id": "UCOHlvKb40Ko3CH5cHWMMWuw",
         "subs": 1450,
-        "total_views": 45519,
+        "total_views": 46043,
         "video_count": 23,
         "latest_title": "경봉 스님, 절 화장실에 '해우소'라는 이름을 붙인 스님 #불교이야기",
         "latest_date": "2026-11-20",
-        "latest_views": 5,
+        "latest_views": 53,
         "latest_likes": 0,
-        "latest_comments": 0
+        "latest_comments": 1
       },
       {
         "name": "inner pace",
         "channel_id": "UC3I8loHAzuptjmp00FHbcbw",
         "subs": 207,
-        "total_views": 3230,
+        "total_views": 3356,
         "video_count": 37,
         "latest_title": "[playlist] 눈이 내리기 전에, 그 언덕길에서 듣는 음악. | 러브레터 Love Letter B-side",
         "latest_date": "2026-11-19",
-        "latest_views": 15,
-        "latest_likes": 2,
+        "latest_views": 18,
+        "latest_likes": 3,
         "latest_comments": 1
       }
     ],
     "threads": {
       "summary": {
         "username": "mind_gardenss",
-        "followers": 42,
-        "views": 487,
-        "views_date": "2026-11-20",
+        "followers": 43,
+        "views": 1337,
+        "views_date": "2026-11-21",
         "likes": 15,
-        "replies": 4,
+        "replies": 1,
         "reposts": 0
       },
       "recent_posts": [
         {
+          "date": "2026-11-21",
+          "snippet": "토요일 밤이 되면 유난히 이번 주에 못다 한 일들이 머…",
+          "views": 2,
+          "likes": 2,
+          "replies": 1
+        },
+        {
+          "date": "2026-11-21",
+          "snippet": "토요일 점심이 되어서야 한 주 동안 꽉 쥐고 있던 어깨…",
+          "views": 8,
+          "likes": 1,
+          "replies": 1
+        },
+        {
           "date": "2026-11-20",
           "snippet": "금요일 밤이 되어서야 한 주 동안 묵혀 둔 피로가 한꺼…",
-          "views": 1,
+          "views": 5,
           "likes": 1,
           "replies": 1
         },
         {
           "date": "2026-11-20",
           "snippet": "금요일 점심쯤 되면 한 주 내내 밀린 피로와 미처 다 …",
-          "views": 6,
+          "views": 8,
           "likes": 1,
           "replies": 1
         },
         {
           "date": "2026-11-19",
           "snippet": "하루를 끝내고 혼자 앉아 있으면 낮에 내가 했던 말과 …",
-          "views": 10,
+          "views": 11,
           "likes": 2,
-          "replies": 1
-        },
-        {
-          "date": "2026-11-19",
-          "snippet": "",
-          "views": 0,
-          "likes": 0,
-          "replies": 0
-        },
-        {
-          "date": "2026-11-19",
-          "snippet": "목요일 점심쯤 되면 이번 주에 내가 잘 해낸 것보다 못…",
-          "views": 13,
-          "likes": 3,
           "replies": 1
         }
       ],
-      "synced_at": "2026-11-21 06:42"
+      "synced_at": "2026-11-22 06:48"
     },
     "instagram": {
       "summary": {
         "username": "mind_gardenss",
         "name": "마음정원 | 철학·심리학",
         "followers": 5,
-        "follows": 35,
-        "media_count": 72,
+        "follows": 37,
+        "media_count": 74,
         "window_days": 28,
-        "views": 1969,
-        "reach": 1688,
-        "profile_views": 20,
+        "views": 1868,
+        "reach": 1567,
+        "profile_views": 22,
         "accounts_engaged": 11
       },
       "recent_posts": [
+        {
+          "date": "2026-11-21",
+          "type": "CAROUSEL",
+          "snippet": "우리를 지치게 하는 것은 사건 자체가 아니라, 내가 어…",
+          "likes": 2,
+          "views": 2,
+          "reach": 2,
+          "saved": 0
+        },
+        {
+          "date": "2026-11-21",
+          "type": "REELS",
+          "snippet": "바쁘게 보낸 한 주였지만, 정작 나를 위한 시간은 얼마…",
+          "likes": 1,
+          "views": 115,
+          "reach": 109,
+          "saved": 0
+        },
         {
           "date": "2026-11-20",
           "type": "CAROUSEL",
@@ -416,8 +434,8 @@
           "type": "REELS",
           "snippet": "한 주 내내 남들 속도와 시선에 맞추느라 내 마음은 늘…",
           "likes": 3,
-          "views": 29,
-          "reach": 29,
+          "views": 34,
+          "reach": 34,
           "saved": 0
         },
         {
@@ -428,27 +446,9 @@
           "views": 3,
           "reach": 2,
           "saved": 0
-        },
-        {
-          "date": "2026-11-19",
-          "type": "REELS",
-          "snippet": "혼자 있는 시간이 자꾸 외롭게 느껴지시나요? 고독은 고…",
-          "likes": 2,
-          "views": 112,
-          "reach": 101,
-          "saved": 1
-        },
-        {
-          "date": "2026-11-18",
-          "type": "CAROUSEL",
-          "snippet": "어제의 강물에 오늘 다시 들어가려 하지 마세요. 강물도…",
-          "likes": 2,
-          "views": 5,
-          "reach": 1,
-          "saved": 0
         }
       ],
-      "synced_at": "2026-11-21 06:42"
+      "synced_at": "2026-11-22 06:48"
     }
   }
 }
