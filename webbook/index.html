@@ -220,6 +220,14 @@
   .chips{display:flex;flex-wrap:wrap;gap:6px;}
   .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;background:#FFFDF9;border:1px solid var(--line-soft);font-size:12px;color:var(--ink-2);letter-spacing:-.005em;}
   .chip::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--gold);flex:0 0 auto;}
+  /* ── 채널 링크 칩 (새 글자 없이 CSS만으로 링크임을 표시) ── */
+  a.chip-link{font-family:var(--sans);text-decoration:none;-webkit-tap-highlight-color:transparent;cursor:pointer;border-color:rgba(107,45,54,.28);color:var(--burgundy);box-shadow:0 1px 0 rgba(107,45,54,.06);transition:background .2s,border-color .2s,color .2s,transform .15s,box-shadow .2s;}
+  a.chip-link::before{background:var(--burgundy);opacity:.9;}
+  a.chip-link:active{background:rgba(107,45,54,.08);border-color:rgba(107,45,54,.55);transform:scale(.98);}
+  a.chip-link:focus-visible{outline:2px solid var(--burgundy);outline-offset:2px;}
+  @media (hover:hover){
+    a.chip-link:hover{background:rgba(107,45,54,.05);border-color:rgba(107,45,54,.5);box-shadow:0 2px 8px rgba(107,45,54,.10);}
+  }
   .btn-ghost{display:flex;align-items:center;justify-content:center;width:100%;margin-top:16px;padding:15px 16px;border-radius:999px;border:1px solid rgba(107,45,54,.4);background:transparent;color:var(--burgundy);font-family:var(--sans);font-size:14.5px;font-weight:500;letter-spacing:-.01em;cursor:pointer;transition:background .25s;}
   .btn-ghost:active{background:rgba(107,45,54,.06);}
   .foot-note{margin-top:12px;text-align:center;font-size:11px;color:var(--muted);opacity:.85;letter-spacing:.02em;}
@@ -528,8 +536,8 @@
             <div class="ch-eyebrow">마음정원</div>
             <p class="ch-text">매일 밤 8시 30분, 고전 한 구절과 오늘의 문장을 건넵니다. 이 맛보기판은 그중 세 편을 골라 담았습니다.</p>
             <div class="chips">
-              <span class="chip">유튜브 · 마음정원</span>
-              <span class="chip">인스타 · 스레드 @mind_gardenss</span>
+              <a class="chip chip-link" href="https://www.youtube.com/@mind-gardens" target="_blank" rel="noopener noreferrer" aria-label="유튜브 · 마음정원 (새 창에서 열기)">유튜브 · 마음정원</a>
+              <a class="chip chip-link" href="https://www.threads.com/@mind_gardenss" target="_blank" rel="noopener noreferrer" aria-label="인스타 · 스레드 @mind_gardenss (새 창에서 열기)">인스타 · 스레드 @mind_gardenss</a>
             </div>
           </div>
 
