@@ -1,6 +1,6 @@
 {
   "date_label": "11월 26일 목요일",
-  "updated_at": "11/26 10:35 기준",
+  "updated_at": "11/26 11:50 기준",
   "briefing": "봉무동 1~13°C 흐림(미세먼지 좋음) · 오늘 20:00 마음정원 세네카 편 공개 · 코코낫 정산 11월 내 계좌 변경 마감 임박(14일째 무회신) · 쿠팡 로켓그로스 품절임박 2건 추가 & 연간계약 서명 공지",
   "urgent_inbox": [
     {
@@ -109,7 +109,7 @@
       "time": "12:00",
       "app_label": "스레드",
       "app_url": "https://www.threads.com/",
-      "copy_text": "해야 할 일이 산처럼 쌓여 있을수록 오히려 손에 아무것도 안 잡힐 때가 있더라.\n\n이것도 급하고 저것도 중요해 보여서 머릿속으로만 순서를 열 번쯤 다시 정하다가 오후가 다 가버리곤 해.\n\n근데 막상 그중에서 제일 만만한 거 하나만 딱 해치우고 나면, 신기하게 나머지도 하나씩 풀리기 시작하더라.\n\n오늘 오후엔 다 끝내려고 애쓰지 말고, 지금 당장 손에 잡히는 딱 한 가지만 먼저 치워보자."
+      "copy_text": "목요일쯤 되면 유난히 피곤한 날이 있잖아.\n일이 많아서라기보다, 주변 사람들 기분 맞추고 거절 못 해서 내 에너지를 다 써버린 날.\n\n착한 사람으로 남으려고 괜찮은 척 넘기다 보면, 정작 집으로 돌아오는 길엔 내 마음 챙길 기운조차 안 남더라.\n\n모든 사람한테 다 좋은 사람일 필요는 없잖아.\n오늘 오후엔 남의 기대보다 내 컨디션을 한 칸만 더 앞에 두자."
     },
     {
       "id": "m2",
@@ -139,39 +139,39 @@
   "threads_replies": [
     {
       "id": "tr1",
-      "topic": "독서 · 김애란 소설집 「안녕이라 그랬어」 완독 단상 (30분 전 · 좋아요 6)",
-      "url": "https://www.threads.com/@ketdol_/post/DgKaOSDEgw0",
-      "reply_text": "좋은 어른이 되고 싶다는 다짐이 문장 하나로 오래 남네. 나도 그런 마음 잊지 않으려고 책 한 권씩 꺼내 읽게 되더라 📖"
+      "topic": "독서 · 친구들과 교환 독서 & 『이런 말을 듣고 싶었나 보다』 추천 (4분 전 · 좋아요 1)",
+      "url": "https://www.threads.com/@youthbooks.mag/post/DgMEFr7FhbO",
+      "reply_text": "같은 책이라도 각자 고르는 기준이랑 취향이 다 달라서 교환 독서가 더 재밌는 것 같아. 추천해 준 책도 궁금해지네 📖"
     },
     {
       "id": "tr2",
-      "topic": "독서 · 10년 차 국어논술 원장 『몽실 언니』 독서 자료 나눔 (49분 전 · 좋아요 18 · 댓글 16)",
-      "url": "https://www.threads.com/@director_shin_/post/DgKYBToknef",
-      "reply_text": "아이들이 책 한 권을 제대로 품고 갈 수 있게 직접 자료까지 만드시는 정성이 대단해. 몽실 언니 오랜만에 다시 펼쳐보고 싶어지네 🌿"
+      "topic": "인문학·독서 · 신형철 『슬픔을 공부하는 슬픔』 문학적 의식 발췌 (1시간 전)",
+      "url": "https://www.threads.com/@muyu_essay/post/DgL7Zw9GUHm",
+      "reply_text": "내 시선도 한쪽에 치우쳐 있을 수 있다는 걸 같이 의식하는 태도가 참 깊네. 오랜만에 다시 꺼내 읽고 싶어지는 문장이야 🌿"
     },
     {
       "id": "tr3",
-      "topic": "독서·루틴 · 새벽 루틴이 삶을 자동화하는 방식 (1시간 전 · 좋아요 22 · 댓글 2)",
-      "url": "https://www.threads.com/@02dobrother/post/DgKUHU8GA5h",
-      "reply_text": "새벽에 물 한 잔 마시고 독서로 머리 비우는 그 짧은 루틴이 하루 전체를 흔들리지 않게 잡아주는 것 같아 ☀️"
+      "topic": "독서 · 벽돌책 10쪽씩 읽기 아침 루틴 Day 20 (2시간 전 · 좋아요 6 · 댓글 6)",
+      "url": "https://www.threads.com/@lucia_e0417/post/DgL1a-eFI9C",
+      "reply_text": "하루 딱 10쪽씩 스무 날을 묵묵히 쌓은 게 진짜 대단하네. 작은 루틴이 제일 단단하게 남는 것 같아 ☕"
     },
     {
       "id": "tr4",
-      "topic": "인문학·독서 · 아침독서 가다머 『진리와 방법 2』 (11시간 전 · 좋아요 4 · 댓글 6)",
-      "url": "https://www.threads.com/@bookclub_botong/post/DgJROGuCQwa",
-      "reply_text": "어려운 철학서 붙잡고 끙끙대다가도 어떻게든 끝까지 읽어보려는 그 시간이 결국 내 근육이 되는 거잖아 ☕"
+      "topic": "독서 · 모닝 독서 기록 『그렇게 나는 다시 삶을 선택했다』 (1시간 전 · 좋아요 1)",
+      "url": "https://www.threads.com/@3_clover_/post/DgL4nkkIBcW",
+      "reply_text": "아침에 책 제목 하나만 꾹 눌러 담아도 하루를 대하는 마음가짐이 달라지더라 ☀️"
     },
     {
       "id": "tr5",
-      "topic": "독서·글쓰기 · 독서, 글쓰기, 운동 3종 세트 완료 (1일 전 · 좋아요 23 · 댓글 6)",
-      "url": "https://www.threads.com/@grace.beni17/post/DgH1eb0kzIj",
-      "reply_text": "독서에 글쓰기에 운동까지 다 챙기고 나면 하루를 온전히 내 편으로 만든 기분이 들더라 💪"
+      "topic": "독서 · 완독 강박 버리기 — 정독 vs 발췌독 (1시간 전 · 댓글 1)",
+      "url": "https://www.threads.com/@bookmabeul/post/DgL8zy_k_gy",
+      "reply_text": "맞아, 처음부터 끝까지 다 읽어야 한다는 부담 내려놓으니까 책 펴는 게 훨씬 가벼워지더라 🔖"
     },
     {
       "id": "tr6",
-      "topic": "독서 · 청예 소설 『주와 연』 출퇴근길 완독 후기 (1일 전 · 좋아요 4)",
-      "url": "https://www.threads.com/@o_roropick/post/DgFfF_DkdKc",
-      "reply_text": "출퇴근길에 책 한 권에 푹 빠져서 마지막 장까지 달리는 그 몰입감이 진짜 좋지 🌙"
+      "topic": "위로·일상 · 요즘 너의 소소한 작은 행복은 뭐야? (17시간 전 · 좋아요 8 · 댓글 6)",
+      "url": "https://www.threads.com/@pondfront_mountain/post/DgKPzHtnxPC",
+      "reply_text": "거창한 일보다 퇴근길에 본 하늘이나 따뜻한 커피 한 잔이 하루를 버티게 해줄 때가 많지 🌙"
     }
   ],
   "dinner": {
