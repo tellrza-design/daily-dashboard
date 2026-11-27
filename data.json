@@ -1,102 +1,96 @@
 {
-  "date_label": "11월 27일 금요일",
-  "updated_at": "11/27 20:50 기준",
-  "briefing": "봉무동 6~18°C 맑음(미세먼지 보통) · 오늘부터 건강검진 식이조절(11/30 오전 위·대장내시경) · Substack 창간호 초안 저장 완료 · 쿠팡 주문이행 90점 상향 & 품절·예산 알림",
+  "date_label": "11월 28일 토요일",
+  "updated_at": "11/28 06:49 기준",
+  "briefing": "봉무동 6~10°C (12~14시 비 60% · 밤부터 급락해 내일 영하권) · 오늘 20:00 inner pace 새 라이브(OBS) · 리틀리 litt.ly/mindgarden 개설 및 손글씨 스티커 24종 완성 · 로켓그로스 계약 체결 & 품절임박 알림",
   "urgent_inbox": [
     {
       "id": "u1",
-      "title": "11/30 건강검진 식이조절 & 자동차보험 일정 겹침",
-      "tag": "오늘부터 식이조절 · 11/30 10:00 겹침",
+      "title": "리틀리(litt.ly/mindgarden) 계좌 인증 → 유료 상품 공개 & 스레드 홍보",
+      "tag": "무료 체험판 공개 중 · 4,900원 상품 대기",
       "urgency": "red",
-      "prompt_text": "11월 30일 월요일 오전 건강검진(위·대장내시경) 일정이랑 오전 10시 자동차보험 비교 조회가 겹치는데, 보험 조회 일정을 오후나 다음 날로 옮겨 주고 오늘부터 식이조절 맞춘 식단표도 챙겨 줘."
+      "prompt_text": "리틀리(litt.ly/mindgarden) 계좌 인증 완료했어요. 유료 상품 공개 확인하고, 손글씨 스티커 24종도 추가할지 정리해 줘. 스레드 홍보 문안도 같이 써 줘."
     },
     {
       "id": "u2",
-      "title": "쿠팡 WING 일괄 점검 + 코코낫 정산 보류(15일째)",
-      "tag": "주문이행 90점 시행 · 품절·예산·연간계약",
+      "title": "오늘 20:00 inner pace 새 라이브 (OBS 켜기)",
+      "tag": "토요일 20:00 · 3차 커뮤니티 공지 예정",
       "urgency": "red",
-      "prompt_text": "쿠팡 WING 들어가서 코코낫·슈퍼해피·모모상점 품절 임박 상품이랑 모모상점 광고 예산 소진, 어제 시행된 주문이행 90점 기준, 슈퍼해피 뱃지 상실, 연간계약 서명, 코코낫 정산 보류 리마인드까지 한꺼번에 처리해 줘."
+      "prompt_text": "오늘 저녁 8시 inner pace 새 라이브 방송 시작 전에 맥 OBS 체크리스트랑 오늘 준비할 거 알려 줘."
     },
     {
       "id": "u3",
-      "title": "Substack 뉴스레터 창간호 초안 검토 및 발행",
-      "tag": "초안 저장 완료 · 후원 약속 설정 확인",
+      "title": "쿠팡 로켓그로스 품절·임박(코코낫·오눌루·모모상점) & WING 점검",
+      "tag": "로켓그로스 신규 계약 체결(~2027-12-31)",
       "urgency": "amber",
-      "prompt_text": "Substack 마음정원 철학 처방전 창간호 초안 링크 다시 보여주고, 발행 전 확인해야 할 설정(후원 약속 끄기 등) 정리해 줘."
+      "prompt_text": "어제 체결된 로켓그로스 계약이랑 코코낫·오눌루·모모상점 품절·품절임박 알림, 그리고 기존 쿠팡 WING 점검 건 정리해서 보여 줘."
     },
     {
       "id": "u4",
-      "title": "Google 계정 'Throne(쓰론)'·'Hark' 로그인 확인",
-      "tag": "보안 알림 · 11/26 07:56 & 11/24",
+      "title": "11/30(월) 15:00 업비트 BLUR 거래지원 종료",
+      "tag": "D-2 · 보유 여부 확인 필요",
       "urgency": "amber",
-      "prompt_text": "어제(11/26) 오전 7시 56분 Google 계정에 Throne(쓰론) 로그인 알림이랑 지난번 Hark 로그인 알림, 내가 한 게 맞는지 확인하고 필요하면 연결 해제 도와줘."
+      "prompt_text": "11월 30일 오후 3시 업비트 블러(BLUR) 거래지원 종료 안내 메일이 왔던데, 주의할 점이랑 대응 방법 알려 줘."
     },
     {
       "id": "u5",
-      "title": "inner pace 11/28(토) 20:00 새 라이브 준비",
-      "tag": "금요일 홍보 · 토 20:00 맥 OBS",
-      "urgency": "amber",
-      "prompt_text": "내일(11/28 토) 저녁 8시 inner pace 새 라이브 방송 관련해서 오늘 금요일 리마인드 홍보랑 준비할 거 정리해 줘."
+      "title": "건강검진 저잔사식 D-2 (11/30 오전) & 자동차보험 액션 날짜 맞춤",
+      "tag": "캘린더 12/1 10:00 이동 확인",
+      "urgency": "blue",
+      "prompt_text": "자동차보험 비교 조회 피클 예약 일정도 캘린더처럼 12월 1일 오전 10시로 옮겨 주고, 오늘 건강검진 식이조절 D-2 식단도 챙겨 줘."
     },
     {
       "id": "u6",
-      "title": "수노(Suno) 블프 세일 & 월·수 21:00 알림 겹침",
-      "tag": "12/1 오전 종료 · 결정 대기",
+      "title": "Google 계정 'Throne'·'Hark' 로그인 확인 & 수노 블프(~12/1)",
+      "tag": "보안 확인 대기 · 할인 마감 D-3",
       "urgency": "blue",
-      "prompt_text": "수노 블랙프라이데이 연간 30% 세일 결제 여부랑 마음의바다 월·수 밤 9시 쇼츠 알림 겹침 건 정리해서 선택할 수 있게 보여줘."
+      "prompt_text": "Google 계정 Throne·Hark 로그인 확인이랑 수노 블랙프라이데이 30% 할인 결제 여부 정리해서 다시 보여 줘."
     }
   ],
   "timeline": [
     {
       "id": "t1",
-      "date": "11/27 (금)",
+      "date": "11/28 (토)",
       "time": "08:00",
-      "title": "🧵 스레드 아침 초단문 3일차 · 08:30 🎵 inner pace 릴스 #1"
+      "title": "🧵 스레드 아침 초단문 4일차 · 08:30 🎵 inner pace 릴스 #1"
     },
     {
       "id": "t2",
-      "date": "11/27 (금)",
-      "time": "12:00",
-      "title": "🧵 스레드 점심 공감 · 🪷 연꽃세상 쇼츠 #2"
+      "date": "11/28 (토)",
+      "time": "11:00",
+      "title": "🎬 마음정원 쇼츠 #2 · 12:00 🧵 점심 공감 · 13:30 inner pace 쇼츠 #2"
     },
     {
       "id": "t3",
-      "date": "11/27 (금)",
+      "date": "11/28 (토)",
       "time": "18:00",
-      "title": "🎬 인스타 릴스 · 🪷 연꽃세상 롱폼 · 18:40 🎵 inner pace 릴스 #2"
+      "title": "🎬 인스타 감성 릴스 · 18:40 🎵 inner pace 릴스 #2"
     },
     {
       "id": "t4",
-      "date": "11/27 (금)",
-      "time": "20:30",
-      "title": "📸 인스타 캐러셀 · 21:00 🧵 스레드 심야사유 (웹북 자동 누적)"
+      "date": "11/28 (토)",
+      "time": "20:00",
+      "title": "🎵 inner pace 라이브 시작 (OBS) · 20:30 📸 캐러셀 · 21:00 🧵 심야사유"
     },
     {
       "id": "t5",
-      "date": "11/28 (토)",
-      "time": "11:00",
-      "title": "🎬 마음정원 쇼츠 #2 · 13:30 inner pace 쇼츠 #2 · 20:00 라이브 OBS"
+      "date": "11/29 (일)",
+      "time": "20:00",
+      "title": "🎬 마음정원 세네카 편 72시간 해제 · 21:10 ✉️ Substack 제1호 초안"
     },
     {
       "id": "t6",
       "date": "11/30 (월)",
       "time": "09:30",
-      "title": "🏥 건강검진 (위·대장내시경) · 10:00 🚗 자동차보험 조회(시간 겹침)"
+      "title": "🏥 건강검진 (위·대장내시경) · 15:00 🪙 업비트 BLUR 거래지원 종료"
     },
     {
       "id": "t7",
-      "date": "11/30 (월)",
-      "time": "21:00",
-      "title": "🌊 마음의바다 쇼츠(월·수) · 🧵 스레드 심야사유 (동시각)"
+      "date": "12/01 (화)",
+      "time": "10:00",
+      "title": "🚗 자동차보험 비교 조회 · 🧵 아침 초단문 시범 마지막 날"
     },
     {
       "id": "t8",
-      "date": "12/01 (화)",
-      "time": "08:00",
-      "title": "🧵 스레드 아침 초단문 시범 마지막 날 · 18:00 마음정원 쇼츠 #1"
-    },
-    {
-      "id": "t9",
       "date": "12/03 (목)",
       "time": "20:00",
       "title": "🎬 마음정원 롱폼 본편 공개"
@@ -258,113 +252,113 @@
     }
   ],
   "channel_metrics": {
-    "synced_at": "2026-11-27 06:43",
+    "synced_at": "2026-11-28 06:43",
     "youtube": [
       {
         "name": "마음정원",
         "channel_id": "UCCwHcYVUxelD1MCoTF7vCNg",
         "subs": 4050,
-        "total_views": 460082,
+        "total_views": 461029,
         "video_count": 100,
         "latest_title": "세네카 인생의 짧음에 대하여, 우리는 오래 산 걸까 오래 있었던 걸까?",
         "latest_date": "2026-11-26",
-        "latest_views": 28,
-        "latest_likes": 1,
+        "latest_views": 72,
+        "latest_likes": 2,
         "latest_comments": 1,
         "subs_diff_7d": 20,
-        "views_diff_7d": 7297
+        "views_diff_7d": 7646
       },
       {
         "name": "마음의바다",
         "channel_id": "UCKGK5-SECrJUxDklVF_c_3g",
         "subs": 11300,
-        "total_views": 296302,
+        "total_views": 296713,
         "video_count": 51,
         "latest_title": "주리반특, 빗자루 두 글자도 못 외운 스님이 아라한이 된 까닭",
         "latest_date": "2026-11-25",
-        "latest_views": 40,
+        "latest_views": 53,
         "latest_likes": 0,
         "latest_comments": 1,
         "subs_diff_7d": 100,
-        "views_diff_7d": 5237
+        "views_diff_7d": 5027
       },
       {
         "name": "연꽃세상",
         "channel_id": "UCOHlvKb40Ko3CH5cHWMMWuw",
         "subs": 1460,
-        "total_views": 49161,
-        "video_count": 25,
-        "latest_title": "절 화장실의 해우소, 짝이 되는 이름이 하나 더 있다 #Shorts",
-        "latest_date": "2026-11-25",
-        "latest_views": 315,
-        "latest_likes": 6,
+        "total_views": 49496,
+        "video_count": 26,
+        "latest_title": "한암 스님, \"이제 불을 지르시오\" 상원사 법당에 앉은 날",
+        "latest_date": "2026-11-27",
+        "latest_views": 10,
+        "latest_likes": 0,
         "latest_comments": 1,
         "subs_diff_7d": 10,
-        "views_diff_7d": 3845
+        "views_diff_7d": 3977
       },
       {
         "name": "inner pace",
         "channel_id": "UC3I8loHAzuptjmp00FHbcbw",
         "subs": 206,
-        "total_views": 3703,
+        "total_views": 3817,
         "video_count": 41,
         "latest_title": "[playlist] 한 골목만 더 걷자고 말하던 밤. | 러브 액츄얼리 Love Actually B-side",
         "latest_date": "2026-11-26",
-        "latest_views": 2,
-        "latest_likes": 1,
+        "latest_views": 15,
+        "latest_likes": 2,
         "latest_comments": 1,
         "subs_diff_7d": -1,
-        "views_diff_7d": 473
+        "views_diff_7d": 587
       }
     ],
     "threads": {
       "summary": {
         "username": "mind_gardenss",
-        "followers": 55,
-        "views": 939,
-        "views_date": "2026-11-26",
-        "likes": 39,
-        "replies": 7,
+        "followers": 59,
+        "views": 522,
+        "views_date": "2026-11-27",
+        "likes": 25,
+        "replies": 1,
         "reposts": 0
       },
       "recent_posts": [
         {
+          "date": "2026-11-27",
+          "snippet": "금요일 밤이 되면 유난히 거리가 분주해 보이는데, 막상…",
+          "views": 3,
+          "likes": 2,
+          "replies": 1
+        },
+        {
+          "date": "2026-11-27",
+          "snippet": "금요일 낮쯤 되면 이번 주에 못 끝낸 일들이 자꾸 먼저…",
+          "views": 11,
+          "likes": 2,
+          "replies": 1
+        },
+        {
+          "date": "2026-11-26",
+          "snippet": "금요일 아침에는 밀린 걸 한꺼번에 끝내려 할수록 마음만…",
+          "views": 18,
+          "likes": 2,
+          "replies": 1
+        },
+        {
           "date": "2026-11-26",
           "snippet": "하루를 정리할 때면 남들보다 조금이라도 더 앞서가야 마…",
-          "views": 5,
+          "views": 9,
           "likes": 2,
           "replies": 2
         },
         {
           "date": "2026-11-26",
           "snippet": "목요일쯤 되면 유난히 바쁜 날보다, 주변 사람들 분위기…",
-          "views": 6,
-          "likes": 1,
-          "replies": 1
-        },
-        {
-          "date": "2026-11-25",
-          "snippet": "목요일쯤 되면 마음도 슬슬 지치는데 그럴수록 남의 속도…",
-          "views": 6,
+          "views": 12,
           "likes": 2,
-          "replies": 1
-        },
-        {
-          "date": "2026-11-25",
-          "snippet": "친구가 복권을 보냈어요. 벌써 사용량 초기화 쿠폰 35…",
-          "views": 5,
-          "likes": 2,
-          "replies": 0
-        },
-        {
-          "date": "2026-11-25",
-          "snippet": "오늘 하루를 돌아보면 분명 바쁘게 움직였는데, 막상 밤…",
-          "views": 6,
-          "likes": 1,
           "replies": 1
         }
       ],
-      "synced_at": "2026-11-27 06:43"
+      "synced_at": "2026-11-28 06:43"
     },
     "instagram": {
       "summary": {
@@ -372,61 +366,61 @@
         "name": "마음정원 | 철학·심리학",
         "followers": 7,
         "follows": 39,
-        "media_count": 84,
+        "media_count": 86,
         "window_days": 28,
-        "views": 1276,
-        "reach": 860,
-        "profile_views": 30,
+        "views": 1340,
+        "reach": 898,
+        "profile_views": 31,
         "accounts_engaged": 11
       },
       "recent_posts": [
+        {
+          "date": "2026-11-27",
+          "type": "CAROUSEL",
+          "snippet": "비울수록 채워지고, 힘을 뺄수록 더 멀리 갑니다. 오늘…",
+          "likes": 1,
+          "views": 0,
+          "reach": 0,
+          "saved": 0
+        },
+        {
+          "date": "2026-11-27",
+          "type": "REELS",
+          "snippet": "금요일 저녁이 되어도 머릿속 소음이 멈추지 않는다면, …",
+          "likes": 2,
+          "views": 51,
+          "reach": 50,
+          "saved": 0
+        },
         {
           "date": "2026-11-26",
           "type": "CAROUSEL",
           "snippet": "모두에게 좋은 사람일 필요는 없습니다. 내 마음을 지켜…",
           "likes": 3,
-          "views": 3,
-          "reach": 2,
+          "views": 5,
+          "reach": 3,
           "saved": 0
         },
         {
           "date": "2026-11-26",
           "type": "REELS",
           "snippet": "오늘 하루의 시간은 누구를 위해 가장 많이 쓰셨나요? …",
-          "likes": 2,
-          "views": 23,
-          "reach": 22,
+          "likes": 3,
+          "views": 28,
+          "reach": 27,
           "saved": 0
         },
         {
           "date": "2026-11-25",
           "type": "CAROUSEL",
           "snippet": "바깥의 소란은 멈추지 않아도, 내가 돌아갈 수 있는 가…",
-          "likes": 2,
-          "views": 16,
-          "reach": 2,
-          "saved": 0
-        },
-        {
-          "date": "2026-11-25",
-          "type": "REELS",
-          "snippet": "한 주의 한가운데인 수요일쯤 되면, 이유 없이 마음이 …",
-          "likes": 2,
-          "views": 31,
-          "reach": 32,
-          "saved": 0
-        },
-        {
-          "date": "2026-11-24",
-          "type": "CAROUSEL",
-          "snippet": "조급함을 내려놓고 살아내다 보면, 어느 날 문득 그 답…",
-          "likes": 2,
-          "views": 11,
-          "reach": 5,
+          "likes": 3,
+          "views": 18,
+          "reach": 4,
           "saved": 0
         }
       ],
-      "synced_at": "2026-11-27 06:43"
+      "synced_at": "2026-11-28 06:43"
     }
   }
 }
