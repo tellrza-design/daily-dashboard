@@ -3431,11 +3431,11 @@
     card.style.display = items.length ? '' : 'none';
     if (!items.length) return;
 
-    $('logHint').textContent = items.length + '개 프로젝트';
+    $('logHint').textContent = items.length + '개 · 탭해서 펼치기';
     list.innerHTML = '';
 
     items.forEach(function (p, idx) {
-      var isOpen = openLogs.hasOwnProperty(p.id) ? !!openLogs[p.id] : idx === 0;
+      var isOpen = openLogs.hasOwnProperty(p.id) ? !!openLogs[p.id] : false;
       openLogs[p.id] = isOpen;
 
       var wrap = el('div', 'plog' + (isOpen ? ' open' : ''));
