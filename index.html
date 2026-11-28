@@ -1467,6 +1467,151 @@
     color: var(--blue);
   }
 
+  /* ── 📋 프로젝트별 작업 일지 (완료 · 대기 · 링크) ── */
+  .plog {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--bg);
+    margin-bottom: 8px;
+    overflow: hidden;
+    transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+  }
+  .plog:last-child { margin-bottom: 0; }
+  .plog.open { border-color: var(--blue-soft); box-shadow: 0 0 0 2px var(--blue-soft); }
+  .plog-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 11px 12px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    min-height: 54px;
+  }
+  .plog-head:active { transform: scale(0.99); }
+  .plog-head-main { flex: 1; min-width: 0; }
+  .plog-name {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 800;
+    letter-spacing: -0.25px;
+    line-height: 1.35;
+    word-break: keep-all;
+  }
+  .plog-last {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--sub);
+    margin-top: 3px;
+    letter-spacing: -0.2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .plog.open .plog-last { display: none; }
+  .plog-meta { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+  .plog-count {
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--amber);
+    background: var(--amber-soft);
+    padding: 3px 7px;
+    border-radius: 999px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .plog-count.done { color: var(--green); background: var(--green-soft); }
+  .plog-count.alert { color: var(--red); background: var(--red-soft); }
+  .plog-caret {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--card);
+    color: var(--sub);
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .25s ease;
+  }
+  .plog.open .plog-caret { transform: rotate(180deg); }
+  .plog-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .32s cubic-bezier(.4, 0, .2, 1);
+  }
+  .plog-inner { padding: 1px 12px 13px; }
+  .plog-block + .plog-block { margin-top: 10px; }
+  .plog-label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: -0.1px;
+    margin-bottom: 5px;
+  }
+  .plog-label.done { color: var(--green); }
+  .plog-label.todo { color: var(--amber); }
+  .plog-label.link { color: var(--blue); }
+  .plog-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .plog-list li {
+    position: relative;
+    padding-left: 12px;
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.2px;
+    word-break: keep-all;
+    margin-bottom: 3px;
+  }
+  .plog-list li:last-child { margin-bottom: 0; }
+  .plog-list li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 7px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--sub);
+  }
+  .plog-block.done .plog-list li::before { background: var(--green); }
+  .plog-block.todo {
+    background: var(--amber-soft);
+    border-radius: 10px;
+    padding: 9px 10px 10px;
+  }
+  .plog-block.todo .plog-list li::before { background: var(--amber); }
+  .plog-links { display: flex; flex-wrap: wrap; gap: 6px; }
+  .plog-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 32px;
+    padding: 6px 10px;
+    border-radius: 9px;
+    background: var(--blue-soft);
+    color: var(--blue);
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+    text-decoration: none;
+    transition: transform .1s ease;
+  }
+  .plog-link:active { transform: scale(0.96); }
+  .plog-link .arr { font-size: 10px; opacity: .85; font-weight: 800; }
+
   /* ── 아래로 당겨서 새로고침 (iOS PWA) ── */
   .ptr {
     height: 0;
@@ -1522,6 +1667,14 @@
       </div>
       <div id="inboxList"></div>
       <button class="inbox-more" id="inboxMore" type="button" hidden>나머지 더 보기 ▾</button>
+    </section>
+
+    <section class="card" id="logCard" aria-label="프로젝트별 작업 일지">
+      <div class="card-head">
+        <div class="card-title">📋 프로젝트별 작업 일지</div>
+        <span class="hint" id="logHint">완료 · 대기 · 링크</span>
+      </div>
+      <div id="logList"></div>
     </section>
 
     <section class="card" id="qpCard" aria-label="텔르자 원터치 호출">
@@ -2003,13 +2156,17 @@
     }).filter(function (q) { return q.label && q.prompt; }) : [];
 
     var replies = Array.isArray(raw.threads_replies) ? raw.threads_replies.map(function (r, i) {
+      if (!r || typeof r !== 'object') return null;
+      var handle = str(r.handle);
+      var summary = str(r.summary);
+      var topic = str(r.topic) || (handle && summary ? handle + ' · ' + summary : (summary || handle));
       return {
         id: str(r.id) || ('tr' + (i + 1)),
-        topic: str(r.topic),
+        topic: topic,
         url: str(r.url),
-        reply_text: str(r.reply_text)
+        reply_text: str(r.reply_text) || str(r.reply)
       };
-    }).filter(function (r) { return r.topic && r.reply_text; }) : [];
+    }).filter(function (r) { return r && r.topic && r.reply_text; }) : [];
 
     var dinner = null;
     if (raw.dinner && typeof raw.dinner === 'object') {
@@ -2040,6 +2197,29 @@
         progress: progress
       };
     }).filter(function (b) { return b.label && b.value; }) : [];
+
+    /* 📋 프로젝트별 작업 일지 — 없어도 나머지 화면은 그대로 뜬다 */
+    var projectLogs = Array.isArray(raw.project_logs) ? raw.project_logs.map(function (p, i) {
+      if (!p || typeof p !== 'object') return null;
+      var tone = str(p.tone);
+      if (TONES.indexOf(tone) < 0) tone = '';
+      var links = Array.isArray(p.links) ? p.links.map(function (l) {
+        if (!l || typeof l !== 'object') return null;
+        var url = str(l.url);
+        return {
+          label: str(l.label),
+          url: /^https?:\/\//i.test(url) ? url : ''
+        };
+      }).filter(function (l) { return l && l.label; }) : [];
+      return {
+        id: str(p.id) || ('pl' + (i + 1)),
+        name: str(p.name),
+        tone: tone,
+        done: Array.isArray(p.done) ? p.done.map(str).filter(function (v) { return v; }) : [],
+        todo: Array.isArray(p.todo) ? p.todo.map(str).filter(function (v) { return v; }) : [],
+        links: links
+      };
+    }).filter(function (p) { return p && p.name; }) : [];
 
     /* 이른바 실시간 지표 — 없어도 나머지 화면은 그대로 뜬다 */
     var metrics = null;
@@ -2133,6 +2313,7 @@
       threads_replies: replies,
       dinner: dinner,
       status_board: board,
+      project_logs: projectLogs,
       channel_metrics: metrics,
       checks: checks,
       quick_prompts: quickPrompts,
@@ -3226,6 +3407,118 @@
     });
   }
 
+  /* ───── 📋 프로젝트별 작업 일지 ───── */
+  var openLogs = {};
+
+  function toggleProjectLog(id, wrap) {
+    if (!wrap) return;
+    var open = !wrap.classList.contains('open');
+    openLogs[id] = open;
+    wrap.classList.toggle('open', open);
+    var head = wrap.querySelector('.plog-head');
+    var body = wrap.querySelector('.plog-body');
+    if (head) head.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (!body) return;
+    body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
+  }
+
+  function buildProjectLogs() {
+    var card = $('logCard');
+    var list = $('logList');
+    if (!card || !list) return;
+    var items = Array.isArray(DATA.project_logs) ? DATA.project_logs : [];
+    card.style.display = items.length ? '' : 'none';
+    if (!items.length) return;
+
+    $('logHint').textContent = items.length + '개 프로젝트';
+    list.innerHTML = '';
+
+    items.forEach(function (p, idx) {
+      var isOpen = openLogs.hasOwnProperty(p.id) ? !!openLogs[p.id] : idx === 0;
+      openLogs[p.id] = isOpen;
+
+      var wrap = el('div', 'plog' + (isOpen ? ' open' : ''));
+
+      var head = el('button', 'plog-head');
+      head.type = 'button';
+      head.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      head.setAttribute('aria-controls', 'plogBody-' + p.id);
+
+      var main = el('span', 'plog-head-main');
+      main.appendChild(el('span', 'plog-name', p.name));
+      var preview = p.done[0] || p.todo[0] || '';
+      if (preview) main.appendChild(el('span', 'plog-last', preview));
+      head.appendChild(main);
+
+      var meta = el('span', 'plog-meta');
+      var countTxt = p.todo.length ? '대기 ' + p.todo.length : '완료';
+      var countCls = 'plog-count' + (p.todo.length ? (p.tone === 'red' ? ' alert' : '') : ' done');
+      meta.appendChild(el('span', countCls, countTxt));
+      meta.appendChild(el('span', 'plog-caret', '▾'));
+      head.appendChild(meta);
+
+      wrap.appendChild(head);
+
+      var body = el('div', 'plog-body');
+      body.id = 'plogBody-' + p.id;
+      var inner = el('div', 'plog-inner');
+
+      if (p.done.length) {
+        var doneBox = el('div', 'plog-block done');
+        doneBox.appendChild(el('div', 'plog-label done', '✅ 완료'));
+        var doneList = el('ul', 'plog-list');
+        p.done.forEach(function (d) { doneList.appendChild(el('li', '', d)); });
+        doneBox.appendChild(doneList);
+        inner.appendChild(doneBox);
+      }
+
+      if (p.todo.length) {
+        var todoBox = el('div', 'plog-block todo');
+        todoBox.appendChild(el('div', 'plog-label todo', '⏳ 대기 · 다음 할 일'));
+        var todoList = el('ul', 'plog-list');
+        p.todo.forEach(function (t) { todoList.appendChild(el('li', '', t)); });
+        todoBox.appendChild(todoList);
+        inner.appendChild(todoBox);
+      }
+
+      if (p.links.length) {
+        var linkBox = el('div', 'plog-block link');
+        linkBox.appendChild(el('div', 'plog-label link', '🔗 바로가기'));
+        var chips = el('div', 'plog-links');
+        p.links.forEach(function (l) {
+          if (!l.url) {
+            chips.appendChild(el('span', 'plog-link', l.label));
+            return;
+          }
+          var a = document.createElement('a');
+          a.className = 'plog-link';
+          a.href = l.url;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.setAttribute('aria-label', l.label + ' 새 창에서 열기');
+          a.appendChild(document.createTextNode(l.label));
+          a.appendChild(el('span', 'arr', '↗'));
+          chips.appendChild(a);
+        });
+        linkBox.appendChild(chips);
+        inner.appendChild(linkBox);
+      }
+
+      body.appendChild(inner);
+      wrap.appendChild(body);
+
+      head.addEventListener('click', function () { toggleProjectLog(p.id, wrap); });
+      list.appendChild(wrap);
+    });
+
+    /* 펼친 카드의 높이를 실제 내용에 맞춘다 (글꼴 로딩 뒤 재계산) */
+    requestAnimationFrame(function () {
+      Array.prototype.forEach.call(list.querySelectorAll('.plog.open .plog-body'), function (b) {
+        b.style.maxHeight = b.scrollHeight + 'px';
+      });
+    });
+  }
+
   /* ───── 📊 채널 · 스레드 실시간 지표 ───── */
   function compactNum(n) {
     n = numRaw(n);
@@ -3529,6 +3822,7 @@
     renderDate();
     renderBriefing();
     buildInbox();
+    buildProjectLogs();
     buildQuickPrompts();
     buildMissions();
     renderReplySet();
