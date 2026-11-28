@@ -3419,6 +3419,7 @@
     var body = wrap.querySelector('.plog-body');
     if (head) head.setAttribute('aria-expanded', open ? 'true' : 'false');
     if (!body) return;
+    body.setAttribute('aria-hidden', open ? 'false' : 'true');
     body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
   }
 
@@ -3461,6 +3462,7 @@
 
       var body = el('div', 'plog-body');
       body.id = 'plogBody-' + p.id;
+      body.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
       var inner = el('div', 'plog-inner');
 
       if (p.done.length) {
