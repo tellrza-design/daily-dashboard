@@ -282,8 +282,17 @@
   }
   .inbox-act {
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
     margin-top: 8px;
+  }
+  .inbox-act .tag {
+    flex: 0 1 auto;
+    min-width: 0;
+    white-space: normal;
+    line-height: 1.35;
+    text-align: left;
   }
   .inbox-copy {
     display: inline-flex;
@@ -2535,10 +2544,10 @@
       row.innerHTML =
         '<span class="inbox-line">' +
           '<span class="inbox-title"></span>' +
-          '<span class="tag tag-' + it.tone + '"></span>' +
           '<span class="dot-check"></span>' +
         '</span>' +
         '<span class="inbox-act">' +
+          '<span class="tag tag-' + it.tone + '"></span>' +
           '<button class="inbox-copy" type="button">⚡ 지시 복사</button>' +
         '</span>';
       row.querySelector('.inbox-title').textContent = it.title;
